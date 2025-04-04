@@ -34,5 +34,3 @@ build/
 ### Mac OS ###
 .DS_Store
 
-
-graphql-trino-generated.graphqls

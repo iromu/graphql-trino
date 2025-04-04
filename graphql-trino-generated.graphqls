@@ -1,0 +1,6492 @@
+schema {
+    query: Query
+    subscription: Subscription
+}
+
+"Marks the field, argument, input field or enum value as deprecated"
+directive @deprecated(
+    "The reason for the deprecation"
+    reason: String = "No longer supported"
+) on FIELD_DEFINITION | ARGUMENT_DEFINITION | ENUM_VALUE | INPUT_FIELD_DEFINITION
+
+"Directs the executor to include this field or fragment only when the `if` argument is true"
+directive @include(
+    "Included when true."
+    if: Boolean!
+) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"Indicates an Input Object is a OneOf Input Object."
+directive @oneOf on INPUT_OBJECT
+
+"Directs the executor to skip this field or fragment when the `if` argument is true."
+directive @skip(
+    "Skipped when true."
+    if: Boolean!
+) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"Exposes a URL that specifies the behaviour of this scalar."
+directive @specifiedBy(
+    "The URL that specifies the behaviour of this scalar."
+    url: String!
+) on SCALAR
+
+type Query {
+    tpcds_sf100000_call_center(filters: [FilterInput], limit: Int): [tpcds_sf100000_call_center]
+    tpcds_sf100000_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf100000_catalog_page]
+    tpcds_sf100000_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf100000_catalog_returns]
+    tpcds_sf100000_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_sf100000_catalog_sales]
+    tpcds_sf100000_customer(filters: [FilterInput], limit: Int): [tpcds_sf100000_customer]
+    tpcds_sf100000_customer_address(filters: [FilterInput], limit: Int): [tpcds_sf100000_customer_address]
+    tpcds_sf100000_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_sf100000_customer_demographics]
+    tpcds_sf100000_date_dim(filters: [FilterInput], limit: Int): [tpcds_sf100000_date_dim]
+    tpcds_sf100000_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_sf100000_dbgen_version]
+    tpcds_sf100000_household_demographics(filters: [FilterInput], limit: Int): [tpcds_sf100000_household_demographics]
+    tpcds_sf100000_income_band(filters: [FilterInput], limit: Int): [tpcds_sf100000_income_band]
+    tpcds_sf100000_inventory(filters: [FilterInput], limit: Int): [tpcds_sf100000_inventory]
+    tpcds_sf100000_item(filters: [FilterInput], limit: Int): [tpcds_sf100000_item]
+    tpcds_sf100000_promotion(filters: [FilterInput], limit: Int): [tpcds_sf100000_promotion]
+    tpcds_sf100000_reason(filters: [FilterInput], limit: Int): [tpcds_sf100000_reason]
+    tpcds_sf100000_ship_mode(filters: [FilterInput], limit: Int): [tpcds_sf100000_ship_mode]
+    tpcds_sf100000_store(filters: [FilterInput], limit: Int): [tpcds_sf100000_store]
+    tpcds_sf100000_store_returns(filters: [FilterInput], limit: Int): [tpcds_sf100000_store_returns]
+    tpcds_sf100000_store_sales(filters: [FilterInput], limit: Int): [tpcds_sf100000_store_sales]
+    tpcds_sf100000_time_dim(filters: [FilterInput], limit: Int): [tpcds_sf100000_time_dim]
+    tpcds_sf100000_warehouse(filters: [FilterInput], limit: Int): [tpcds_sf100000_warehouse]
+    tpcds_sf100000_web_page(filters: [FilterInput], limit: Int): [tpcds_sf100000_web_page]
+    tpcds_sf100000_web_returns(filters: [FilterInput], limit: Int): [tpcds_sf100000_web_returns]
+    tpcds_sf100000_web_sales(filters: [FilterInput], limit: Int): [tpcds_sf100000_web_sales]
+    tpcds_sf100000_web_site(filters: [FilterInput], limit: Int): [tpcds_sf100000_web_site]
+    tpcds_sf10000_call_center(filters: [FilterInput], limit: Int): [tpcds_sf10000_call_center]
+    tpcds_sf10000_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf10000_catalog_page]
+    tpcds_sf10000_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf10000_catalog_returns]
+    tpcds_sf10000_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_sf10000_catalog_sales]
+    tpcds_sf10000_customer(filters: [FilterInput], limit: Int): [tpcds_sf10000_customer]
+    tpcds_sf10000_customer_address(filters: [FilterInput], limit: Int): [tpcds_sf10000_customer_address]
+    tpcds_sf10000_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_sf10000_customer_demographics]
+    tpcds_sf10000_date_dim(filters: [FilterInput], limit: Int): [tpcds_sf10000_date_dim]
+    tpcds_sf10000_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_sf10000_dbgen_version]
+    tpcds_sf10000_household_demographics(filters: [FilterInput], limit: Int): [tpcds_sf10000_household_demographics]
+    tpcds_sf10000_income_band(filters: [FilterInput], limit: Int): [tpcds_sf10000_income_band]
+    tpcds_sf10000_inventory(filters: [FilterInput], limit: Int): [tpcds_sf10000_inventory]
+    tpcds_sf10000_item(filters: [FilterInput], limit: Int): [tpcds_sf10000_item]
+    tpcds_sf10000_promotion(filters: [FilterInput], limit: Int): [tpcds_sf10000_promotion]
+    tpcds_sf10000_reason(filters: [FilterInput], limit: Int): [tpcds_sf10000_reason]
+    tpcds_sf10000_ship_mode(filters: [FilterInput], limit: Int): [tpcds_sf10000_ship_mode]
+    tpcds_sf10000_store(filters: [FilterInput], limit: Int): [tpcds_sf10000_store]
+    tpcds_sf10000_store_returns(filters: [FilterInput], limit: Int): [tpcds_sf10000_store_returns]
+    tpcds_sf10000_store_sales(filters: [FilterInput], limit: Int): [tpcds_sf10000_store_sales]
+    tpcds_sf10000_time_dim(filters: [FilterInput], limit: Int): [tpcds_sf10000_time_dim]
+    tpcds_sf10000_warehouse(filters: [FilterInput], limit: Int): [tpcds_sf10000_warehouse]
+    tpcds_sf10000_web_page(filters: [FilterInput], limit: Int): [tpcds_sf10000_web_page]
+    tpcds_sf10000_web_returns(filters: [FilterInput], limit: Int): [tpcds_sf10000_web_returns]
+    tpcds_sf10000_web_sales(filters: [FilterInput], limit: Int): [tpcds_sf10000_web_sales]
+    tpcds_sf10000_web_site(filters: [FilterInput], limit: Int): [tpcds_sf10000_web_site]
+    tpcds_sf1000_call_center(filters: [FilterInput], limit: Int): [tpcds_sf1000_call_center]
+    tpcds_sf1000_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf1000_catalog_page]
+    tpcds_sf1000_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf1000_catalog_returns]
+    tpcds_sf1000_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_sf1000_catalog_sales]
+    tpcds_sf1000_customer(filters: [FilterInput], limit: Int): [tpcds_sf1000_customer]
+    tpcds_sf1000_customer_address(filters: [FilterInput], limit: Int): [tpcds_sf1000_customer_address]
+    tpcds_sf1000_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_sf1000_customer_demographics]
+    tpcds_sf1000_date_dim(filters: [FilterInput], limit: Int): [tpcds_sf1000_date_dim]
+    tpcds_sf1000_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_sf1000_dbgen_version]
+    tpcds_sf1000_household_demographics(filters: [FilterInput], limit: Int): [tpcds_sf1000_household_demographics]
+    tpcds_sf1000_income_band(filters: [FilterInput], limit: Int): [tpcds_sf1000_income_band]
+    tpcds_sf1000_inventory(filters: [FilterInput], limit: Int): [tpcds_sf1000_inventory]
+    tpcds_sf1000_item(filters: [FilterInput], limit: Int): [tpcds_sf1000_item]
+    tpcds_sf1000_promotion(filters: [FilterInput], limit: Int): [tpcds_sf1000_promotion]
+    tpcds_sf1000_reason(filters: [FilterInput], limit: Int): [tpcds_sf1000_reason]
+    tpcds_sf1000_ship_mode(filters: [FilterInput], limit: Int): [tpcds_sf1000_ship_mode]
+    tpcds_sf1000_store(filters: [FilterInput], limit: Int): [tpcds_sf1000_store]
+    tpcds_sf1000_store_returns(filters: [FilterInput], limit: Int): [tpcds_sf1000_store_returns]
+    tpcds_sf1000_store_sales(filters: [FilterInput], limit: Int): [tpcds_sf1000_store_sales]
+    tpcds_sf1000_time_dim(filters: [FilterInput], limit: Int): [tpcds_sf1000_time_dim]
+    tpcds_sf1000_warehouse(filters: [FilterInput], limit: Int): [tpcds_sf1000_warehouse]
+    tpcds_sf1000_web_page(filters: [FilterInput], limit: Int): [tpcds_sf1000_web_page]
+    tpcds_sf1000_web_returns(filters: [FilterInput], limit: Int): [tpcds_sf1000_web_returns]
+    tpcds_sf1000_web_sales(filters: [FilterInput], limit: Int): [tpcds_sf1000_web_sales]
+    tpcds_sf1000_web_site(filters: [FilterInput], limit: Int): [tpcds_sf1000_web_site]
+    tpcds_sf100_call_center(filters: [FilterInput], limit: Int): [tpcds_sf100_call_center]
+    tpcds_sf100_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf100_catalog_page]
+    tpcds_sf100_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf100_catalog_returns]
+    tpcds_sf100_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_sf100_catalog_sales]
+    tpcds_sf100_customer(filters: [FilterInput], limit: Int): [tpcds_sf100_customer]
+    tpcds_sf100_customer_address(filters: [FilterInput], limit: Int): [tpcds_sf100_customer_address]
+    tpcds_sf100_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_sf100_customer_demographics]
+    tpcds_sf100_date_dim(filters: [FilterInput], limit: Int): [tpcds_sf100_date_dim]
+    tpcds_sf100_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_sf100_dbgen_version]
+    tpcds_sf100_household_demographics(filters: [FilterInput], limit: Int): [tpcds_sf100_household_demographics]
+    tpcds_sf100_income_band(filters: [FilterInput], limit: Int): [tpcds_sf100_income_band]
+    tpcds_sf100_inventory(filters: [FilterInput], limit: Int): [tpcds_sf100_inventory]
+    tpcds_sf100_item(filters: [FilterInput], limit: Int): [tpcds_sf100_item]
+    tpcds_sf100_promotion(filters: [FilterInput], limit: Int): [tpcds_sf100_promotion]
+    tpcds_sf100_reason(filters: [FilterInput], limit: Int): [tpcds_sf100_reason]
+    tpcds_sf100_ship_mode(filters: [FilterInput], limit: Int): [tpcds_sf100_ship_mode]
+    tpcds_sf100_store(filters: [FilterInput], limit: Int): [tpcds_sf100_store]
+    tpcds_sf100_store_returns(filters: [FilterInput], limit: Int): [tpcds_sf100_store_returns]
+    tpcds_sf100_store_sales(filters: [FilterInput], limit: Int): [tpcds_sf100_store_sales]
+    tpcds_sf100_time_dim(filters: [FilterInput], limit: Int): [tpcds_sf100_time_dim]
+    tpcds_sf100_warehouse(filters: [FilterInput], limit: Int): [tpcds_sf100_warehouse]
+    tpcds_sf100_web_page(filters: [FilterInput], limit: Int): [tpcds_sf100_web_page]
+    tpcds_sf100_web_returns(filters: [FilterInput], limit: Int): [tpcds_sf100_web_returns]
+    tpcds_sf100_web_sales(filters: [FilterInput], limit: Int): [tpcds_sf100_web_sales]
+    tpcds_sf100_web_site(filters: [FilterInput], limit: Int): [tpcds_sf100_web_site]
+    tpcds_sf10_call_center(filters: [FilterInput], limit: Int): [tpcds_sf10_call_center]
+    tpcds_sf10_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf10_catalog_page]
+    tpcds_sf10_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf10_catalog_returns]
+    tpcds_sf10_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_sf10_catalog_sales]
+    tpcds_sf10_customer(filters: [FilterInput], limit: Int): [tpcds_sf10_customer]
+    tpcds_sf10_customer_address(filters: [FilterInput], limit: Int): [tpcds_sf10_customer_address]
+    tpcds_sf10_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_sf10_customer_demographics]
+    tpcds_sf10_date_dim(filters: [FilterInput], limit: Int): [tpcds_sf10_date_dim]
+    tpcds_sf10_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_sf10_dbgen_version]
+    tpcds_sf10_household_demographics(filters: [FilterInput], limit: Int): [tpcds_sf10_household_demographics]
+    tpcds_sf10_income_band(filters: [FilterInput], limit: Int): [tpcds_sf10_income_band]
+    tpcds_sf10_inventory(filters: [FilterInput], limit: Int): [tpcds_sf10_inventory]
+    tpcds_sf10_item(filters: [FilterInput], limit: Int): [tpcds_sf10_item]
+    tpcds_sf10_promotion(filters: [FilterInput], limit: Int): [tpcds_sf10_promotion]
+    tpcds_sf10_reason(filters: [FilterInput], limit: Int): [tpcds_sf10_reason]
+    tpcds_sf10_ship_mode(filters: [FilterInput], limit: Int): [tpcds_sf10_ship_mode]
+    tpcds_sf10_store(filters: [FilterInput], limit: Int): [tpcds_sf10_store]
+    tpcds_sf10_store_returns(filters: [FilterInput], limit: Int): [tpcds_sf10_store_returns]
+    tpcds_sf10_store_sales(filters: [FilterInput], limit: Int): [tpcds_sf10_store_sales]
+    tpcds_sf10_time_dim(filters: [FilterInput], limit: Int): [tpcds_sf10_time_dim]
+    tpcds_sf10_warehouse(filters: [FilterInput], limit: Int): [tpcds_sf10_warehouse]
+    tpcds_sf10_web_page(filters: [FilterInput], limit: Int): [tpcds_sf10_web_page]
+    tpcds_sf10_web_returns(filters: [FilterInput], limit: Int): [tpcds_sf10_web_returns]
+    tpcds_sf10_web_sales(filters: [FilterInput], limit: Int): [tpcds_sf10_web_sales]
+    tpcds_sf10_web_site(filters: [FilterInput], limit: Int): [tpcds_sf10_web_site]
+    tpcds_sf1_call_center(filters: [FilterInput], limit: Int): [tpcds_sf1_call_center]
+    tpcds_sf1_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf1_catalog_page]
+    tpcds_sf1_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf1_catalog_returns]
+    tpcds_sf1_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_sf1_catalog_sales]
+    tpcds_sf1_customer(filters: [FilterInput], limit: Int): [tpcds_sf1_customer]
+    tpcds_sf1_customer_address(filters: [FilterInput], limit: Int): [tpcds_sf1_customer_address]
+    tpcds_sf1_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_sf1_customer_demographics]
+    tpcds_sf1_date_dim(filters: [FilterInput], limit: Int): [tpcds_sf1_date_dim]
+    tpcds_sf1_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_sf1_dbgen_version]
+    tpcds_sf1_household_demographics(filters: [FilterInput], limit: Int): [tpcds_sf1_household_demographics]
+    tpcds_sf1_income_band(filters: [FilterInput], limit: Int): [tpcds_sf1_income_band]
+    tpcds_sf1_inventory(filters: [FilterInput], limit: Int): [tpcds_sf1_inventory]
+    tpcds_sf1_item(filters: [FilterInput], limit: Int): [tpcds_sf1_item]
+    tpcds_sf1_promotion(filters: [FilterInput], limit: Int): [tpcds_sf1_promotion]
+    tpcds_sf1_reason(filters: [FilterInput], limit: Int): [tpcds_sf1_reason]
+    tpcds_sf1_ship_mode(filters: [FilterInput], limit: Int): [tpcds_sf1_ship_mode]
+    tpcds_sf1_store(filters: [FilterInput], limit: Int): [tpcds_sf1_store]
+    tpcds_sf1_store_returns(filters: [FilterInput], limit: Int): [tpcds_sf1_store_returns]
+    tpcds_sf1_store_sales(filters: [FilterInput], limit: Int): [tpcds_sf1_store_sales]
+    tpcds_sf1_time_dim(filters: [FilterInput], limit: Int): [tpcds_sf1_time_dim]
+    tpcds_sf1_warehouse(filters: [FilterInput], limit: Int): [tpcds_sf1_warehouse]
+    tpcds_sf1_web_page(filters: [FilterInput], limit: Int): [tpcds_sf1_web_page]
+    tpcds_sf1_web_returns(filters: [FilterInput], limit: Int): [tpcds_sf1_web_returns]
+    tpcds_sf1_web_sales(filters: [FilterInput], limit: Int): [tpcds_sf1_web_sales]
+    tpcds_sf1_web_site(filters: [FilterInput], limit: Int): [tpcds_sf1_web_site]
+    tpcds_sf30000_call_center(filters: [FilterInput], limit: Int): [tpcds_sf30000_call_center]
+    tpcds_sf30000_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf30000_catalog_page]
+    tpcds_sf30000_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf30000_catalog_returns]
+    tpcds_sf30000_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_sf30000_catalog_sales]
+    tpcds_sf30000_customer(filters: [FilterInput], limit: Int): [tpcds_sf30000_customer]
+    tpcds_sf30000_customer_address(filters: [FilterInput], limit: Int): [tpcds_sf30000_customer_address]
+    tpcds_sf30000_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_sf30000_customer_demographics]
+    tpcds_sf30000_date_dim(filters: [FilterInput], limit: Int): [tpcds_sf30000_date_dim]
+    tpcds_sf30000_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_sf30000_dbgen_version]
+    tpcds_sf30000_household_demographics(filters: [FilterInput], limit: Int): [tpcds_sf30000_household_demographics]
+    tpcds_sf30000_income_band(filters: [FilterInput], limit: Int): [tpcds_sf30000_income_band]
+    tpcds_sf30000_inventory(filters: [FilterInput], limit: Int): [tpcds_sf30000_inventory]
+    tpcds_sf30000_item(filters: [FilterInput], limit: Int): [tpcds_sf30000_item]
+    tpcds_sf30000_promotion(filters: [FilterInput], limit: Int): [tpcds_sf30000_promotion]
+    tpcds_sf30000_reason(filters: [FilterInput], limit: Int): [tpcds_sf30000_reason]
+    tpcds_sf30000_ship_mode(filters: [FilterInput], limit: Int): [tpcds_sf30000_ship_mode]
+    tpcds_sf30000_store(filters: [FilterInput], limit: Int): [tpcds_sf30000_store]
+    tpcds_sf30000_store_returns(filters: [FilterInput], limit: Int): [tpcds_sf30000_store_returns]
+    tpcds_sf30000_store_sales(filters: [FilterInput], limit: Int): [tpcds_sf30000_store_sales]
+    tpcds_sf30000_time_dim(filters: [FilterInput], limit: Int): [tpcds_sf30000_time_dim]
+    tpcds_sf30000_warehouse(filters: [FilterInput], limit: Int): [tpcds_sf30000_warehouse]
+    tpcds_sf30000_web_page(filters: [FilterInput], limit: Int): [tpcds_sf30000_web_page]
+    tpcds_sf30000_web_returns(filters: [FilterInput], limit: Int): [tpcds_sf30000_web_returns]
+    tpcds_sf30000_web_sales(filters: [FilterInput], limit: Int): [tpcds_sf30000_web_sales]
+    tpcds_sf30000_web_site(filters: [FilterInput], limit: Int): [tpcds_sf30000_web_site]
+    tpcds_sf3000_call_center(filters: [FilterInput], limit: Int): [tpcds_sf3000_call_center]
+    tpcds_sf3000_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf3000_catalog_page]
+    tpcds_sf3000_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf3000_catalog_returns]
+    tpcds_sf3000_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_sf3000_catalog_sales]
+    tpcds_sf3000_customer(filters: [FilterInput], limit: Int): [tpcds_sf3000_customer]
+    tpcds_sf3000_customer_address(filters: [FilterInput], limit: Int): [tpcds_sf3000_customer_address]
+    tpcds_sf3000_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_sf3000_customer_demographics]
+    tpcds_sf3000_date_dim(filters: [FilterInput], limit: Int): [tpcds_sf3000_date_dim]
+    tpcds_sf3000_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_sf3000_dbgen_version]
+    tpcds_sf3000_household_demographics(filters: [FilterInput], limit: Int): [tpcds_sf3000_household_demographics]
+    tpcds_sf3000_income_band(filters: [FilterInput], limit: Int): [tpcds_sf3000_income_band]
+    tpcds_sf3000_inventory(filters: [FilterInput], limit: Int): [tpcds_sf3000_inventory]
+    tpcds_sf3000_item(filters: [FilterInput], limit: Int): [tpcds_sf3000_item]
+    tpcds_sf3000_promotion(filters: [FilterInput], limit: Int): [tpcds_sf3000_promotion]
+    tpcds_sf3000_reason(filters: [FilterInput], limit: Int): [tpcds_sf3000_reason]
+    tpcds_sf3000_ship_mode(filters: [FilterInput], limit: Int): [tpcds_sf3000_ship_mode]
+    tpcds_sf3000_store(filters: [FilterInput], limit: Int): [tpcds_sf3000_store]
+    tpcds_sf3000_store_returns(filters: [FilterInput], limit: Int): [tpcds_sf3000_store_returns]
+    tpcds_sf3000_store_sales(filters: [FilterInput], limit: Int): [tpcds_sf3000_store_sales]
+    tpcds_sf3000_time_dim(filters: [FilterInput], limit: Int): [tpcds_sf3000_time_dim]
+    tpcds_sf3000_warehouse(filters: [FilterInput], limit: Int): [tpcds_sf3000_warehouse]
+    tpcds_sf3000_web_page(filters: [FilterInput], limit: Int): [tpcds_sf3000_web_page]
+    tpcds_sf3000_web_returns(filters: [FilterInput], limit: Int): [tpcds_sf3000_web_returns]
+    tpcds_sf3000_web_sales(filters: [FilterInput], limit: Int): [tpcds_sf3000_web_sales]
+    tpcds_sf3000_web_site(filters: [FilterInput], limit: Int): [tpcds_sf3000_web_site]
+    tpcds_sf300_call_center(filters: [FilterInput], limit: Int): [tpcds_sf300_call_center]
+    tpcds_sf300_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf300_catalog_page]
+    tpcds_sf300_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf300_catalog_returns]
+    tpcds_sf300_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_sf300_catalog_sales]
+    tpcds_sf300_customer(filters: [FilterInput], limit: Int): [tpcds_sf300_customer]
+    tpcds_sf300_customer_address(filters: [FilterInput], limit: Int): [tpcds_sf300_customer_address]
+    tpcds_sf300_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_sf300_customer_demographics]
+    tpcds_sf300_date_dim(filters: [FilterInput], limit: Int): [tpcds_sf300_date_dim]
+    tpcds_sf300_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_sf300_dbgen_version]
+    tpcds_sf300_household_demographics(filters: [FilterInput], limit: Int): [tpcds_sf300_household_demographics]
+    tpcds_sf300_income_band(filters: [FilterInput], limit: Int): [tpcds_sf300_income_band]
+    tpcds_sf300_inventory(filters: [FilterInput], limit: Int): [tpcds_sf300_inventory]
+    tpcds_sf300_item(filters: [FilterInput], limit: Int): [tpcds_sf300_item]
+    tpcds_sf300_promotion(filters: [FilterInput], limit: Int): [tpcds_sf300_promotion]
+    tpcds_sf300_reason(filters: [FilterInput], limit: Int): [tpcds_sf300_reason]
+    tpcds_sf300_ship_mode(filters: [FilterInput], limit: Int): [tpcds_sf300_ship_mode]
+    tpcds_sf300_store(filters: [FilterInput], limit: Int): [tpcds_sf300_store]
+    tpcds_sf300_store_returns(filters: [FilterInput], limit: Int): [tpcds_sf300_store_returns]
+    tpcds_sf300_store_sales(filters: [FilterInput], limit: Int): [tpcds_sf300_store_sales]
+    tpcds_sf300_time_dim(filters: [FilterInput], limit: Int): [tpcds_sf300_time_dim]
+    tpcds_sf300_warehouse(filters: [FilterInput], limit: Int): [tpcds_sf300_warehouse]
+    tpcds_sf300_web_page(filters: [FilterInput], limit: Int): [tpcds_sf300_web_page]
+    tpcds_sf300_web_returns(filters: [FilterInput], limit: Int): [tpcds_sf300_web_returns]
+    tpcds_sf300_web_sales(filters: [FilterInput], limit: Int): [tpcds_sf300_web_sales]
+    tpcds_sf300_web_site(filters: [FilterInput], limit: Int): [tpcds_sf300_web_site]
+    tpcds_tiny_call_center(filters: [FilterInput], limit: Int): [tpcds_tiny_call_center]
+    tpcds_tiny_catalog_page(filters: [FilterInput], limit: Int): [tpcds_tiny_catalog_page]
+    tpcds_tiny_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_tiny_catalog_returns]
+    tpcds_tiny_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_tiny_catalog_sales]
+    tpcds_tiny_customer(filters: [FilterInput], limit: Int): [tpcds_tiny_customer]
+    tpcds_tiny_customer_address(filters: [FilterInput], limit: Int): [tpcds_tiny_customer_address]
+    tpcds_tiny_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_tiny_customer_demographics]
+    tpcds_tiny_date_dim(filters: [FilterInput], limit: Int): [tpcds_tiny_date_dim]
+    tpcds_tiny_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_tiny_dbgen_version]
+    tpcds_tiny_household_demographics(filters: [FilterInput], limit: Int): [tpcds_tiny_household_demographics]
+    tpcds_tiny_income_band(filters: [FilterInput], limit: Int): [tpcds_tiny_income_band]
+    tpcds_tiny_inventory(filters: [FilterInput], limit: Int): [tpcds_tiny_inventory]
+    tpcds_tiny_item(filters: [FilterInput], limit: Int): [tpcds_tiny_item]
+    tpcds_tiny_promotion(filters: [FilterInput], limit: Int): [tpcds_tiny_promotion]
+    tpcds_tiny_reason(filters: [FilterInput], limit: Int): [tpcds_tiny_reason]
+    tpcds_tiny_ship_mode(filters: [FilterInput], limit: Int): [tpcds_tiny_ship_mode]
+    tpcds_tiny_store(filters: [FilterInput], limit: Int): [tpcds_tiny_store]
+    tpcds_tiny_store_returns(filters: [FilterInput], limit: Int): [tpcds_tiny_store_returns]
+    tpcds_tiny_store_sales(filters: [FilterInput], limit: Int): [tpcds_tiny_store_sales]
+    tpcds_tiny_time_dim(filters: [FilterInput], limit: Int): [tpcds_tiny_time_dim]
+    tpcds_tiny_warehouse(filters: [FilterInput], limit: Int): [tpcds_tiny_warehouse]
+    tpcds_tiny_web_page(filters: [FilterInput], limit: Int): [tpcds_tiny_web_page]
+    tpcds_tiny_web_returns(filters: [FilterInput], limit: Int): [tpcds_tiny_web_returns]
+    tpcds_tiny_web_sales(filters: [FilterInput], limit: Int): [tpcds_tiny_web_sales]
+    tpcds_tiny_web_site(filters: [FilterInput], limit: Int): [tpcds_tiny_web_site]
+    tpch_sf100000_customer(filters: [FilterInput], limit: Int): [tpch_sf100000_customer]
+    tpch_sf100000_lineitem(filters: [FilterInput], limit: Int): [tpch_sf100000_lineitem]
+    tpch_sf100000_nation(filters: [FilterInput], limit: Int): [tpch_sf100000_nation]
+    tpch_sf100000_orders(filters: [FilterInput], limit: Int): [tpch_sf100000_orders]
+    tpch_sf100000_part(filters: [FilterInput], limit: Int): [tpch_sf100000_part]
+    tpch_sf100000_partsupp(filters: [FilterInput], limit: Int): [tpch_sf100000_partsupp]
+    tpch_sf100000_region(filters: [FilterInput], limit: Int): [tpch_sf100000_region]
+    tpch_sf100000_supplier(filters: [FilterInput], limit: Int): [tpch_sf100000_supplier]
+    tpch_sf10000_customer(filters: [FilterInput], limit: Int): [tpch_sf10000_customer]
+    tpch_sf10000_lineitem(filters: [FilterInput], limit: Int): [tpch_sf10000_lineitem]
+    tpch_sf10000_nation(filters: [FilterInput], limit: Int): [tpch_sf10000_nation]
+    tpch_sf10000_orders(filters: [FilterInput], limit: Int): [tpch_sf10000_orders]
+    tpch_sf10000_part(filters: [FilterInput], limit: Int): [tpch_sf10000_part]
+    tpch_sf10000_partsupp(filters: [FilterInput], limit: Int): [tpch_sf10000_partsupp]
+    tpch_sf10000_region(filters: [FilterInput], limit: Int): [tpch_sf10000_region]
+    tpch_sf10000_supplier(filters: [FilterInput], limit: Int): [tpch_sf10000_supplier]
+    tpch_sf1000_customer(filters: [FilterInput], limit: Int): [tpch_sf1000_customer]
+    tpch_sf1000_lineitem(filters: [FilterInput], limit: Int): [tpch_sf1000_lineitem]
+    tpch_sf1000_nation(filters: [FilterInput], limit: Int): [tpch_sf1000_nation]
+    tpch_sf1000_orders(filters: [FilterInput], limit: Int): [tpch_sf1000_orders]
+    tpch_sf1000_part(filters: [FilterInput], limit: Int): [tpch_sf1000_part]
+    tpch_sf1000_partsupp(filters: [FilterInput], limit: Int): [tpch_sf1000_partsupp]
+    tpch_sf1000_region(filters: [FilterInput], limit: Int): [tpch_sf1000_region]
+    tpch_sf1000_supplier(filters: [FilterInput], limit: Int): [tpch_sf1000_supplier]
+    tpch_sf100_customer(filters: [FilterInput], limit: Int): [tpch_sf100_customer]
+    tpch_sf100_lineitem(filters: [FilterInput], limit: Int): [tpch_sf100_lineitem]
+    tpch_sf100_nation(filters: [FilterInput], limit: Int): [tpch_sf100_nation]
+    tpch_sf100_orders(filters: [FilterInput], limit: Int): [tpch_sf100_orders]
+    tpch_sf100_part(filters: [FilterInput], limit: Int): [tpch_sf100_part]
+    tpch_sf100_partsupp(filters: [FilterInput], limit: Int): [tpch_sf100_partsupp]
+    tpch_sf100_region(filters: [FilterInput], limit: Int): [tpch_sf100_region]
+    tpch_sf100_supplier(filters: [FilterInput], limit: Int): [tpch_sf100_supplier]
+    tpch_sf1_customer(filters: [FilterInput], limit: Int): [tpch_sf1_customer]
+    tpch_sf1_lineitem(filters: [FilterInput], limit: Int): [tpch_sf1_lineitem]
+    tpch_sf1_nation(filters: [FilterInput], limit: Int): [tpch_sf1_nation]
+    tpch_sf1_orders(filters: [FilterInput], limit: Int): [tpch_sf1_orders]
+    tpch_sf1_part(filters: [FilterInput], limit: Int): [tpch_sf1_part]
+    tpch_sf1_partsupp(filters: [FilterInput], limit: Int): [tpch_sf1_partsupp]
+    tpch_sf1_region(filters: [FilterInput], limit: Int): [tpch_sf1_region]
+    tpch_sf1_supplier(filters: [FilterInput], limit: Int): [tpch_sf1_supplier]
+    tpch_sf30000_customer(filters: [FilterInput], limit: Int): [tpch_sf30000_customer]
+    tpch_sf30000_lineitem(filters: [FilterInput], limit: Int): [tpch_sf30000_lineitem]
+    tpch_sf30000_nation(filters: [FilterInput], limit: Int): [tpch_sf30000_nation]
+    tpch_sf30000_orders(filters: [FilterInput], limit: Int): [tpch_sf30000_orders]
+    tpch_sf30000_part(filters: [FilterInput], limit: Int): [tpch_sf30000_part]
+    tpch_sf30000_partsupp(filters: [FilterInput], limit: Int): [tpch_sf30000_partsupp]
+    tpch_sf30000_region(filters: [FilterInput], limit: Int): [tpch_sf30000_region]
+    tpch_sf30000_supplier(filters: [FilterInput], limit: Int): [tpch_sf30000_supplier]
+    tpch_sf3000_customer(filters: [FilterInput], limit: Int): [tpch_sf3000_customer]
+    tpch_sf3000_lineitem(filters: [FilterInput], limit: Int): [tpch_sf3000_lineitem]
+    tpch_sf3000_nation(filters: [FilterInput], limit: Int): [tpch_sf3000_nation]
+    tpch_sf3000_orders(filters: [FilterInput], limit: Int): [tpch_sf3000_orders]
+    tpch_sf3000_part(filters: [FilterInput], limit: Int): [tpch_sf3000_part]
+    tpch_sf3000_partsupp(filters: [FilterInput], limit: Int): [tpch_sf3000_partsupp]
+    tpch_sf3000_region(filters: [FilterInput], limit: Int): [tpch_sf3000_region]
+    tpch_sf3000_supplier(filters: [FilterInput], limit: Int): [tpch_sf3000_supplier]
+    tpch_sf300_customer(filters: [FilterInput], limit: Int): [tpch_sf300_customer]
+    tpch_sf300_lineitem(filters: [FilterInput], limit: Int): [tpch_sf300_lineitem]
+    tpch_sf300_nation(filters: [FilterInput], limit: Int): [tpch_sf300_nation]
+    tpch_sf300_orders(filters: [FilterInput], limit: Int): [tpch_sf300_orders]
+    tpch_sf300_part(filters: [FilterInput], limit: Int): [tpch_sf300_part]
+    tpch_sf300_partsupp(filters: [FilterInput], limit: Int): [tpch_sf300_partsupp]
+    tpch_sf300_region(filters: [FilterInput], limit: Int): [tpch_sf300_region]
+    tpch_sf300_supplier(filters: [FilterInput], limit: Int): [tpch_sf300_supplier]
+    tpch_tiny_customer(filters: [FilterInput], limit: Int): [tpch_tiny_customer]
+    tpch_tiny_lineitem(filters: [FilterInput], limit: Int): [tpch_tiny_lineitem]
+    tpch_tiny_nation(filters: [FilterInput], limit: Int): [tpch_tiny_nation]
+    tpch_tiny_orders(filters: [FilterInput], limit: Int): [tpch_tiny_orders]
+    tpch_tiny_part(filters: [FilterInput], limit: Int): [tpch_tiny_part]
+    tpch_tiny_partsupp(filters: [FilterInput], limit: Int): [tpch_tiny_partsupp]
+    tpch_tiny_region(filters: [FilterInput], limit: Int): [tpch_tiny_region]
+    tpch_tiny_supplier(filters: [FilterInput], limit: Int): [tpch_tiny_supplier]
+}
+
+type Subscription {
+    tpcds_sf100000_call_center(filters: [FilterInput], limit: Int): [tpcds_sf100000_call_center]
+    tpcds_sf100000_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf100000_catalog_page]
+    tpcds_sf100000_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf100000_catalog_returns]
+    tpcds_sf100000_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_sf100000_catalog_sales]
+    tpcds_sf100000_customer(filters: [FilterInput], limit: Int): [tpcds_sf100000_customer]
+    tpcds_sf100000_customer_address(filters: [FilterInput], limit: Int): [tpcds_sf100000_customer_address]
+    tpcds_sf100000_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_sf100000_customer_demographics]
+    tpcds_sf100000_date_dim(filters: [FilterInput], limit: Int): [tpcds_sf100000_date_dim]
+    tpcds_sf100000_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_sf100000_dbgen_version]
+    tpcds_sf100000_household_demographics(filters: [FilterInput], limit: Int): [tpcds_sf100000_household_demographics]
+    tpcds_sf100000_income_band(filters: [FilterInput], limit: Int): [tpcds_sf100000_income_band]
+    tpcds_sf100000_inventory(filters: [FilterInput], limit: Int): [tpcds_sf100000_inventory]
+    tpcds_sf100000_item(filters: [FilterInput], limit: Int): [tpcds_sf100000_item]
+    tpcds_sf100000_promotion(filters: [FilterInput], limit: Int): [tpcds_sf100000_promotion]
+    tpcds_sf100000_reason(filters: [FilterInput], limit: Int): [tpcds_sf100000_reason]
+    tpcds_sf100000_ship_mode(filters: [FilterInput], limit: Int): [tpcds_sf100000_ship_mode]
+    tpcds_sf100000_store(filters: [FilterInput], limit: Int): [tpcds_sf100000_store]
+    tpcds_sf100000_store_returns(filters: [FilterInput], limit: Int): [tpcds_sf100000_store_returns]
+    tpcds_sf100000_store_sales(filters: [FilterInput], limit: Int): [tpcds_sf100000_store_sales]
+    tpcds_sf100000_time_dim(filters: [FilterInput], limit: Int): [tpcds_sf100000_time_dim]
+    tpcds_sf100000_warehouse(filters: [FilterInput], limit: Int): [tpcds_sf100000_warehouse]
+    tpcds_sf100000_web_page(filters: [FilterInput], limit: Int): [tpcds_sf100000_web_page]
+    tpcds_sf100000_web_returns(filters: [FilterInput], limit: Int): [tpcds_sf100000_web_returns]
+    tpcds_sf100000_web_sales(filters: [FilterInput], limit: Int): [tpcds_sf100000_web_sales]
+    tpcds_sf100000_web_site(filters: [FilterInput], limit: Int): [tpcds_sf100000_web_site]
+    tpcds_sf10000_call_center(filters: [FilterInput], limit: Int): [tpcds_sf10000_call_center]
+    tpcds_sf10000_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf10000_catalog_page]
+    tpcds_sf10000_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf10000_catalog_returns]
+    tpcds_sf10000_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_sf10000_catalog_sales]
+    tpcds_sf10000_customer(filters: [FilterInput], limit: Int): [tpcds_sf10000_customer]
+    tpcds_sf10000_customer_address(filters: [FilterInput], limit: Int): [tpcds_sf10000_customer_address]
+    tpcds_sf10000_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_sf10000_customer_demographics]
+    tpcds_sf10000_date_dim(filters: [FilterInput], limit: Int): [tpcds_sf10000_date_dim]
+    tpcds_sf10000_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_sf10000_dbgen_version]
+    tpcds_sf10000_household_demographics(filters: [FilterInput], limit: Int): [tpcds_sf10000_household_demographics]
+    tpcds_sf10000_income_band(filters: [FilterInput], limit: Int): [tpcds_sf10000_income_band]
+    tpcds_sf10000_inventory(filters: [FilterInput], limit: Int): [tpcds_sf10000_inventory]
+    tpcds_sf10000_item(filters: [FilterInput], limit: Int): [tpcds_sf10000_item]
+    tpcds_sf10000_promotion(filters: [FilterInput], limit: Int): [tpcds_sf10000_promotion]
+    tpcds_sf10000_reason(filters: [FilterInput], limit: Int): [tpcds_sf10000_reason]
+    tpcds_sf10000_ship_mode(filters: [FilterInput], limit: Int): [tpcds_sf10000_ship_mode]
+    tpcds_sf10000_store(filters: [FilterInput], limit: Int): [tpcds_sf10000_store]
+    tpcds_sf10000_store_returns(filters: [FilterInput], limit: Int): [tpcds_sf10000_store_returns]
+    tpcds_sf10000_store_sales(filters: [FilterInput], limit: Int): [tpcds_sf10000_store_sales]
+    tpcds_sf10000_time_dim(filters: [FilterInput], limit: Int): [tpcds_sf10000_time_dim]
+    tpcds_sf10000_warehouse(filters: [FilterInput], limit: Int): [tpcds_sf10000_warehouse]
+    tpcds_sf10000_web_page(filters: [FilterInput], limit: Int): [tpcds_sf10000_web_page]
+    tpcds_sf10000_web_returns(filters: [FilterInput], limit: Int): [tpcds_sf10000_web_returns]
+    tpcds_sf10000_web_sales(filters: [FilterInput], limit: Int): [tpcds_sf10000_web_sales]
+    tpcds_sf10000_web_site(filters: [FilterInput], limit: Int): [tpcds_sf10000_web_site]
+    tpcds_sf1000_call_center(filters: [FilterInput], limit: Int): [tpcds_sf1000_call_center]
+    tpcds_sf1000_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf1000_catalog_page]
+    tpcds_sf1000_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf1000_catalog_returns]
+    tpcds_sf1000_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_sf1000_catalog_sales]
+    tpcds_sf1000_customer(filters: [FilterInput], limit: Int): [tpcds_sf1000_customer]
+    tpcds_sf1000_customer_address(filters: [FilterInput], limit: Int): [tpcds_sf1000_customer_address]
+    tpcds_sf1000_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_sf1000_customer_demographics]
+    tpcds_sf1000_date_dim(filters: [FilterInput], limit: Int): [tpcds_sf1000_date_dim]
+    tpcds_sf1000_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_sf1000_dbgen_version]
+    tpcds_sf1000_household_demographics(filters: [FilterInput], limit: Int): [tpcds_sf1000_household_demographics]
+    tpcds_sf1000_income_band(filters: [FilterInput], limit: Int): [tpcds_sf1000_income_band]
+    tpcds_sf1000_inventory(filters: [FilterInput], limit: Int): [tpcds_sf1000_inventory]
+    tpcds_sf1000_item(filters: [FilterInput], limit: Int): [tpcds_sf1000_item]
+    tpcds_sf1000_promotion(filters: [FilterInput], limit: Int): [tpcds_sf1000_promotion]
+    tpcds_sf1000_reason(filters: [FilterInput], limit: Int): [tpcds_sf1000_reason]
+    tpcds_sf1000_ship_mode(filters: [FilterInput], limit: Int): [tpcds_sf1000_ship_mode]
+    tpcds_sf1000_store(filters: [FilterInput], limit: Int): [tpcds_sf1000_store]
+    tpcds_sf1000_store_returns(filters: [FilterInput], limit: Int): [tpcds_sf1000_store_returns]
+    tpcds_sf1000_store_sales(filters: [FilterInput], limit: Int): [tpcds_sf1000_store_sales]
+    tpcds_sf1000_time_dim(filters: [FilterInput], limit: Int): [tpcds_sf1000_time_dim]
+    tpcds_sf1000_warehouse(filters: [FilterInput], limit: Int): [tpcds_sf1000_warehouse]
+    tpcds_sf1000_web_page(filters: [FilterInput], limit: Int): [tpcds_sf1000_web_page]
+    tpcds_sf1000_web_returns(filters: [FilterInput], limit: Int): [tpcds_sf1000_web_returns]
+    tpcds_sf1000_web_sales(filters: [FilterInput], limit: Int): [tpcds_sf1000_web_sales]
+    tpcds_sf1000_web_site(filters: [FilterInput], limit: Int): [tpcds_sf1000_web_site]
+    tpcds_sf100_call_center(filters: [FilterInput], limit: Int): [tpcds_sf100_call_center]
+    tpcds_sf100_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf100_catalog_page]
+    tpcds_sf100_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf100_catalog_returns]
+    tpcds_sf100_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_sf100_catalog_sales]
+    tpcds_sf100_customer(filters: [FilterInput], limit: Int): [tpcds_sf100_customer]
+    tpcds_sf100_customer_address(filters: [FilterInput], limit: Int): [tpcds_sf100_customer_address]
+    tpcds_sf100_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_sf100_customer_demographics]
+    tpcds_sf100_date_dim(filters: [FilterInput], limit: Int): [tpcds_sf100_date_dim]
+    tpcds_sf100_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_sf100_dbgen_version]
+    tpcds_sf100_household_demographics(filters: [FilterInput], limit: Int): [tpcds_sf100_household_demographics]
+    tpcds_sf100_income_band(filters: [FilterInput], limit: Int): [tpcds_sf100_income_band]
+    tpcds_sf100_inventory(filters: [FilterInput], limit: Int): [tpcds_sf100_inventory]
+    tpcds_sf100_item(filters: [FilterInput], limit: Int): [tpcds_sf100_item]
+    tpcds_sf100_promotion(filters: [FilterInput], limit: Int): [tpcds_sf100_promotion]
+    tpcds_sf100_reason(filters: [FilterInput], limit: Int): [tpcds_sf100_reason]
+    tpcds_sf100_ship_mode(filters: [FilterInput], limit: Int): [tpcds_sf100_ship_mode]
+    tpcds_sf100_store(filters: [FilterInput], limit: Int): [tpcds_sf100_store]
+    tpcds_sf100_store_returns(filters: [FilterInput], limit: Int): [tpcds_sf100_store_returns]
+    tpcds_sf100_store_sales(filters: [FilterInput], limit: Int): [tpcds_sf100_store_sales]
+    tpcds_sf100_time_dim(filters: [FilterInput], limit: Int): [tpcds_sf100_time_dim]
+    tpcds_sf100_warehouse(filters: [FilterInput], limit: Int): [tpcds_sf100_warehouse]
+    tpcds_sf100_web_page(filters: [FilterInput], limit: Int): [tpcds_sf100_web_page]
+    tpcds_sf100_web_returns(filters: [FilterInput], limit: Int): [tpcds_sf100_web_returns]
+    tpcds_sf100_web_sales(filters: [FilterInput], limit: Int): [tpcds_sf100_web_sales]
+    tpcds_sf100_web_site(filters: [FilterInput], limit: Int): [tpcds_sf100_web_site]
+    tpcds_sf10_call_center(filters: [FilterInput], limit: Int): [tpcds_sf10_call_center]
+    tpcds_sf10_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf10_catalog_page]
+    tpcds_sf10_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf10_catalog_returns]
+    tpcds_sf10_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_sf10_catalog_sales]
+    tpcds_sf10_customer(filters: [FilterInput], limit: Int): [tpcds_sf10_customer]
+    tpcds_sf10_customer_address(filters: [FilterInput], limit: Int): [tpcds_sf10_customer_address]
+    tpcds_sf10_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_sf10_customer_demographics]
+    tpcds_sf10_date_dim(filters: [FilterInput], limit: Int): [tpcds_sf10_date_dim]
+    tpcds_sf10_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_sf10_dbgen_version]
+    tpcds_sf10_household_demographics(filters: [FilterInput], limit: Int): [tpcds_sf10_household_demographics]
+    tpcds_sf10_income_band(filters: [FilterInput], limit: Int): [tpcds_sf10_income_band]
+    tpcds_sf10_inventory(filters: [FilterInput], limit: Int): [tpcds_sf10_inventory]
+    tpcds_sf10_item(filters: [FilterInput], limit: Int): [tpcds_sf10_item]
+    tpcds_sf10_promotion(filters: [FilterInput], limit: Int): [tpcds_sf10_promotion]
+    tpcds_sf10_reason(filters: [FilterInput], limit: Int): [tpcds_sf10_reason]
+    tpcds_sf10_ship_mode(filters: [FilterInput], limit: Int): [tpcds_sf10_ship_mode]
+    tpcds_sf10_store(filters: [FilterInput], limit: Int): [tpcds_sf10_store]
+    tpcds_sf10_store_returns(filters: [FilterInput], limit: Int): [tpcds_sf10_store_returns]
+    tpcds_sf10_store_sales(filters: [FilterInput], limit: Int): [tpcds_sf10_store_sales]
+    tpcds_sf10_time_dim(filters: [FilterInput], limit: Int): [tpcds_sf10_time_dim]
+    tpcds_sf10_warehouse(filters: [FilterInput], limit: Int): [tpcds_sf10_warehouse]
+    tpcds_sf10_web_page(filters: [FilterInput], limit: Int): [tpcds_sf10_web_page]
+    tpcds_sf10_web_returns(filters: [FilterInput], limit: Int): [tpcds_sf10_web_returns]
+    tpcds_sf10_web_sales(filters: [FilterInput], limit: Int): [tpcds_sf10_web_sales]
+    tpcds_sf10_web_site(filters: [FilterInput], limit: Int): [tpcds_sf10_web_site]
+    tpcds_sf1_call_center(filters: [FilterInput], limit: Int): [tpcds_sf1_call_center]
+    tpcds_sf1_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf1_catalog_page]
+    tpcds_sf1_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf1_catalog_returns]
+    tpcds_sf1_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_sf1_catalog_sales]
+    tpcds_sf1_customer(filters: [FilterInput], limit: Int): [tpcds_sf1_customer]
+    tpcds_sf1_customer_address(filters: [FilterInput], limit: Int): [tpcds_sf1_customer_address]
+    tpcds_sf1_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_sf1_customer_demographics]
+    tpcds_sf1_date_dim(filters: [FilterInput], limit: Int): [tpcds_sf1_date_dim]
+    tpcds_sf1_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_sf1_dbgen_version]
+    tpcds_sf1_household_demographics(filters: [FilterInput], limit: Int): [tpcds_sf1_household_demographics]
+    tpcds_sf1_income_band(filters: [FilterInput], limit: Int): [tpcds_sf1_income_band]
+    tpcds_sf1_inventory(filters: [FilterInput], limit: Int): [tpcds_sf1_inventory]
+    tpcds_sf1_item(filters: [FilterInput], limit: Int): [tpcds_sf1_item]
+    tpcds_sf1_promotion(filters: [FilterInput], limit: Int): [tpcds_sf1_promotion]
+    tpcds_sf1_reason(filters: [FilterInput], limit: Int): [tpcds_sf1_reason]
+    tpcds_sf1_ship_mode(filters: [FilterInput], limit: Int): [tpcds_sf1_ship_mode]
+    tpcds_sf1_store(filters: [FilterInput], limit: Int): [tpcds_sf1_store]
+    tpcds_sf1_store_returns(filters: [FilterInput], limit: Int): [tpcds_sf1_store_returns]
+    tpcds_sf1_store_sales(filters: [FilterInput], limit: Int): [tpcds_sf1_store_sales]
+    tpcds_sf1_time_dim(filters: [FilterInput], limit: Int): [tpcds_sf1_time_dim]
+    tpcds_sf1_warehouse(filters: [FilterInput], limit: Int): [tpcds_sf1_warehouse]
+    tpcds_sf1_web_page(filters: [FilterInput], limit: Int): [tpcds_sf1_web_page]
+    tpcds_sf1_web_returns(filters: [FilterInput], limit: Int): [tpcds_sf1_web_returns]
+    tpcds_sf1_web_sales(filters: [FilterInput], limit: Int): [tpcds_sf1_web_sales]
+    tpcds_sf1_web_site(filters: [FilterInput], limit: Int): [tpcds_sf1_web_site]
+    tpcds_sf30000_call_center(filters: [FilterInput], limit: Int): [tpcds_sf30000_call_center]
+    tpcds_sf30000_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf30000_catalog_page]
+    tpcds_sf30000_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf30000_catalog_returns]
+    tpcds_sf30000_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_sf30000_catalog_sales]
+    tpcds_sf30000_customer(filters: [FilterInput], limit: Int): [tpcds_sf30000_customer]
+    tpcds_sf30000_customer_address(filters: [FilterInput], limit: Int): [tpcds_sf30000_customer_address]
+    tpcds_sf30000_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_sf30000_customer_demographics]
+    tpcds_sf30000_date_dim(filters: [FilterInput], limit: Int): [tpcds_sf30000_date_dim]
+    tpcds_sf30000_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_sf30000_dbgen_version]
+    tpcds_sf30000_household_demographics(filters: [FilterInput], limit: Int): [tpcds_sf30000_household_demographics]
+    tpcds_sf30000_income_band(filters: [FilterInput], limit: Int): [tpcds_sf30000_income_band]
+    tpcds_sf30000_inventory(filters: [FilterInput], limit: Int): [tpcds_sf30000_inventory]
+    tpcds_sf30000_item(filters: [FilterInput], limit: Int): [tpcds_sf30000_item]
+    tpcds_sf30000_promotion(filters: [FilterInput], limit: Int): [tpcds_sf30000_promotion]
+    tpcds_sf30000_reason(filters: [FilterInput], limit: Int): [tpcds_sf30000_reason]
+    tpcds_sf30000_ship_mode(filters: [FilterInput], limit: Int): [tpcds_sf30000_ship_mode]
+    tpcds_sf30000_store(filters: [FilterInput], limit: Int): [tpcds_sf30000_store]
+    tpcds_sf30000_store_returns(filters: [FilterInput], limit: Int): [tpcds_sf30000_store_returns]
+    tpcds_sf30000_store_sales(filters: [FilterInput], limit: Int): [tpcds_sf30000_store_sales]
+    tpcds_sf30000_time_dim(filters: [FilterInput], limit: Int): [tpcds_sf30000_time_dim]
+    tpcds_sf30000_warehouse(filters: [FilterInput], limit: Int): [tpcds_sf30000_warehouse]
+    tpcds_sf30000_web_page(filters: [FilterInput], limit: Int): [tpcds_sf30000_web_page]
+    tpcds_sf30000_web_returns(filters: [FilterInput], limit: Int): [tpcds_sf30000_web_returns]
+    tpcds_sf30000_web_sales(filters: [FilterInput], limit: Int): [tpcds_sf30000_web_sales]
+    tpcds_sf30000_web_site(filters: [FilterInput], limit: Int): [tpcds_sf30000_web_site]
+    tpcds_sf3000_call_center(filters: [FilterInput], limit: Int): [tpcds_sf3000_call_center]
+    tpcds_sf3000_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf3000_catalog_page]
+    tpcds_sf3000_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf3000_catalog_returns]
+    tpcds_sf3000_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_sf3000_catalog_sales]
+    tpcds_sf3000_customer(filters: [FilterInput], limit: Int): [tpcds_sf3000_customer]
+    tpcds_sf3000_customer_address(filters: [FilterInput], limit: Int): [tpcds_sf3000_customer_address]
+    tpcds_sf3000_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_sf3000_customer_demographics]
+    tpcds_sf3000_date_dim(filters: [FilterInput], limit: Int): [tpcds_sf3000_date_dim]
+    tpcds_sf3000_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_sf3000_dbgen_version]
+    tpcds_sf3000_household_demographics(filters: [FilterInput], limit: Int): [tpcds_sf3000_household_demographics]
+    tpcds_sf3000_income_band(filters: [FilterInput], limit: Int): [tpcds_sf3000_income_band]
+    tpcds_sf3000_inventory(filters: [FilterInput], limit: Int): [tpcds_sf3000_inventory]
+    tpcds_sf3000_item(filters: [FilterInput], limit: Int): [tpcds_sf3000_item]
+    tpcds_sf3000_promotion(filters: [FilterInput], limit: Int): [tpcds_sf3000_promotion]
+    tpcds_sf3000_reason(filters: [FilterInput], limit: Int): [tpcds_sf3000_reason]
+    tpcds_sf3000_ship_mode(filters: [FilterInput], limit: Int): [tpcds_sf3000_ship_mode]
+    tpcds_sf3000_store(filters: [FilterInput], limit: Int): [tpcds_sf3000_store]
+    tpcds_sf3000_store_returns(filters: [FilterInput], limit: Int): [tpcds_sf3000_store_returns]
+    tpcds_sf3000_store_sales(filters: [FilterInput], limit: Int): [tpcds_sf3000_store_sales]
+    tpcds_sf3000_time_dim(filters: [FilterInput], limit: Int): [tpcds_sf3000_time_dim]
+    tpcds_sf3000_warehouse(filters: [FilterInput], limit: Int): [tpcds_sf3000_warehouse]
+    tpcds_sf3000_web_page(filters: [FilterInput], limit: Int): [tpcds_sf3000_web_page]
+    tpcds_sf3000_web_returns(filters: [FilterInput], limit: Int): [tpcds_sf3000_web_returns]
+    tpcds_sf3000_web_sales(filters: [FilterInput], limit: Int): [tpcds_sf3000_web_sales]
+    tpcds_sf3000_web_site(filters: [FilterInput], limit: Int): [tpcds_sf3000_web_site]
+    tpcds_sf300_call_center(filters: [FilterInput], limit: Int): [tpcds_sf300_call_center]
+    tpcds_sf300_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf300_catalog_page]
+    tpcds_sf300_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf300_catalog_returns]
+    tpcds_sf300_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_sf300_catalog_sales]
+    tpcds_sf300_customer(filters: [FilterInput], limit: Int): [tpcds_sf300_customer]
+    tpcds_sf300_customer_address(filters: [FilterInput], limit: Int): [tpcds_sf300_customer_address]
+    tpcds_sf300_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_sf300_customer_demographics]
+    tpcds_sf300_date_dim(filters: [FilterInput], limit: Int): [tpcds_sf300_date_dim]
+    tpcds_sf300_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_sf300_dbgen_version]
+    tpcds_sf300_household_demographics(filters: [FilterInput], limit: Int): [tpcds_sf300_household_demographics]
+    tpcds_sf300_income_band(filters: [FilterInput], limit: Int): [tpcds_sf300_income_band]
+    tpcds_sf300_inventory(filters: [FilterInput], limit: Int): [tpcds_sf300_inventory]
+    tpcds_sf300_item(filters: [FilterInput], limit: Int): [tpcds_sf300_item]
+    tpcds_sf300_promotion(filters: [FilterInput], limit: Int): [tpcds_sf300_promotion]
+    tpcds_sf300_reason(filters: [FilterInput], limit: Int): [tpcds_sf300_reason]
+    tpcds_sf300_ship_mode(filters: [FilterInput], limit: Int): [tpcds_sf300_ship_mode]
+    tpcds_sf300_store(filters: [FilterInput], limit: Int): [tpcds_sf300_store]
+    tpcds_sf300_store_returns(filters: [FilterInput], limit: Int): [tpcds_sf300_store_returns]
+    tpcds_sf300_store_sales(filters: [FilterInput], limit: Int): [tpcds_sf300_store_sales]
+    tpcds_sf300_time_dim(filters: [FilterInput], limit: Int): [tpcds_sf300_time_dim]
+    tpcds_sf300_warehouse(filters: [FilterInput], limit: Int): [tpcds_sf300_warehouse]
+    tpcds_sf300_web_page(filters: [FilterInput], limit: Int): [tpcds_sf300_web_page]
+    tpcds_sf300_web_returns(filters: [FilterInput], limit: Int): [tpcds_sf300_web_returns]
+    tpcds_sf300_web_sales(filters: [FilterInput], limit: Int): [tpcds_sf300_web_sales]
+    tpcds_sf300_web_site(filters: [FilterInput], limit: Int): [tpcds_sf300_web_site]
+    tpcds_tiny_call_center(filters: [FilterInput], limit: Int): [tpcds_tiny_call_center]
+    tpcds_tiny_catalog_page(filters: [FilterInput], limit: Int): [tpcds_tiny_catalog_page]
+    tpcds_tiny_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_tiny_catalog_returns]
+    tpcds_tiny_catalog_sales(filters: [FilterInput], limit: Int): [tpcds_tiny_catalog_sales]
+    tpcds_tiny_customer(filters: [FilterInput], limit: Int): [tpcds_tiny_customer]
+    tpcds_tiny_customer_address(filters: [FilterInput], limit: Int): [tpcds_tiny_customer_address]
+    tpcds_tiny_customer_demographics(filters: [FilterInput], limit: Int): [tpcds_tiny_customer_demographics]
+    tpcds_tiny_date_dim(filters: [FilterInput], limit: Int): [tpcds_tiny_date_dim]
+    tpcds_tiny_dbgen_version(filters: [FilterInput], limit: Int): [tpcds_tiny_dbgen_version]
+    tpcds_tiny_household_demographics(filters: [FilterInput], limit: Int): [tpcds_tiny_household_demographics]
+    tpcds_tiny_income_band(filters: [FilterInput], limit: Int): [tpcds_tiny_income_band]
+    tpcds_tiny_inventory(filters: [FilterInput], limit: Int): [tpcds_tiny_inventory]
+    tpcds_tiny_item(filters: [FilterInput], limit: Int): [tpcds_tiny_item]
+    tpcds_tiny_promotion(filters: [FilterInput], limit: Int): [tpcds_tiny_promotion]
+    tpcds_tiny_reason(filters: [FilterInput], limit: Int): [tpcds_tiny_reason]
+    tpcds_tiny_ship_mode(filters: [FilterInput], limit: Int): [tpcds_tiny_ship_mode]
+    tpcds_tiny_store(filters: [FilterInput], limit: Int): [tpcds_tiny_store]
+    tpcds_tiny_store_returns(filters: [FilterInput], limit: Int): [tpcds_tiny_store_returns]
+    tpcds_tiny_store_sales(filters: [FilterInput], limit: Int): [tpcds_tiny_store_sales]
+    tpcds_tiny_time_dim(filters: [FilterInput], limit: Int): [tpcds_tiny_time_dim]
+    tpcds_tiny_warehouse(filters: [FilterInput], limit: Int): [tpcds_tiny_warehouse]
+    tpcds_tiny_web_page(filters: [FilterInput], limit: Int): [tpcds_tiny_web_page]
+    tpcds_tiny_web_returns(filters: [FilterInput], limit: Int): [tpcds_tiny_web_returns]
+    tpcds_tiny_web_sales(filters: [FilterInput], limit: Int): [tpcds_tiny_web_sales]
+    tpcds_tiny_web_site(filters: [FilterInput], limit: Int): [tpcds_tiny_web_site]
+    tpch_sf100000_customer(filters: [FilterInput], limit: Int): [tpch_sf100000_customer]
+    tpch_sf100000_lineitem(filters: [FilterInput], limit: Int): [tpch_sf100000_lineitem]
+    tpch_sf100000_nation(filters: [FilterInput], limit: Int): [tpch_sf100000_nation]
+    tpch_sf100000_orders(filters: [FilterInput], limit: Int): [tpch_sf100000_orders]
+    tpch_sf100000_part(filters: [FilterInput], limit: Int): [tpch_sf100000_part]
+    tpch_sf100000_partsupp(filters: [FilterInput], limit: Int): [tpch_sf100000_partsupp]
+    tpch_sf100000_region(filters: [FilterInput], limit: Int): [tpch_sf100000_region]
+    tpch_sf100000_supplier(filters: [FilterInput], limit: Int): [tpch_sf100000_supplier]
+    tpch_sf10000_customer(filters: [FilterInput], limit: Int): [tpch_sf10000_customer]
+    tpch_sf10000_lineitem(filters: [FilterInput], limit: Int): [tpch_sf10000_lineitem]
+    tpch_sf10000_nation(filters: [FilterInput], limit: Int): [tpch_sf10000_nation]
+    tpch_sf10000_orders(filters: [FilterInput], limit: Int): [tpch_sf10000_orders]
+    tpch_sf10000_part(filters: [FilterInput], limit: Int): [tpch_sf10000_part]
+    tpch_sf10000_partsupp(filters: [FilterInput], limit: Int): [tpch_sf10000_partsupp]
+    tpch_sf10000_region(filters: [FilterInput], limit: Int): [tpch_sf10000_region]
+    tpch_sf10000_supplier(filters: [FilterInput], limit: Int): [tpch_sf10000_supplier]
+    tpch_sf1000_customer(filters: [FilterInput], limit: Int): [tpch_sf1000_customer]
+    tpch_sf1000_lineitem(filters: [FilterInput], limit: Int): [tpch_sf1000_lineitem]
+    tpch_sf1000_nation(filters: [FilterInput], limit: Int): [tpch_sf1000_nation]
+    tpch_sf1000_orders(filters: [FilterInput], limit: Int): [tpch_sf1000_orders]
+    tpch_sf1000_part(filters: [FilterInput], limit: Int): [tpch_sf1000_part]
+    tpch_sf1000_partsupp(filters: [FilterInput], limit: Int): [tpch_sf1000_partsupp]
+    tpch_sf1000_region(filters: [FilterInput], limit: Int): [tpch_sf1000_region]
+    tpch_sf1000_supplier(filters: [FilterInput], limit: Int): [tpch_sf1000_supplier]
+    tpch_sf100_customer(filters: [FilterInput], limit: Int): [tpch_sf100_customer]
+    tpch_sf100_lineitem(filters: [FilterInput], limit: Int): [tpch_sf100_lineitem]
+    tpch_sf100_nation(filters: [FilterInput], limit: Int): [tpch_sf100_nation]
+    tpch_sf100_orders(filters: [FilterInput], limit: Int): [tpch_sf100_orders]
+    tpch_sf100_part(filters: [FilterInput], limit: Int): [tpch_sf100_part]
+    tpch_sf100_partsupp(filters: [FilterInput], limit: Int): [tpch_sf100_partsupp]
+    tpch_sf100_region(filters: [FilterInput], limit: Int): [tpch_sf100_region]
+    tpch_sf100_supplier(filters: [FilterInput], limit: Int): [tpch_sf100_supplier]
+    tpch_sf1_customer(filters: [FilterInput], limit: Int): [tpch_sf1_customer]
+    tpch_sf1_lineitem(filters: [FilterInput], limit: Int): [tpch_sf1_lineitem]
+    tpch_sf1_nation(filters: [FilterInput], limit: Int): [tpch_sf1_nation]
+    tpch_sf1_orders(filters: [FilterInput], limit: Int): [tpch_sf1_orders]
+    tpch_sf1_part(filters: [FilterInput], limit: Int): [tpch_sf1_part]
+    tpch_sf1_partsupp(filters: [FilterInput], limit: Int): [tpch_sf1_partsupp]
+    tpch_sf1_region(filters: [FilterInput], limit: Int): [tpch_sf1_region]
+    tpch_sf1_supplier(filters: [FilterInput], limit: Int): [tpch_sf1_supplier]
+    tpch_sf30000_customer(filters: [FilterInput], limit: Int): [tpch_sf30000_customer]
+    tpch_sf30000_lineitem(filters: [FilterInput], limit: Int): [tpch_sf30000_lineitem]
+    tpch_sf30000_nation(filters: [FilterInput], limit: Int): [tpch_sf30000_nation]
+    tpch_sf30000_orders(filters: [FilterInput], limit: Int): [tpch_sf30000_orders]
+    tpch_sf30000_part(filters: [FilterInput], limit: Int): [tpch_sf30000_part]
+    tpch_sf30000_partsupp(filters: [FilterInput], limit: Int): [tpch_sf30000_partsupp]
+    tpch_sf30000_region(filters: [FilterInput], limit: Int): [tpch_sf30000_region]
+    tpch_sf30000_supplier(filters: [FilterInput], limit: Int): [tpch_sf30000_supplier]
+    tpch_sf3000_customer(filters: [FilterInput], limit: Int): [tpch_sf3000_customer]
+    tpch_sf3000_lineitem(filters: [FilterInput], limit: Int): [tpch_sf3000_lineitem]
+    tpch_sf3000_nation(filters: [FilterInput], limit: Int): [tpch_sf3000_nation]
+    tpch_sf3000_orders(filters: [FilterInput], limit: Int): [tpch_sf3000_orders]
+    tpch_sf3000_part(filters: [FilterInput], limit: Int): [tpch_sf3000_part]
+    tpch_sf3000_partsupp(filters: [FilterInput], limit: Int): [tpch_sf3000_partsupp]
+    tpch_sf3000_region(filters: [FilterInput], limit: Int): [tpch_sf3000_region]
+    tpch_sf3000_supplier(filters: [FilterInput], limit: Int): [tpch_sf3000_supplier]
+    tpch_sf300_customer(filters: [FilterInput], limit: Int): [tpch_sf300_customer]
+    tpch_sf300_lineitem(filters: [FilterInput], limit: Int): [tpch_sf300_lineitem]
+    tpch_sf300_nation(filters: [FilterInput], limit: Int): [tpch_sf300_nation]
+    tpch_sf300_orders(filters: [FilterInput], limit: Int): [tpch_sf300_orders]
+    tpch_sf300_part(filters: [FilterInput], limit: Int): [tpch_sf300_part]
+    tpch_sf300_partsupp(filters: [FilterInput], limit: Int): [tpch_sf300_partsupp]
+    tpch_sf300_region(filters: [FilterInput], limit: Int): [tpch_sf300_region]
+    tpch_sf300_supplier(filters: [FilterInput], limit: Int): [tpch_sf300_supplier]
+    tpch_tiny_customer(filters: [FilterInput], limit: Int): [tpch_tiny_customer]
+    tpch_tiny_lineitem(filters: [FilterInput], limit: Int): [tpch_tiny_lineitem]
+    tpch_tiny_nation(filters: [FilterInput], limit: Int): [tpch_tiny_nation]
+    tpch_tiny_orders(filters: [FilterInput], limit: Int): [tpch_tiny_orders]
+    tpch_tiny_part(filters: [FilterInput], limit: Int): [tpch_tiny_part]
+    tpch_tiny_partsupp(filters: [FilterInput], limit: Int): [tpch_tiny_partsupp]
+    tpch_tiny_region(filters: [FilterInput], limit: Int): [tpch_tiny_region]
+    tpch_tiny_supplier(filters: [FilterInput], limit: Int): [tpch_tiny_supplier]
+}
+
+type tpcds_sf100000_call_center {
+    cc_call_center_id: String
+    cc_call_center_sk: Int
+    cc_city: String
+    cc_class: String
+    cc_closed_date_sk: Int
+    cc_company: Int
+    cc_company_name: String
+    cc_country: String
+    cc_county: String
+    cc_division: Int
+    cc_division_name: String
+    cc_employees: Int
+    cc_gmt_offset: String
+    cc_hours: String
+    cc_manager: String
+    cc_market_manager: String
+    cc_mkt_class: String
+    cc_mkt_desc: String
+    cc_mkt_id: Int
+    cc_name: String
+    cc_open_date_sk: Int
+    cc_rec_end_date: String
+    cc_rec_start_date: String
+    cc_sq_ft: Int
+    cc_state: String
+    cc_street_name: String
+    cc_street_number: String
+    cc_street_type: String
+    cc_suite_number: String
+    cc_tax_percentage: String
+    cc_zip: String
+}
+
+type tpcds_sf100000_catalog_page {
+    cp_catalog_number: Int
+    cp_catalog_page_id: String
+    cp_catalog_page_number: Int
+    cp_catalog_page_sk: Int
+    cp_department: String
+    cp_description: String
+    cp_end_date_sk: Int
+    cp_start_date_sk: Int
+    cp_type: String
+}
+
+type tpcds_sf100000_catalog_returns {
+    cr_call_center_sk: Int
+    cr_catalog_page_sk: Int
+    cr_fee: String
+    cr_item_sk: Int
+    cr_net_loss: String
+    cr_order_number: Int
+    cr_reason_sk: Int
+    cr_refunded_addr_sk: Int
+    cr_refunded_cash: String
+    cr_refunded_cdemo_sk: Int
+    cr_refunded_customer_sk: Int
+    cr_refunded_hdemo_sk: Int
+    cr_return_amount: String
+    cr_return_amt_inc_tax: String
+    cr_return_quantity: Int
+    cr_return_ship_cost: String
+    cr_return_tax: String
+    cr_returned_date_sk: Int
+    cr_returned_time_sk: Int
+    cr_returning_addr_sk: Int
+    cr_returning_cdemo_sk: Int
+    cr_returning_customer_sk: Int
+    cr_returning_hdemo_sk: Int
+    cr_reversed_charge: String
+    cr_ship_mode_sk: Int
+    cr_store_credit: String
+    cr_warehouse_sk: Int
+}
+
+type tpcds_sf100000_catalog_sales {
+    cs_bill_addr_sk: Int
+    cs_bill_cdemo_sk: Int
+    cs_bill_customer_sk: Int
+    cs_bill_hdemo_sk: Int
+    cs_call_center_sk: Int
+    cs_catalog_page_sk: Int
+    cs_coupon_amt: String
+    cs_ext_discount_amt: String
+    cs_ext_list_price: String
+    cs_ext_sales_price: String
+    cs_ext_ship_cost: String
+    cs_ext_tax: String
+    cs_ext_wholesale_cost: String
+    cs_item_sk: Int
+    cs_list_price: String
+    cs_net_paid: String
+    cs_net_paid_inc_ship: String
+    cs_net_paid_inc_ship_tax: String
+    cs_net_paid_inc_tax: String
+    cs_net_profit: String
+    cs_order_number: Int
+    cs_promo_sk: Int
+    cs_quantity: Int
+    cs_sales_price: String
+    cs_ship_addr_sk: Int
+    cs_ship_cdemo_sk: Int
+    cs_ship_customer_sk: Int
+    cs_ship_date_sk: Int
+    cs_ship_hdemo_sk: Int
+    cs_ship_mode_sk: Int
+    cs_sold_date_sk: Int
+    cs_sold_time_sk: Int
+    cs_warehouse_sk: Int
+    cs_wholesale_cost: String
+}
+
+type tpcds_sf100000_customer {
+    c_birth_country: String
+    c_birth_day: Int
+    c_birth_month: Int
+    c_birth_year: Int
+    c_current_addr_sk: Int
+    c_current_cdemo_sk: Int
+    c_current_hdemo_sk: Int
+    c_customer_id: String
+    c_customer_sk: Int
+    c_email_address: String
+    c_first_name: String
+    c_first_sales_date_sk: Int
+    c_first_shipto_date_sk: Int
+    c_last_name: String
+    c_last_review_date_sk: Int
+    c_login: String
+    c_preferred_cust_flag: String
+    c_salutation: String
+}
+
+type tpcds_sf100000_customer_address {
+    ca_address_id: String
+    ca_address_sk: Int
+    ca_city: String
+    ca_country: String
+    ca_county: String
+    ca_gmt_offset: String
+    ca_location_type: String
+    ca_state: String
+    ca_street_name: String
+    ca_street_number: String
+    ca_street_type: String
+    ca_suite_number: String
+    ca_zip: String
+}
+
+type tpcds_sf100000_customer_demographics {
+    cd_credit_rating: String
+    cd_demo_sk: Int
+    cd_dep_college_count: Int
+    cd_dep_count: Int
+    cd_dep_employed_count: Int
+    cd_education_status: String
+    cd_gender: String
+    cd_marital_status: String
+    cd_purchase_estimate: Int
+}
+
+type tpcds_sf100000_date_dim {
+    d_current_day: String
+    d_current_month: String
+    d_current_quarter: String
+    d_current_week: String
+    d_current_year: String
+    d_date: String
+    d_date_id: String
+    d_date_sk: Int
+    d_day_name: String
+    d_dom: Int
+    d_dow: Int
+    d_first_dom: Int
+    d_following_holiday: String
+    d_fy_quarter_seq: Int
+    d_fy_week_seq: Int
+    d_fy_year: Int
+    d_holiday: String
+    d_last_dom: Int
+    d_month_seq: Int
+    d_moy: Int
+    d_qoy: Int
+    d_quarter_name: String
+    d_quarter_seq: Int
+    d_same_day_lq: Int
+    d_same_day_ly: Int
+    d_week_seq: Int
+    d_weekend: String
+    d_year: Int
+}
+
+type tpcds_sf100000_dbgen_version {
+    dv_cmdline_args: String
+    dv_create_date: String
+    dv_create_time: String
+    dv_version: String
+}
+
+type tpcds_sf100000_household_demographics {
+    hd_buy_potential: String
+    hd_demo_sk: Int
+    hd_dep_count: Int
+    hd_income_band_sk: Int
+    hd_vehicle_count: Int
+}
+
+type tpcds_sf100000_income_band {
+    ib_income_band_sk: Int
+    ib_lower_bound: Int
+    ib_upper_bound: Int
+}
+
+type tpcds_sf100000_inventory {
+    inv_date_sk: Int
+    inv_item_sk: Int
+    inv_quantity_on_hand: Int
+    inv_warehouse_sk: Int
+}
+
+type tpcds_sf100000_item {
+    i_brand: String
+    i_brand_id: Int
+    i_category: String
+    i_category_id: Int
+    i_class: String
+    i_class_id: Int
+    i_color: String
+    i_container: String
+    i_current_price: String
+    i_formulation: String
+    i_item_desc: String
+    i_item_id: String
+    i_item_sk: Int
+    i_manager_id: Int
+    i_manufact: String
+    i_manufact_id: Int
+    i_product_name: String
+    i_rec_end_date: String
+    i_rec_start_date: String
+    i_size: String
+    i_units: String
+    i_wholesale_cost: String
+}
+
+type tpcds_sf100000_promotion {
+    p_channel_catalog: String
+    p_channel_demo: String
+    p_channel_details: String
+    p_channel_dmail: String
+    p_channel_email: String
+    p_channel_event: String
+    p_channel_press: String
+    p_channel_radio: String
+    p_channel_tv: String
+    p_cost: String
+    p_discount_active: String
+    p_end_date_sk: Int
+    p_item_sk: Int
+    p_promo_id: String
+    p_promo_name: String
+    p_promo_sk: Int
+    p_purpose: String
+    p_response_targe: Int
+    p_start_date_sk: Int
+}
+
+type tpcds_sf100000_reason {
+    r_reason_desc: String
+    r_reason_id: String
+    r_reason_sk: Int
+}
+
+type tpcds_sf100000_ship_mode {
+    sm_carrier: String
+    sm_code: String
+    sm_contract: String
+    sm_ship_mode_id: String
+    sm_ship_mode_sk: Int
+    sm_type: String
+}
+
+type tpcds_sf100000_store {
+    s_city: String
+    s_closed_date_sk: Int
+    s_company_id: Int
+    s_company_name: String
+    s_country: String
+    s_county: String
+    s_division_id: Int
+    s_division_name: String
+    s_floor_space: Int
+    s_geography_class: String
+    s_gmt_offset: String
+    s_hours: String
+    s_manager: String
+    s_market_desc: String
+    s_market_id: Int
+    s_market_manager: String
+    s_number_employees: Int
+    s_rec_end_date: String
+    s_rec_start_date: String
+    s_state: String
+    s_store_id: String
+    s_store_name: String
+    s_store_sk: Int
+    s_street_name: String
+    s_street_number: String
+    s_street_type: String
+    s_suite_number: String
+    s_tax_precentage: String
+    s_zip: String
+}
+
+type tpcds_sf100000_store_returns {
+    sr_addr_sk: Int
+    sr_cdemo_sk: Int
+    sr_customer_sk: Int
+    sr_fee: String
+    sr_hdemo_sk: Int
+    sr_item_sk: Int
+    sr_net_loss: String
+    sr_reason_sk: Int
+    sr_refunded_cash: String
+    sr_return_amt: String
+    sr_return_amt_inc_tax: String
+    sr_return_quantity: Int
+    sr_return_ship_cost: String
+    sr_return_tax: String
+    sr_return_time_sk: Int
+    sr_returned_date_sk: Int
+    sr_reversed_charge: String
+    sr_store_credit: String
+    sr_store_sk: Int
+    sr_ticket_number: Int
+}
+
+type tpcds_sf100000_store_sales {
+    ss_addr_sk: Int
+    ss_cdemo_sk: Int
+    ss_coupon_amt: String
+    ss_customer_sk: Int
+    ss_ext_discount_amt: String
+    ss_ext_list_price: String
+    ss_ext_sales_price: String
+    ss_ext_tax: String
+    ss_ext_wholesale_cost: String
+    ss_hdemo_sk: Int
+    ss_item_sk: Int
+    ss_list_price: String
+    ss_net_paid: String
+    ss_net_paid_inc_tax: String
+    ss_net_profit: String
+    ss_promo_sk: Int
+    ss_quantity: Int
+    ss_sales_price: String
+    ss_sold_date_sk: Int
+    ss_sold_time_sk: Int
+    ss_store_sk: Int
+    ss_ticket_number: Int
+    ss_wholesale_cost: String
+}
+
+type tpcds_sf100000_time_dim {
+    t_am_pm: String
+    t_hour: Int
+    t_meal_time: String
+    t_minute: Int
+    t_second: Int
+    t_shift: String
+    t_sub_shift: String
+    t_time: Int
+    t_time_id: String
+    t_time_sk: Int
+}
+
+type tpcds_sf100000_warehouse {
+    w_city: String
+    w_country: String
+    w_county: String
+    w_gmt_offset: String
+    w_state: String
+    w_street_name: String
+    w_street_number: String
+    w_street_type: String
+    w_suite_number: String
+    w_warehouse_id: String
+    w_warehouse_name: String
+    w_warehouse_sk: Int
+    w_warehouse_sq_ft: Int
+    w_zip: String
+}
+
+type tpcds_sf100000_web_page {
+    wp_access_date_sk: Int
+    wp_autogen_flag: String
+    wp_char_count: Int
+    wp_creation_date_sk: Int
+    wp_customer_sk: Int
+    wp_image_count: Int
+    wp_link_count: Int
+    wp_max_ad_count: Int
+    wp_rec_end_date: String
+    wp_rec_start_date: String
+    wp_type: String
+    wp_url: String
+    wp_web_page_id: String
+    wp_web_page_sk: Int
+}
+
+type tpcds_sf100000_web_returns {
+    wr_account_credit: String
+    wr_fee: String
+    wr_item_sk: Int
+    wr_net_loss: String
+    wr_order_number: Int
+    wr_reason_sk: Int
+    wr_refunded_addr_sk: Int
+    wr_refunded_cash: String
+    wr_refunded_cdemo_sk: Int
+    wr_refunded_customer_sk: Int
+    wr_refunded_hdemo_sk: Int
+    wr_return_amt: String
+    wr_return_amt_inc_tax: String
+    wr_return_quantity: Int
+    wr_return_ship_cost: String
+    wr_return_tax: String
+    wr_returned_date_sk: Int
+    wr_returned_time_sk: Int
+    wr_returning_addr_sk: Int
+    wr_returning_cdemo_sk: Int
+    wr_returning_customer_sk: Int
+    wr_returning_hdemo_sk: Int
+    wr_reversed_charge: String
+    wr_web_page_sk: Int
+}
+
+type tpcds_sf100000_web_sales {
+    ws_bill_addr_sk: Int
+    ws_bill_cdemo_sk: Int
+    ws_bill_customer_sk: Int
+    ws_bill_hdemo_sk: Int
+    ws_coupon_amt: String
+    ws_ext_discount_amt: String
+    ws_ext_list_price: String
+    ws_ext_sales_price: String
+    ws_ext_ship_cost: String
+    ws_ext_tax: String
+    ws_ext_wholesale_cost: String
+    ws_item_sk: Int
+    ws_list_price: String
+    ws_net_paid: String
+    ws_net_paid_inc_ship: String
+    ws_net_paid_inc_ship_tax: String
+    ws_net_paid_inc_tax: String
+    ws_net_profit: String
+    ws_order_number: Int
+    ws_promo_sk: Int
+    ws_quantity: Int
+    ws_sales_price: String
+    ws_ship_addr_sk: Int
+    ws_ship_cdemo_sk: Int
+    ws_ship_customer_sk: Int
+    ws_ship_date_sk: Int
+    ws_ship_hdemo_sk: Int
+    ws_ship_mode_sk: Int
+    ws_sold_date_sk: Int
+    ws_sold_time_sk: Int
+    ws_warehouse_sk: Int
+    ws_web_page_sk: Int
+    ws_web_site_sk: Int
+    ws_wholesale_cost: String
+}
+
+type tpcds_sf100000_web_site {
+    web_city: String
+    web_class: String
+    web_close_date_sk: Int
+    web_company_id: Int
+    web_company_name: String
+    web_country: String
+    web_county: String
+    web_gmt_offset: String
+    web_manager: String
+    web_market_manager: String
+    web_mkt_class: String
+    web_mkt_desc: String
+    web_mkt_id: Int
+    web_name: String
+    web_open_date_sk: Int
+    web_rec_end_date: String
+    web_rec_start_date: String
+    web_site_id: String
+    web_site_sk: Int
+    web_state: String
+    web_street_name: String
+    web_street_number: String
+    web_street_type: String
+    web_suite_number: String
+    web_tax_percentage: String
+    web_zip: String
+}
+
+type tpcds_sf10000_call_center {
+    cc_call_center_id: String
+    cc_call_center_sk: Int
+    cc_city: String
+    cc_class: String
+    cc_closed_date_sk: Int
+    cc_company: Int
+    cc_company_name: String
+    cc_country: String
+    cc_county: String
+    cc_division: Int
+    cc_division_name: String
+    cc_employees: Int
+    cc_gmt_offset: String
+    cc_hours: String
+    cc_manager: String
+    cc_market_manager: String
+    cc_mkt_class: String
+    cc_mkt_desc: String
+    cc_mkt_id: Int
+    cc_name: String
+    cc_open_date_sk: Int
+    cc_rec_end_date: String
+    cc_rec_start_date: String
+    cc_sq_ft: Int
+    cc_state: String
+    cc_street_name: String
+    cc_street_number: String
+    cc_street_type: String
+    cc_suite_number: String
+    cc_tax_percentage: String
+    cc_zip: String
+}
+
+type tpcds_sf10000_catalog_page {
+    cp_catalog_number: Int
+    cp_catalog_page_id: String
+    cp_catalog_page_number: Int
+    cp_catalog_page_sk: Int
+    cp_department: String
+    cp_description: String
+    cp_end_date_sk: Int
+    cp_start_date_sk: Int
+    cp_type: String
+}
+
+type tpcds_sf10000_catalog_returns {
+    cr_call_center_sk: Int
+    cr_catalog_page_sk: Int
+    cr_fee: String
+    cr_item_sk: Int
+    cr_net_loss: String
+    cr_order_number: Int
+    cr_reason_sk: Int
+    cr_refunded_addr_sk: Int
+    cr_refunded_cash: String
+    cr_refunded_cdemo_sk: Int
+    cr_refunded_customer_sk: Int
+    cr_refunded_hdemo_sk: Int
+    cr_return_amount: String
+    cr_return_amt_inc_tax: String
+    cr_return_quantity: Int
+    cr_return_ship_cost: String
+    cr_return_tax: String
+    cr_returned_date_sk: Int
+    cr_returned_time_sk: Int
+    cr_returning_addr_sk: Int
+    cr_returning_cdemo_sk: Int
+    cr_returning_customer_sk: Int
+    cr_returning_hdemo_sk: Int
+    cr_reversed_charge: String
+    cr_ship_mode_sk: Int
+    cr_store_credit: String
+    cr_warehouse_sk: Int
+}
+
+type tpcds_sf10000_catalog_sales {
+    cs_bill_addr_sk: Int
+    cs_bill_cdemo_sk: Int
+    cs_bill_customer_sk: Int
+    cs_bill_hdemo_sk: Int
+    cs_call_center_sk: Int
+    cs_catalog_page_sk: Int
+    cs_coupon_amt: String
+    cs_ext_discount_amt: String
+    cs_ext_list_price: String
+    cs_ext_sales_price: String
+    cs_ext_ship_cost: String
+    cs_ext_tax: String
+    cs_ext_wholesale_cost: String
+    cs_item_sk: Int
+    cs_list_price: String
+    cs_net_paid: String
+    cs_net_paid_inc_ship: String
+    cs_net_paid_inc_ship_tax: String
+    cs_net_paid_inc_tax: String
+    cs_net_profit: String
+    cs_order_number: Int
+    cs_promo_sk: Int
+    cs_quantity: Int
+    cs_sales_price: String
+    cs_ship_addr_sk: Int
+    cs_ship_cdemo_sk: Int
+    cs_ship_customer_sk: Int
+    cs_ship_date_sk: Int
+    cs_ship_hdemo_sk: Int
+    cs_ship_mode_sk: Int
+    cs_sold_date_sk: Int
+    cs_sold_time_sk: Int
+    cs_warehouse_sk: Int
+    cs_wholesale_cost: String
+}
+
+type tpcds_sf10000_customer {
+    c_birth_country: String
+    c_birth_day: Int
+    c_birth_month: Int
+    c_birth_year: Int
+    c_current_addr_sk: Int
+    c_current_cdemo_sk: Int
+    c_current_hdemo_sk: Int
+    c_customer_id: String
+    c_customer_sk: Int
+    c_email_address: String
+    c_first_name: String
+    c_first_sales_date_sk: Int
+    c_first_shipto_date_sk: Int
+    c_last_name: String
+    c_last_review_date_sk: Int
+    c_login: String
+    c_preferred_cust_flag: String
+    c_salutation: String
+}
+
+type tpcds_sf10000_customer_address {
+    ca_address_id: String
+    ca_address_sk: Int
+    ca_city: String
+    ca_country: String
+    ca_county: String
+    ca_gmt_offset: String
+    ca_location_type: String
+    ca_state: String
+    ca_street_name: String
+    ca_street_number: String
+    ca_street_type: String
+    ca_suite_number: String
+    ca_zip: String
+}
+
+type tpcds_sf10000_customer_demographics {
+    cd_credit_rating: String
+    cd_demo_sk: Int
+    cd_dep_college_count: Int
+    cd_dep_count: Int
+    cd_dep_employed_count: Int
+    cd_education_status: String
+    cd_gender: String
+    cd_marital_status: String
+    cd_purchase_estimate: Int
+}
+
+type tpcds_sf10000_date_dim {
+    d_current_day: String
+    d_current_month: String
+    d_current_quarter: String
+    d_current_week: String
+    d_current_year: String
+    d_date: String
+    d_date_id: String
+    d_date_sk: Int
+    d_day_name: String
+    d_dom: Int
+    d_dow: Int
+    d_first_dom: Int
+    d_following_holiday: String
+    d_fy_quarter_seq: Int
+    d_fy_week_seq: Int
+    d_fy_year: Int
+    d_holiday: String
+    d_last_dom: Int
+    d_month_seq: Int
+    d_moy: Int
+    d_qoy: Int
+    d_quarter_name: String
+    d_quarter_seq: Int
+    d_same_day_lq: Int
+    d_same_day_ly: Int
+    d_week_seq: Int
+    d_weekend: String
+    d_year: Int
+}
+
+type tpcds_sf10000_dbgen_version {
+    dv_cmdline_args: String
+    dv_create_date: String
+    dv_create_time: String
+    dv_version: String
+}
+
+type tpcds_sf10000_household_demographics {
+    hd_buy_potential: String
+    hd_demo_sk: Int
+    hd_dep_count: Int
+    hd_income_band_sk: Int
+    hd_vehicle_count: Int
+}
+
+type tpcds_sf10000_income_band {
+    ib_income_band_sk: Int
+    ib_lower_bound: Int
+    ib_upper_bound: Int
+}
+
+type tpcds_sf10000_inventory {
+    inv_date_sk: Int
+    inv_item_sk: Int
+    inv_quantity_on_hand: Int
+    inv_warehouse_sk: Int
+}
+
+type tpcds_sf10000_item {
+    i_brand: String
+    i_brand_id: Int
+    i_category: String
+    i_category_id: Int
+    i_class: String
+    i_class_id: Int
+    i_color: String
+    i_container: String
+    i_current_price: String
+    i_formulation: String
+    i_item_desc: String
+    i_item_id: String
+    i_item_sk: Int
+    i_manager_id: Int
+    i_manufact: String
+    i_manufact_id: Int
+    i_product_name: String
+    i_rec_end_date: String
+    i_rec_start_date: String
+    i_size: String
+    i_units: String
+    i_wholesale_cost: String
+}
+
+type tpcds_sf10000_promotion {
+    p_channel_catalog: String
+    p_channel_demo: String
+    p_channel_details: String
+    p_channel_dmail: String
+    p_channel_email: String
+    p_channel_event: String
+    p_channel_press: String
+    p_channel_radio: String
+    p_channel_tv: String
+    p_cost: String
+    p_discount_active: String
+    p_end_date_sk: Int
+    p_item_sk: Int
+    p_promo_id: String
+    p_promo_name: String
+    p_promo_sk: Int
+    p_purpose: String
+    p_response_targe: Int
+    p_start_date_sk: Int
+}
+
+type tpcds_sf10000_reason {
+    r_reason_desc: String
+    r_reason_id: String
+    r_reason_sk: Int
+}
+
+type tpcds_sf10000_ship_mode {
+    sm_carrier: String
+    sm_code: String
+    sm_contract: String
+    sm_ship_mode_id: String
+    sm_ship_mode_sk: Int
+    sm_type: String
+}
+
+type tpcds_sf10000_store {
+    s_city: String
+    s_closed_date_sk: Int
+    s_company_id: Int
+    s_company_name: String
+    s_country: String
+    s_county: String
+    s_division_id: Int
+    s_division_name: String
+    s_floor_space: Int
+    s_geography_class: String
+    s_gmt_offset: String
+    s_hours: String
+    s_manager: String
+    s_market_desc: String
+    s_market_id: Int
+    s_market_manager: String
+    s_number_employees: Int
+    s_rec_end_date: String
+    s_rec_start_date: String
+    s_state: String
+    s_store_id: String
+    s_store_name: String
+    s_store_sk: Int
+    s_street_name: String
+    s_street_number: String
+    s_street_type: String
+    s_suite_number: String
+    s_tax_precentage: String
+    s_zip: String
+}
+
+type tpcds_sf10000_store_returns {
+    sr_addr_sk: Int
+    sr_cdemo_sk: Int
+    sr_customer_sk: Int
+    sr_fee: String
+    sr_hdemo_sk: Int
+    sr_item_sk: Int
+    sr_net_loss: String
+    sr_reason_sk: Int
+    sr_refunded_cash: String
+    sr_return_amt: String
+    sr_return_amt_inc_tax: String
+    sr_return_quantity: Int
+    sr_return_ship_cost: String
+    sr_return_tax: String
+    sr_return_time_sk: Int
+    sr_returned_date_sk: Int
+    sr_reversed_charge: String
+    sr_store_credit: String
+    sr_store_sk: Int
+    sr_ticket_number: Int
+}
+
+type tpcds_sf10000_store_sales {
+    ss_addr_sk: Int
+    ss_cdemo_sk: Int
+    ss_coupon_amt: String
+    ss_customer_sk: Int
+    ss_ext_discount_amt: String
+    ss_ext_list_price: String
+    ss_ext_sales_price: String
+    ss_ext_tax: String
+    ss_ext_wholesale_cost: String
+    ss_hdemo_sk: Int
+    ss_item_sk: Int
+    ss_list_price: String
+    ss_net_paid: String
+    ss_net_paid_inc_tax: String
+    ss_net_profit: String
+    ss_promo_sk: Int
+    ss_quantity: Int
+    ss_sales_price: String
+    ss_sold_date_sk: Int
+    ss_sold_time_sk: Int
+    ss_store_sk: Int
+    ss_ticket_number: Int
+    ss_wholesale_cost: String
+}
+
+type tpcds_sf10000_time_dim {
+    t_am_pm: String
+    t_hour: Int
+    t_meal_time: String
+    t_minute: Int
+    t_second: Int
+    t_shift: String
+    t_sub_shift: String
+    t_time: Int
+    t_time_id: String
+    t_time_sk: Int
+}
+
+type tpcds_sf10000_warehouse {
+    w_city: String
+    w_country: String
+    w_county: String
+    w_gmt_offset: String
+    w_state: String
+    w_street_name: String
+    w_street_number: String
+    w_street_type: String
+    w_suite_number: String
+    w_warehouse_id: String
+    w_warehouse_name: String
+    w_warehouse_sk: Int
+    w_warehouse_sq_ft: Int
+    w_zip: String
+}
+
+type tpcds_sf10000_web_page {
+    wp_access_date_sk: Int
+    wp_autogen_flag: String
+    wp_char_count: Int
+    wp_creation_date_sk: Int
+    wp_customer_sk: Int
+    wp_image_count: Int
+    wp_link_count: Int
+    wp_max_ad_count: Int
+    wp_rec_end_date: String
+    wp_rec_start_date: String
+    wp_type: String
+    wp_url: String
+    wp_web_page_id: String
+    wp_web_page_sk: Int
+}
+
+type tpcds_sf10000_web_returns {
+    wr_account_credit: String
+    wr_fee: String
+    wr_item_sk: Int
+    wr_net_loss: String
+    wr_order_number: Int
+    wr_reason_sk: Int
+    wr_refunded_addr_sk: Int
+    wr_refunded_cash: String
+    wr_refunded_cdemo_sk: Int
+    wr_refunded_customer_sk: Int
+    wr_refunded_hdemo_sk: Int
+    wr_return_amt: String
+    wr_return_amt_inc_tax: String
+    wr_return_quantity: Int
+    wr_return_ship_cost: String
+    wr_return_tax: String
+    wr_returned_date_sk: Int
+    wr_returned_time_sk: Int
+    wr_returning_addr_sk: Int
+    wr_returning_cdemo_sk: Int
+    wr_returning_customer_sk: Int
+    wr_returning_hdemo_sk: Int
+    wr_reversed_charge: String
+    wr_web_page_sk: Int
+}
+
+type tpcds_sf10000_web_sales {
+    ws_bill_addr_sk: Int
+    ws_bill_cdemo_sk: Int
+    ws_bill_customer_sk: Int
+    ws_bill_hdemo_sk: Int
+    ws_coupon_amt: String
+    ws_ext_discount_amt: String
+    ws_ext_list_price: String
+    ws_ext_sales_price: String
+    ws_ext_ship_cost: String
+    ws_ext_tax: String
+    ws_ext_wholesale_cost: String
+    ws_item_sk: Int
+    ws_list_price: String
+    ws_net_paid: String
+    ws_net_paid_inc_ship: String
+    ws_net_paid_inc_ship_tax: String
+    ws_net_paid_inc_tax: String
+    ws_net_profit: String
+    ws_order_number: Int
+    ws_promo_sk: Int
+    ws_quantity: Int
+    ws_sales_price: String
+    ws_ship_addr_sk: Int
+    ws_ship_cdemo_sk: Int
+    ws_ship_customer_sk: Int
+    ws_ship_date_sk: Int
+    ws_ship_hdemo_sk: Int
+    ws_ship_mode_sk: Int
+    ws_sold_date_sk: Int
+    ws_sold_time_sk: Int
+    ws_warehouse_sk: Int
+    ws_web_page_sk: Int
+    ws_web_site_sk: Int
+    ws_wholesale_cost: String
+}
+
+type tpcds_sf10000_web_site {
+    web_city: String
+    web_class: String
+    web_close_date_sk: Int
+    web_company_id: Int
+    web_company_name: String
+    web_country: String
+    web_county: String
+    web_gmt_offset: String
+    web_manager: String
+    web_market_manager: String
+    web_mkt_class: String
+    web_mkt_desc: String
+    web_mkt_id: Int
+    web_name: String
+    web_open_date_sk: Int
+    web_rec_end_date: String
+    web_rec_start_date: String
+    web_site_id: String
+    web_site_sk: Int
+    web_state: String
+    web_street_name: String
+    web_street_number: String
+    web_street_type: String
+    web_suite_number: String
+    web_tax_percentage: String
+    web_zip: String
+}
+
+type tpcds_sf1000_call_center {
+    cc_call_center_id: String
+    cc_call_center_sk: Int
+    cc_city: String
+    cc_class: String
+    cc_closed_date_sk: Int
+    cc_company: Int
+    cc_company_name: String
+    cc_country: String
+    cc_county: String
+    cc_division: Int
+    cc_division_name: String
+    cc_employees: Int
+    cc_gmt_offset: String
+    cc_hours: String
+    cc_manager: String
+    cc_market_manager: String
+    cc_mkt_class: String
+    cc_mkt_desc: String
+    cc_mkt_id: Int
+    cc_name: String
+    cc_open_date_sk: Int
+    cc_rec_end_date: String
+    cc_rec_start_date: String
+    cc_sq_ft: Int
+    cc_state: String
+    cc_street_name: String
+    cc_street_number: String
+    cc_street_type: String
+    cc_suite_number: String
+    cc_tax_percentage: String
+    cc_zip: String
+}
+
+type tpcds_sf1000_catalog_page {
+    cp_catalog_number: Int
+    cp_catalog_page_id: String
+    cp_catalog_page_number: Int
+    cp_catalog_page_sk: Int
+    cp_department: String
+    cp_description: String
+    cp_end_date_sk: Int
+    cp_start_date_sk: Int
+    cp_type: String
+}
+
+type tpcds_sf1000_catalog_returns {
+    cr_call_center_sk: Int
+    cr_catalog_page_sk: Int
+    cr_fee: String
+    cr_item_sk: Int
+    cr_net_loss: String
+    cr_order_number: Int
+    cr_reason_sk: Int
+    cr_refunded_addr_sk: Int
+    cr_refunded_cash: String
+    cr_refunded_cdemo_sk: Int
+    cr_refunded_customer_sk: Int
+    cr_refunded_hdemo_sk: Int
+    cr_return_amount: String
+    cr_return_amt_inc_tax: String
+    cr_return_quantity: Int
+    cr_return_ship_cost: String
+    cr_return_tax: String
+    cr_returned_date_sk: Int
+    cr_returned_time_sk: Int
+    cr_returning_addr_sk: Int
+    cr_returning_cdemo_sk: Int
+    cr_returning_customer_sk: Int
+    cr_returning_hdemo_sk: Int
+    cr_reversed_charge: String
+    cr_ship_mode_sk: Int
+    cr_store_credit: String
+    cr_warehouse_sk: Int
+}
+
+type tpcds_sf1000_catalog_sales {
+    cs_bill_addr_sk: Int
+    cs_bill_cdemo_sk: Int
+    cs_bill_customer_sk: Int
+    cs_bill_hdemo_sk: Int
+    cs_call_center_sk: Int
+    cs_catalog_page_sk: Int
+    cs_coupon_amt: String
+    cs_ext_discount_amt: String
+    cs_ext_list_price: String
+    cs_ext_sales_price: String
+    cs_ext_ship_cost: String
+    cs_ext_tax: String
+    cs_ext_wholesale_cost: String
+    cs_item_sk: Int
+    cs_list_price: String
+    cs_net_paid: String
+    cs_net_paid_inc_ship: String
+    cs_net_paid_inc_ship_tax: String
+    cs_net_paid_inc_tax: String
+    cs_net_profit: String
+    cs_order_number: Int
+    cs_promo_sk: Int
+    cs_quantity: Int
+    cs_sales_price: String
+    cs_ship_addr_sk: Int
+    cs_ship_cdemo_sk: Int
+    cs_ship_customer_sk: Int
+    cs_ship_date_sk: Int
+    cs_ship_hdemo_sk: Int
+    cs_ship_mode_sk: Int
+    cs_sold_date_sk: Int
+    cs_sold_time_sk: Int
+    cs_warehouse_sk: Int
+    cs_wholesale_cost: String
+}
+
+type tpcds_sf1000_customer {
+    c_birth_country: String
+    c_birth_day: Int
+    c_birth_month: Int
+    c_birth_year: Int
+    c_current_addr_sk: Int
+    c_current_cdemo_sk: Int
+    c_current_hdemo_sk: Int
+    c_customer_id: String
+    c_customer_sk: Int
+    c_email_address: String
+    c_first_name: String
+    c_first_sales_date_sk: Int
+    c_first_shipto_date_sk: Int
+    c_last_name: String
+    c_last_review_date_sk: Int
+    c_login: String
+    c_preferred_cust_flag: String
+    c_salutation: String
+}
+
+type tpcds_sf1000_customer_address {
+    ca_address_id: String
+    ca_address_sk: Int
+    ca_city: String
+    ca_country: String
+    ca_county: String
+    ca_gmt_offset: String
+    ca_location_type: String
+    ca_state: String
+    ca_street_name: String
+    ca_street_number: String
+    ca_street_type: String
+    ca_suite_number: String
+    ca_zip: String
+}
+
+type tpcds_sf1000_customer_demographics {
+    cd_credit_rating: String
+    cd_demo_sk: Int
+    cd_dep_college_count: Int
+    cd_dep_count: Int
+    cd_dep_employed_count: Int
+    cd_education_status: String
+    cd_gender: String
+    cd_marital_status: String
+    cd_purchase_estimate: Int
+}
+
+type tpcds_sf1000_date_dim {
+    d_current_day: String
+    d_current_month: String
+    d_current_quarter: String
+    d_current_week: String
+    d_current_year: String
+    d_date: String
+    d_date_id: String
+    d_date_sk: Int
+    d_day_name: String
+    d_dom: Int
+    d_dow: Int
+    d_first_dom: Int
+    d_following_holiday: String
+    d_fy_quarter_seq: Int
+    d_fy_week_seq: Int
+    d_fy_year: Int
+    d_holiday: String
+    d_last_dom: Int
+    d_month_seq: Int
+    d_moy: Int
+    d_qoy: Int
+    d_quarter_name: String
+    d_quarter_seq: Int
+    d_same_day_lq: Int
+    d_same_day_ly: Int
+    d_week_seq: Int
+    d_weekend: String
+    d_year: Int
+}
+
+type tpcds_sf1000_dbgen_version {
+    dv_cmdline_args: String
+    dv_create_date: String
+    dv_create_time: String
+    dv_version: String
+}
+
+type tpcds_sf1000_household_demographics {
+    hd_buy_potential: String
+    hd_demo_sk: Int
+    hd_dep_count: Int
+    hd_income_band_sk: Int
+    hd_vehicle_count: Int
+}
+
+type tpcds_sf1000_income_band {
+    ib_income_band_sk: Int
+    ib_lower_bound: Int
+    ib_upper_bound: Int
+}
+
+type tpcds_sf1000_inventory {
+    inv_date_sk: Int
+    inv_item_sk: Int
+    inv_quantity_on_hand: Int
+    inv_warehouse_sk: Int
+}
+
+type tpcds_sf1000_item {
+    i_brand: String
+    i_brand_id: Int
+    i_category: String
+    i_category_id: Int
+    i_class: String
+    i_class_id: Int
+    i_color: String
+    i_container: String
+    i_current_price: String
+    i_formulation: String
+    i_item_desc: String
+    i_item_id: String
+    i_item_sk: Int
+    i_manager_id: Int
+    i_manufact: String
+    i_manufact_id: Int
+    i_product_name: String
+    i_rec_end_date: String
+    i_rec_start_date: String
+    i_size: String
+    i_units: String
+    i_wholesale_cost: String
+}
+
+type tpcds_sf1000_promotion {
+    p_channel_catalog: String
+    p_channel_demo: String
+    p_channel_details: String
+    p_channel_dmail: String
+    p_channel_email: String
+    p_channel_event: String
+    p_channel_press: String
+    p_channel_radio: String
+    p_channel_tv: String
+    p_cost: String
+    p_discount_active: String
+    p_end_date_sk: Int
+    p_item_sk: Int
+    p_promo_id: String
+    p_promo_name: String
+    p_promo_sk: Int
+    p_purpose: String
+    p_response_targe: Int
+    p_start_date_sk: Int
+}
+
+type tpcds_sf1000_reason {
+    r_reason_desc: String
+    r_reason_id: String
+    r_reason_sk: Int
+}
+
+type tpcds_sf1000_ship_mode {
+    sm_carrier: String
+    sm_code: String
+    sm_contract: String
+    sm_ship_mode_id: String
+    sm_ship_mode_sk: Int
+    sm_type: String
+}
+
+type tpcds_sf1000_store {
+    s_city: String
+    s_closed_date_sk: Int
+    s_company_id: Int
+    s_company_name: String
+    s_country: String
+    s_county: String
+    s_division_id: Int
+    s_division_name: String
+    s_floor_space: Int
+    s_geography_class: String
+    s_gmt_offset: String
+    s_hours: String
+    s_manager: String
+    s_market_desc: String
+    s_market_id: Int
+    s_market_manager: String
+    s_number_employees: Int
+    s_rec_end_date: String
+    s_rec_start_date: String
+    s_state: String
+    s_store_id: String
+    s_store_name: String
+    s_store_sk: Int
+    s_street_name: String
+    s_street_number: String
+    s_street_type: String
+    s_suite_number: String
+    s_tax_precentage: String
+    s_zip: String
+}
+
+type tpcds_sf1000_store_returns {
+    sr_addr_sk: Int
+    sr_cdemo_sk: Int
+    sr_customer_sk: Int
+    sr_fee: String
+    sr_hdemo_sk: Int
+    sr_item_sk: Int
+    sr_net_loss: String
+    sr_reason_sk: Int
+    sr_refunded_cash: String
+    sr_return_amt: String
+    sr_return_amt_inc_tax: String
+    sr_return_quantity: Int
+    sr_return_ship_cost: String
+    sr_return_tax: String
+    sr_return_time_sk: Int
+    sr_returned_date_sk: Int
+    sr_reversed_charge: String
+    sr_store_credit: String
+    sr_store_sk: Int
+    sr_ticket_number: Int
+}
+
+type tpcds_sf1000_store_sales {
+    ss_addr_sk: Int
+    ss_cdemo_sk: Int
+    ss_coupon_amt: String
+    ss_customer_sk: Int
+    ss_ext_discount_amt: String
+    ss_ext_list_price: String
+    ss_ext_sales_price: String
+    ss_ext_tax: String
+    ss_ext_wholesale_cost: String
+    ss_hdemo_sk: Int
+    ss_item_sk: Int
+    ss_list_price: String
+    ss_net_paid: String
+    ss_net_paid_inc_tax: String
+    ss_net_profit: String
+    ss_promo_sk: Int
+    ss_quantity: Int
+    ss_sales_price: String
+    ss_sold_date_sk: Int
+    ss_sold_time_sk: Int
+    ss_store_sk: Int
+    ss_ticket_number: Int
+    ss_wholesale_cost: String
+}
+
+type tpcds_sf1000_time_dim {
+    t_am_pm: String
+    t_hour: Int
+    t_meal_time: String
+    t_minute: Int
+    t_second: Int
+    t_shift: String
+    t_sub_shift: String
+    t_time: Int
+    t_time_id: String
+    t_time_sk: Int
+}
+
+type tpcds_sf1000_warehouse {
+    w_city: String
+    w_country: String
+    w_county: String
+    w_gmt_offset: String
+    w_state: String
+    w_street_name: String
+    w_street_number: String
+    w_street_type: String
+    w_suite_number: String
+    w_warehouse_id: String
+    w_warehouse_name: String
+    w_warehouse_sk: Int
+    w_warehouse_sq_ft: Int
+    w_zip: String
+}
+
+type tpcds_sf1000_web_page {
+    wp_access_date_sk: Int
+    wp_autogen_flag: String
+    wp_char_count: Int
+    wp_creation_date_sk: Int
+    wp_customer_sk: Int
+    wp_image_count: Int
+    wp_link_count: Int
+    wp_max_ad_count: Int
+    wp_rec_end_date: String
+    wp_rec_start_date: String
+    wp_type: String
+    wp_url: String
+    wp_web_page_id: String
+    wp_web_page_sk: Int
+}
+
+type tpcds_sf1000_web_returns {
+    wr_account_credit: String
+    wr_fee: String
+    wr_item_sk: Int
+    wr_net_loss: String
+    wr_order_number: Int
+    wr_reason_sk: Int
+    wr_refunded_addr_sk: Int
+    wr_refunded_cash: String
+    wr_refunded_cdemo_sk: Int
+    wr_refunded_customer_sk: Int
+    wr_refunded_hdemo_sk: Int
+    wr_return_amt: String
+    wr_return_amt_inc_tax: String
+    wr_return_quantity: Int
+    wr_return_ship_cost: String
+    wr_return_tax: String
+    wr_returned_date_sk: Int
+    wr_returned_time_sk: Int
+    wr_returning_addr_sk: Int
+    wr_returning_cdemo_sk: Int
+    wr_returning_customer_sk: Int
+    wr_returning_hdemo_sk: Int
+    wr_reversed_charge: String
+    wr_web_page_sk: Int
+}
+
+type tpcds_sf1000_web_sales {
+    ws_bill_addr_sk: Int
+    ws_bill_cdemo_sk: Int
+    ws_bill_customer_sk: Int
+    ws_bill_hdemo_sk: Int
+    ws_coupon_amt: String
+    ws_ext_discount_amt: String
+    ws_ext_list_price: String
+    ws_ext_sales_price: String
+    ws_ext_ship_cost: String
+    ws_ext_tax: String
+    ws_ext_wholesale_cost: String
+    ws_item_sk: Int
+    ws_list_price: String
+    ws_net_paid: String
+    ws_net_paid_inc_ship: String
+    ws_net_paid_inc_ship_tax: String
+    ws_net_paid_inc_tax: String
+    ws_net_profit: String
+    ws_order_number: Int
+    ws_promo_sk: Int
+    ws_quantity: Int
+    ws_sales_price: String
+    ws_ship_addr_sk: Int
+    ws_ship_cdemo_sk: Int
+    ws_ship_customer_sk: Int
+    ws_ship_date_sk: Int
+    ws_ship_hdemo_sk: Int
+    ws_ship_mode_sk: Int
+    ws_sold_date_sk: Int
+    ws_sold_time_sk: Int
+    ws_warehouse_sk: Int
+    ws_web_page_sk: Int
+    ws_web_site_sk: Int
+    ws_wholesale_cost: String
+}
+
+type tpcds_sf1000_web_site {
+    web_city: String
+    web_class: String
+    web_close_date_sk: Int
+    web_company_id: Int
+    web_company_name: String
+    web_country: String
+    web_county: String
+    web_gmt_offset: String
+    web_manager: String
+    web_market_manager: String
+    web_mkt_class: String
+    web_mkt_desc: String
+    web_mkt_id: Int
+    web_name: String
+    web_open_date_sk: Int
+    web_rec_end_date: String
+    web_rec_start_date: String
+    web_site_id: String
+    web_site_sk: Int
+    web_state: String
+    web_street_name: String
+    web_street_number: String
+    web_street_type: String
+    web_suite_number: String
+    web_tax_percentage: String
+    web_zip: String
+}
+
+type tpcds_sf100_call_center {
+    cc_call_center_id: String
+    cc_call_center_sk: Int
+    cc_city: String
+    cc_class: String
+    cc_closed_date_sk: Int
+    cc_company: Int
+    cc_company_name: String
+    cc_country: String
+    cc_county: String
+    cc_division: Int
+    cc_division_name: String
+    cc_employees: Int
+    cc_gmt_offset: String
+    cc_hours: String
+    cc_manager: String
+    cc_market_manager: String
+    cc_mkt_class: String
+    cc_mkt_desc: String
+    cc_mkt_id: Int
+    cc_name: String
+    cc_open_date_sk: Int
+    cc_rec_end_date: String
+    cc_rec_start_date: String
+    cc_sq_ft: Int
+    cc_state: String
+    cc_street_name: String
+    cc_street_number: String
+    cc_street_type: String
+    cc_suite_number: String
+    cc_tax_percentage: String
+    cc_zip: String
+}
+
+type tpcds_sf100_catalog_page {
+    cp_catalog_number: Int
+    cp_catalog_page_id: String
+    cp_catalog_page_number: Int
+    cp_catalog_page_sk: Int
+    cp_department: String
+    cp_description: String
+    cp_end_date_sk: Int
+    cp_start_date_sk: Int
+    cp_type: String
+}
+
+type tpcds_sf100_catalog_returns {
+    cr_call_center_sk: Int
+    cr_catalog_page_sk: Int
+    cr_fee: String
+    cr_item_sk: Int
+    cr_net_loss: String
+    cr_order_number: Int
+    cr_reason_sk: Int
+    cr_refunded_addr_sk: Int
+    cr_refunded_cash: String
+    cr_refunded_cdemo_sk: Int
+    cr_refunded_customer_sk: Int
+    cr_refunded_hdemo_sk: Int
+    cr_return_amount: String
+    cr_return_amt_inc_tax: String
+    cr_return_quantity: Int
+    cr_return_ship_cost: String
+    cr_return_tax: String
+    cr_returned_date_sk: Int
+    cr_returned_time_sk: Int
+    cr_returning_addr_sk: Int
+    cr_returning_cdemo_sk: Int
+    cr_returning_customer_sk: Int
+    cr_returning_hdemo_sk: Int
+    cr_reversed_charge: String
+    cr_ship_mode_sk: Int
+    cr_store_credit: String
+    cr_warehouse_sk: Int
+}
+
+type tpcds_sf100_catalog_sales {
+    cs_bill_addr_sk: Int
+    cs_bill_cdemo_sk: Int
+    cs_bill_customer_sk: Int
+    cs_bill_hdemo_sk: Int
+    cs_call_center_sk: Int
+    cs_catalog_page_sk: Int
+    cs_coupon_amt: String
+    cs_ext_discount_amt: String
+    cs_ext_list_price: String
+    cs_ext_sales_price: String
+    cs_ext_ship_cost: String
+    cs_ext_tax: String
+    cs_ext_wholesale_cost: String
+    cs_item_sk: Int
+    cs_list_price: String
+    cs_net_paid: String
+    cs_net_paid_inc_ship: String
+    cs_net_paid_inc_ship_tax: String
+    cs_net_paid_inc_tax: String
+    cs_net_profit: String
+    cs_order_number: Int
+    cs_promo_sk: Int
+    cs_quantity: Int
+    cs_sales_price: String
+    cs_ship_addr_sk: Int
+    cs_ship_cdemo_sk: Int
+    cs_ship_customer_sk: Int
+    cs_ship_date_sk: Int
+    cs_ship_hdemo_sk: Int
+    cs_ship_mode_sk: Int
+    cs_sold_date_sk: Int
+    cs_sold_time_sk: Int
+    cs_warehouse_sk: Int
+    cs_wholesale_cost: String
+}
+
+type tpcds_sf100_customer {
+    c_birth_country: String
+    c_birth_day: Int
+    c_birth_month: Int
+    c_birth_year: Int
+    c_current_addr_sk: Int
+    c_current_cdemo_sk: Int
+    c_current_hdemo_sk: Int
+    c_customer_id: String
+    c_customer_sk: Int
+    c_email_address: String
+    c_first_name: String
+    c_first_sales_date_sk: Int
+    c_first_shipto_date_sk: Int
+    c_last_name: String
+    c_last_review_date_sk: Int
+    c_login: String
+    c_preferred_cust_flag: String
+    c_salutation: String
+}
+
+type tpcds_sf100_customer_address {
+    ca_address_id: String
+    ca_address_sk: Int
+    ca_city: String
+    ca_country: String
+    ca_county: String
+    ca_gmt_offset: String
+    ca_location_type: String
+    ca_state: String
+    ca_street_name: String
+    ca_street_number: String
+    ca_street_type: String
+    ca_suite_number: String
+    ca_zip: String
+}
+
+type tpcds_sf100_customer_demographics {
+    cd_credit_rating: String
+    cd_demo_sk: Int
+    cd_dep_college_count: Int
+    cd_dep_count: Int
+    cd_dep_employed_count: Int
+    cd_education_status: String
+    cd_gender: String
+    cd_marital_status: String
+    cd_purchase_estimate: Int
+}
+
+type tpcds_sf100_date_dim {
+    d_current_day: String
+    d_current_month: String
+    d_current_quarter: String
+    d_current_week: String
+    d_current_year: String
+    d_date: String
+    d_date_id: String
+    d_date_sk: Int
+    d_day_name: String
+    d_dom: Int
+    d_dow: Int
+    d_first_dom: Int
+    d_following_holiday: String
+    d_fy_quarter_seq: Int
+    d_fy_week_seq: Int
+    d_fy_year: Int
+    d_holiday: String
+    d_last_dom: Int
+    d_month_seq: Int
+    d_moy: Int
+    d_qoy: Int
+    d_quarter_name: String
+    d_quarter_seq: Int
+    d_same_day_lq: Int
+    d_same_day_ly: Int
+    d_week_seq: Int
+    d_weekend: String
+    d_year: Int
+}
+
+type tpcds_sf100_dbgen_version {
+    dv_cmdline_args: String
+    dv_create_date: String
+    dv_create_time: String
+    dv_version: String
+}
+
+type tpcds_sf100_household_demographics {
+    hd_buy_potential: String
+    hd_demo_sk: Int
+    hd_dep_count: Int
+    hd_income_band_sk: Int
+    hd_vehicle_count: Int
+}
+
+type tpcds_sf100_income_band {
+    ib_income_band_sk: Int
+    ib_lower_bound: Int
+    ib_upper_bound: Int
+}
+
+type tpcds_sf100_inventory {
+    inv_date_sk: Int
+    inv_item_sk: Int
+    inv_quantity_on_hand: Int
+    inv_warehouse_sk: Int
+}
+
+type tpcds_sf100_item {
+    i_brand: String
+    i_brand_id: Int
+    i_category: String
+    i_category_id: Int
+    i_class: String
+    i_class_id: Int
+    i_color: String
+    i_container: String
+    i_current_price: String
+    i_formulation: String
+    i_item_desc: String
+    i_item_id: String
+    i_item_sk: Int
+    i_manager_id: Int
+    i_manufact: String
+    i_manufact_id: Int
+    i_product_name: String
+    i_rec_end_date: String
+    i_rec_start_date: String
+    i_size: String
+    i_units: String
+    i_wholesale_cost: String
+}
+
+type tpcds_sf100_promotion {
+    p_channel_catalog: String
+    p_channel_demo: String
+    p_channel_details: String
+    p_channel_dmail: String
+    p_channel_email: String
+    p_channel_event: String
+    p_channel_press: String
+    p_channel_radio: String
+    p_channel_tv: String
+    p_cost: String
+    p_discount_active: String
+    p_end_date_sk: Int
+    p_item_sk: Int
+    p_promo_id: String
+    p_promo_name: String
+    p_promo_sk: Int
+    p_purpose: String
+    p_response_targe: Int
+    p_start_date_sk: Int
+}
+
+type tpcds_sf100_reason {
+    r_reason_desc: String
+    r_reason_id: String
+    r_reason_sk: Int
+}
+
+type tpcds_sf100_ship_mode {
+    sm_carrier: String
+    sm_code: String
+    sm_contract: String
+    sm_ship_mode_id: String
+    sm_ship_mode_sk: Int
+    sm_type: String
+}
+
+type tpcds_sf100_store {
+    s_city: String
+    s_closed_date_sk: Int
+    s_company_id: Int
+    s_company_name: String
+    s_country: String
+    s_county: String
+    s_division_id: Int
+    s_division_name: String
+    s_floor_space: Int
+    s_geography_class: String
+    s_gmt_offset: String
+    s_hours: String
+    s_manager: String
+    s_market_desc: String
+    s_market_id: Int
+    s_market_manager: String
+    s_number_employees: Int
+    s_rec_end_date: String
+    s_rec_start_date: String
+    s_state: String
+    s_store_id: String
+    s_store_name: String
+    s_store_sk: Int
+    s_street_name: String
+    s_street_number: String
+    s_street_type: String
+    s_suite_number: String
+    s_tax_precentage: String
+    s_zip: String
+}
+
+type tpcds_sf100_store_returns {
+    sr_addr_sk: Int
+    sr_cdemo_sk: Int
+    sr_customer_sk: Int
+    sr_fee: String
+    sr_hdemo_sk: Int
+    sr_item_sk: Int
+    sr_net_loss: String
+    sr_reason_sk: Int
+    sr_refunded_cash: String
+    sr_return_amt: String
+    sr_return_amt_inc_tax: String
+    sr_return_quantity: Int
+    sr_return_ship_cost: String
+    sr_return_tax: String
+    sr_return_time_sk: Int
+    sr_returned_date_sk: Int
+    sr_reversed_charge: String
+    sr_store_credit: String
+    sr_store_sk: Int
+    sr_ticket_number: Int
+}
+
+type tpcds_sf100_store_sales {
+    ss_addr_sk: Int
+    ss_cdemo_sk: Int
+    ss_coupon_amt: String
+    ss_customer_sk: Int
+    ss_ext_discount_amt: String
+    ss_ext_list_price: String
+    ss_ext_sales_price: String
+    ss_ext_tax: String
+    ss_ext_wholesale_cost: String
+    ss_hdemo_sk: Int
+    ss_item_sk: Int
+    ss_list_price: String
+    ss_net_paid: String
+    ss_net_paid_inc_tax: String
+    ss_net_profit: String
+    ss_promo_sk: Int
+    ss_quantity: Int
+    ss_sales_price: String
+    ss_sold_date_sk: Int
+    ss_sold_time_sk: Int
+    ss_store_sk: Int
+    ss_ticket_number: Int
+    ss_wholesale_cost: String
+}
+
+type tpcds_sf100_time_dim {
+    t_am_pm: String
+    t_hour: Int
+    t_meal_time: String
+    t_minute: Int
+    t_second: Int
+    t_shift: String
+    t_sub_shift: String
+    t_time: Int
+    t_time_id: String
+    t_time_sk: Int
+}
+
+type tpcds_sf100_warehouse {
+    w_city: String
+    w_country: String
+    w_county: String
+    w_gmt_offset: String
+    w_state: String
+    w_street_name: String
+    w_street_number: String
+    w_street_type: String
+    w_suite_number: String
+    w_warehouse_id: String
+    w_warehouse_name: String
+    w_warehouse_sk: Int
+    w_warehouse_sq_ft: Int
+    w_zip: String
+}
+
+type tpcds_sf100_web_page {
+    wp_access_date_sk: Int
+    wp_autogen_flag: String
+    wp_char_count: Int
+    wp_creation_date_sk: Int
+    wp_customer_sk: Int
+    wp_image_count: Int
+    wp_link_count: Int
+    wp_max_ad_count: Int
+    wp_rec_end_date: String
+    wp_rec_start_date: String
+    wp_type: String
+    wp_url: String
+    wp_web_page_id: String
+    wp_web_page_sk: Int
+}
+
+type tpcds_sf100_web_returns {
+    wr_account_credit: String
+    wr_fee: String
+    wr_item_sk: Int
+    wr_net_loss: String
+    wr_order_number: Int
+    wr_reason_sk: Int
+    wr_refunded_addr_sk: Int
+    wr_refunded_cash: String
+    wr_refunded_cdemo_sk: Int
+    wr_refunded_customer_sk: Int
+    wr_refunded_hdemo_sk: Int
+    wr_return_amt: String
+    wr_return_amt_inc_tax: String
+    wr_return_quantity: Int
+    wr_return_ship_cost: String
+    wr_return_tax: String
+    wr_returned_date_sk: Int
+    wr_returned_time_sk: Int
+    wr_returning_addr_sk: Int
+    wr_returning_cdemo_sk: Int
+    wr_returning_customer_sk: Int
+    wr_returning_hdemo_sk: Int
+    wr_reversed_charge: String
+    wr_web_page_sk: Int
+}
+
+type tpcds_sf100_web_sales {
+    ws_bill_addr_sk: Int
+    ws_bill_cdemo_sk: Int
+    ws_bill_customer_sk: Int
+    ws_bill_hdemo_sk: Int
+    ws_coupon_amt: String
+    ws_ext_discount_amt: String
+    ws_ext_list_price: String
+    ws_ext_sales_price: String
+    ws_ext_ship_cost: String
+    ws_ext_tax: String
+    ws_ext_wholesale_cost: String
+    ws_item_sk: Int
+    ws_list_price: String
+    ws_net_paid: String
+    ws_net_paid_inc_ship: String
+    ws_net_paid_inc_ship_tax: String
+    ws_net_paid_inc_tax: String
+    ws_net_profit: String
+    ws_order_number: Int
+    ws_promo_sk: Int
+    ws_quantity: Int
+    ws_sales_price: String
+    ws_ship_addr_sk: Int
+    ws_ship_cdemo_sk: Int
+    ws_ship_customer_sk: Int
+    ws_ship_date_sk: Int
+    ws_ship_hdemo_sk: Int
+    ws_ship_mode_sk: Int
+    ws_sold_date_sk: Int
+    ws_sold_time_sk: Int
+    ws_warehouse_sk: Int
+    ws_web_page_sk: Int
+    ws_web_site_sk: Int
+    ws_wholesale_cost: String
+}
+
+type tpcds_sf100_web_site {
+    web_city: String
+    web_class: String
+    web_close_date_sk: Int
+    web_company_id: Int
+    web_company_name: String
+    web_country: String
+    web_county: String
+    web_gmt_offset: String
+    web_manager: String
+    web_market_manager: String
+    web_mkt_class: String
+    web_mkt_desc: String
+    web_mkt_id: Int
+    web_name: String
+    web_open_date_sk: Int
+    web_rec_end_date: String
+    web_rec_start_date: String
+    web_site_id: String
+    web_site_sk: Int
+    web_state: String
+    web_street_name: String
+    web_street_number: String
+    web_street_type: String
+    web_suite_number: String
+    web_tax_percentage: String
+    web_zip: String
+}
+
+type tpcds_sf10_call_center {
+    cc_call_center_id: String
+    cc_call_center_sk: Int
+    cc_city: String
+    cc_class: String
+    cc_closed_date_sk: Int
+    cc_company: Int
+    cc_company_name: String
+    cc_country: String
+    cc_county: String
+    cc_division: Int
+    cc_division_name: String
+    cc_employees: Int
+    cc_gmt_offset: String
+    cc_hours: String
+    cc_manager: String
+    cc_market_manager: String
+    cc_mkt_class: String
+    cc_mkt_desc: String
+    cc_mkt_id: Int
+    cc_name: String
+    cc_open_date_sk: Int
+    cc_rec_end_date: String
+    cc_rec_start_date: String
+    cc_sq_ft: Int
+    cc_state: String
+    cc_street_name: String
+    cc_street_number: String
+    cc_street_type: String
+    cc_suite_number: String
+    cc_tax_percentage: String
+    cc_zip: String
+}
+
+type tpcds_sf10_catalog_page {
+    cp_catalog_number: Int
+    cp_catalog_page_id: String
+    cp_catalog_page_number: Int
+    cp_catalog_page_sk: Int
+    cp_department: String
+    cp_description: String
+    cp_end_date_sk: Int
+    cp_start_date_sk: Int
+    cp_type: String
+}
+
+type tpcds_sf10_catalog_returns {
+    cr_call_center_sk: Int
+    cr_catalog_page_sk: Int
+    cr_fee: String
+    cr_item_sk: Int
+    cr_net_loss: String
+    cr_order_number: Int
+    cr_reason_sk: Int
+    cr_refunded_addr_sk: Int
+    cr_refunded_cash: String
+    cr_refunded_cdemo_sk: Int
+    cr_refunded_customer_sk: Int
+    cr_refunded_hdemo_sk: Int
+    cr_return_amount: String
+    cr_return_amt_inc_tax: String
+    cr_return_quantity: Int
+    cr_return_ship_cost: String
+    cr_return_tax: String
+    cr_returned_date_sk: Int
+    cr_returned_time_sk: Int
+    cr_returning_addr_sk: Int
+    cr_returning_cdemo_sk: Int
+    cr_returning_customer_sk: Int
+    cr_returning_hdemo_sk: Int
+    cr_reversed_charge: String
+    cr_ship_mode_sk: Int
+    cr_store_credit: String
+    cr_warehouse_sk: Int
+}
+
+type tpcds_sf10_catalog_sales {
+    cs_bill_addr_sk: Int
+    cs_bill_cdemo_sk: Int
+    cs_bill_customer_sk: Int
+    cs_bill_hdemo_sk: Int
+    cs_call_center_sk: Int
+    cs_catalog_page_sk: Int
+    cs_coupon_amt: String
+    cs_ext_discount_amt: String
+    cs_ext_list_price: String
+    cs_ext_sales_price: String
+    cs_ext_ship_cost: String
+    cs_ext_tax: String
+    cs_ext_wholesale_cost: String
+    cs_item_sk: Int
+    cs_list_price: String
+    cs_net_paid: String
+    cs_net_paid_inc_ship: String
+    cs_net_paid_inc_ship_tax: String
+    cs_net_paid_inc_tax: String
+    cs_net_profit: String
+    cs_order_number: Int
+    cs_promo_sk: Int
+    cs_quantity: Int
+    cs_sales_price: String
+    cs_ship_addr_sk: Int
+    cs_ship_cdemo_sk: Int
+    cs_ship_customer_sk: Int
+    cs_ship_date_sk: Int
+    cs_ship_hdemo_sk: Int
+    cs_ship_mode_sk: Int
+    cs_sold_date_sk: Int
+    cs_sold_time_sk: Int
+    cs_warehouse_sk: Int
+    cs_wholesale_cost: String
+}
+
+type tpcds_sf10_customer {
+    c_birth_country: String
+    c_birth_day: Int
+    c_birth_month: Int
+    c_birth_year: Int
+    c_current_addr_sk: Int
+    c_current_cdemo_sk: Int
+    c_current_hdemo_sk: Int
+    c_customer_id: String
+    c_customer_sk: Int
+    c_email_address: String
+    c_first_name: String
+    c_first_sales_date_sk: Int
+    c_first_shipto_date_sk: Int
+    c_last_name: String
+    c_last_review_date_sk: Int
+    c_login: String
+    c_preferred_cust_flag: String
+    c_salutation: String
+}
+
+type tpcds_sf10_customer_address {
+    ca_address_id: String
+    ca_address_sk: Int
+    ca_city: String
+    ca_country: String
+    ca_county: String
+    ca_gmt_offset: String
+    ca_location_type: String
+    ca_state: String
+    ca_street_name: String
+    ca_street_number: String
+    ca_street_type: String
+    ca_suite_number: String
+    ca_zip: String
+}
+
+type tpcds_sf10_customer_demographics {
+    cd_credit_rating: String
+    cd_demo_sk: Int
+    cd_dep_college_count: Int
+    cd_dep_count: Int
+    cd_dep_employed_count: Int
+    cd_education_status: String
+    cd_gender: String
+    cd_marital_status: String
+    cd_purchase_estimate: Int
+}
+
+type tpcds_sf10_date_dim {
+    d_current_day: String
+    d_current_month: String
+    d_current_quarter: String
+    d_current_week: String
+    d_current_year: String
+    d_date: String
+    d_date_id: String
+    d_date_sk: Int
+    d_day_name: String
+    d_dom: Int
+    d_dow: Int
+    d_first_dom: Int
+    d_following_holiday: String
+    d_fy_quarter_seq: Int
+    d_fy_week_seq: Int
+    d_fy_year: Int
+    d_holiday: String
+    d_last_dom: Int
+    d_month_seq: Int
+    d_moy: Int
+    d_qoy: Int
+    d_quarter_name: String
+    d_quarter_seq: Int
+    d_same_day_lq: Int
+    d_same_day_ly: Int
+    d_week_seq: Int
+    d_weekend: String
+    d_year: Int
+}
+
+type tpcds_sf10_dbgen_version {
+    dv_cmdline_args: String
+    dv_create_date: String
+    dv_create_time: String
+    dv_version: String
+}
+
+type tpcds_sf10_household_demographics {
+    hd_buy_potential: String
+    hd_demo_sk: Int
+    hd_dep_count: Int
+    hd_income_band_sk: Int
+    hd_vehicle_count: Int
+}
+
+type tpcds_sf10_income_band {
+    ib_income_band_sk: Int
+    ib_lower_bound: Int
+    ib_upper_bound: Int
+}
+
+type tpcds_sf10_inventory {
+    inv_date_sk: Int
+    inv_item_sk: Int
+    inv_quantity_on_hand: Int
+    inv_warehouse_sk: Int
+}
+
+type tpcds_sf10_item {
+    i_brand: String
+    i_brand_id: Int
+    i_category: String
+    i_category_id: Int
+    i_class: String
+    i_class_id: Int
+    i_color: String
+    i_container: String
+    i_current_price: String
+    i_formulation: String
+    i_item_desc: String
+    i_item_id: String
+    i_item_sk: Int
+    i_manager_id: Int
+    i_manufact: String
+    i_manufact_id: Int
+    i_product_name: String
+    i_rec_end_date: String
+    i_rec_start_date: String
+    i_size: String
+    i_units: String
+    i_wholesale_cost: String
+}
+
+type tpcds_sf10_promotion {
+    p_channel_catalog: String
+    p_channel_demo: String
+    p_channel_details: String
+    p_channel_dmail: String
+    p_channel_email: String
+    p_channel_event: String
+    p_channel_press: String
+    p_channel_radio: String
+    p_channel_tv: String
+    p_cost: String
+    p_discount_active: String
+    p_end_date_sk: Int
+    p_item_sk: Int
+    p_promo_id: String
+    p_promo_name: String
+    p_promo_sk: Int
+    p_purpose: String
+    p_response_targe: Int
+    p_start_date_sk: Int
+}
+
+type tpcds_sf10_reason {
+    r_reason_desc: String
+    r_reason_id: String
+    r_reason_sk: Int
+}
+
+type tpcds_sf10_ship_mode {
+    sm_carrier: String
+    sm_code: String
+    sm_contract: String
+    sm_ship_mode_id: String
+    sm_ship_mode_sk: Int
+    sm_type: String
+}
+
+type tpcds_sf10_store {
+    s_city: String
+    s_closed_date_sk: Int
+    s_company_id: Int
+    s_company_name: String
+    s_country: String
+    s_county: String
+    s_division_id: Int
+    s_division_name: String
+    s_floor_space: Int
+    s_geography_class: String
+    s_gmt_offset: String
+    s_hours: String
+    s_manager: String
+    s_market_desc: String
+    s_market_id: Int
+    s_market_manager: String
+    s_number_employees: Int
+    s_rec_end_date: String
+    s_rec_start_date: String
+    s_state: String
+    s_store_id: String
+    s_store_name: String
+    s_store_sk: Int
+    s_street_name: String
+    s_street_number: String
+    s_street_type: String
+    s_suite_number: String
+    s_tax_precentage: String
+    s_zip: String
+}
+
+type tpcds_sf10_store_returns {
+    sr_addr_sk: Int
+    sr_cdemo_sk: Int
+    sr_customer_sk: Int
+    sr_fee: String
+    sr_hdemo_sk: Int
+    sr_item_sk: Int
+    sr_net_loss: String
+    sr_reason_sk: Int
+    sr_refunded_cash: String
+    sr_return_amt: String
+    sr_return_amt_inc_tax: String
+    sr_return_quantity: Int
+    sr_return_ship_cost: String
+    sr_return_tax: String
+    sr_return_time_sk: Int
+    sr_returned_date_sk: Int
+    sr_reversed_charge: String
+    sr_store_credit: String
+    sr_store_sk: Int
+    sr_ticket_number: Int
+}
+
+type tpcds_sf10_store_sales {
+    ss_addr_sk: Int
+    ss_cdemo_sk: Int
+    ss_coupon_amt: String
+    ss_customer_sk: Int
+    ss_ext_discount_amt: String
+    ss_ext_list_price: String
+    ss_ext_sales_price: String
+    ss_ext_tax: String
+    ss_ext_wholesale_cost: String
+    ss_hdemo_sk: Int
+    ss_item_sk: Int
+    ss_list_price: String
+    ss_net_paid: String
+    ss_net_paid_inc_tax: String
+    ss_net_profit: String
+    ss_promo_sk: Int
+    ss_quantity: Int
+    ss_sales_price: String
+    ss_sold_date_sk: Int
+    ss_sold_time_sk: Int
+    ss_store_sk: Int
+    ss_ticket_number: Int
+    ss_wholesale_cost: String
+}
+
+type tpcds_sf10_time_dim {
+    t_am_pm: String
+    t_hour: Int
+    t_meal_time: String
+    t_minute: Int
+    t_second: Int
+    t_shift: String
+    t_sub_shift: String
+    t_time: Int
+    t_time_id: String
+    t_time_sk: Int
+}
+
+type tpcds_sf10_warehouse {
+    w_city: String
+    w_country: String
+    w_county: String
+    w_gmt_offset: String
+    w_state: String
+    w_street_name: String
+    w_street_number: String
+    w_street_type: String
+    w_suite_number: String
+    w_warehouse_id: String
+    w_warehouse_name: String
+    w_warehouse_sk: Int
+    w_warehouse_sq_ft: Int
+    w_zip: String
+}
+
+type tpcds_sf10_web_page {
+    wp_access_date_sk: Int
+    wp_autogen_flag: String
+    wp_char_count: Int
+    wp_creation_date_sk: Int
+    wp_customer_sk: Int
+    wp_image_count: Int
+    wp_link_count: Int
+    wp_max_ad_count: Int
+    wp_rec_end_date: String
+    wp_rec_start_date: String
+    wp_type: String
+    wp_url: String
+    wp_web_page_id: String
+    wp_web_page_sk: Int
+}
+
+type tpcds_sf10_web_returns {
+    wr_account_credit: String
+    wr_fee: String
+    wr_item_sk: Int
+    wr_net_loss: String
+    wr_order_number: Int
+    wr_reason_sk: Int
+    wr_refunded_addr_sk: Int
+    wr_refunded_cash: String
+    wr_refunded_cdemo_sk: Int
+    wr_refunded_customer_sk: Int
+    wr_refunded_hdemo_sk: Int
+    wr_return_amt: String
+    wr_return_amt_inc_tax: String
+    wr_return_quantity: Int
+    wr_return_ship_cost: String
+    wr_return_tax: String
+    wr_returned_date_sk: Int
+    wr_returned_time_sk: Int
+    wr_returning_addr_sk: Int
+    wr_returning_cdemo_sk: Int
+    wr_returning_customer_sk: Int
+    wr_returning_hdemo_sk: Int
+    wr_reversed_charge: String
+    wr_web_page_sk: Int
+}
+
+type tpcds_sf10_web_sales {
+    ws_bill_addr_sk: Int
+    ws_bill_cdemo_sk: Int
+    ws_bill_customer_sk: Int
+    ws_bill_hdemo_sk: Int
+    ws_coupon_amt: String
+    ws_ext_discount_amt: String
+    ws_ext_list_price: String
+    ws_ext_sales_price: String
+    ws_ext_ship_cost: String
+    ws_ext_tax: String
+    ws_ext_wholesale_cost: String
+    ws_item_sk: Int
+    ws_list_price: String
+    ws_net_paid: String
+    ws_net_paid_inc_ship: String
+    ws_net_paid_inc_ship_tax: String
+    ws_net_paid_inc_tax: String
+    ws_net_profit: String
+    ws_order_number: Int
+    ws_promo_sk: Int
+    ws_quantity: Int
+    ws_sales_price: String
+    ws_ship_addr_sk: Int
+    ws_ship_cdemo_sk: Int
+    ws_ship_customer_sk: Int
+    ws_ship_date_sk: Int
+    ws_ship_hdemo_sk: Int
+    ws_ship_mode_sk: Int
+    ws_sold_date_sk: Int
+    ws_sold_time_sk: Int
+    ws_warehouse_sk: Int
+    ws_web_page_sk: Int
+    ws_web_site_sk: Int
+    ws_wholesale_cost: String
+}
+
+type tpcds_sf10_web_site {
+    web_city: String
+    web_class: String
+    web_close_date_sk: Int
+    web_company_id: Int
+    web_company_name: String
+    web_country: String
+    web_county: String
+    web_gmt_offset: String
+    web_manager: String
+    web_market_manager: String
+    web_mkt_class: String
+    web_mkt_desc: String
+    web_mkt_id: Int
+    web_name: String
+    web_open_date_sk: Int
+    web_rec_end_date: String
+    web_rec_start_date: String
+    web_site_id: String
+    web_site_sk: Int
+    web_state: String
+    web_street_name: String
+    web_street_number: String
+    web_street_type: String
+    web_suite_number: String
+    web_tax_percentage: String
+    web_zip: String
+}
+
+type tpcds_sf1_call_center {
+    cc_call_center_id: String
+    cc_call_center_sk: Int
+    cc_city: String
+    cc_class: String
+    cc_closed_date_sk: Int
+    cc_company: Int
+    cc_company_name: String
+    cc_country: String
+    cc_county: String
+    cc_division: Int
+    cc_division_name: String
+    cc_employees: Int
+    cc_gmt_offset: String
+    cc_hours: String
+    cc_manager: String
+    cc_market_manager: String
+    cc_mkt_class: String
+    cc_mkt_desc: String
+    cc_mkt_id: Int
+    cc_name: String
+    cc_open_date_sk: Int
+    cc_rec_end_date: String
+    cc_rec_start_date: String
+    cc_sq_ft: Int
+    cc_state: String
+    cc_street_name: String
+    cc_street_number: String
+    cc_street_type: String
+    cc_suite_number: String
+    cc_tax_percentage: String
+    cc_zip: String
+}
+
+type tpcds_sf1_catalog_page {
+    cp_catalog_number: Int
+    cp_catalog_page_id: String
+    cp_catalog_page_number: Int
+    cp_catalog_page_sk: Int
+    cp_department: String
+    cp_description: String
+    cp_end_date_sk: Int
+    cp_start_date_sk: Int
+    cp_type: String
+}
+
+type tpcds_sf1_catalog_returns {
+    cr_call_center_sk: Int
+    cr_catalog_page_sk: Int
+    cr_fee: String
+    cr_item_sk: Int
+    cr_net_loss: String
+    cr_order_number: Int
+    cr_reason_sk: Int
+    cr_refunded_addr_sk: Int
+    cr_refunded_cash: String
+    cr_refunded_cdemo_sk: Int
+    cr_refunded_customer_sk: Int
+    cr_refunded_hdemo_sk: Int
+    cr_return_amount: String
+    cr_return_amt_inc_tax: String
+    cr_return_quantity: Int
+    cr_return_ship_cost: String
+    cr_return_tax: String
+    cr_returned_date_sk: Int
+    cr_returned_time_sk: Int
+    cr_returning_addr_sk: Int
+    cr_returning_cdemo_sk: Int
+    cr_returning_customer_sk: Int
+    cr_returning_hdemo_sk: Int
+    cr_reversed_charge: String
+    cr_ship_mode_sk: Int
+    cr_store_credit: String
+    cr_warehouse_sk: Int
+}
+
+type tpcds_sf1_catalog_sales {
+    cs_bill_addr_sk: Int
+    cs_bill_cdemo_sk: Int
+    cs_bill_customer_sk: Int
+    cs_bill_hdemo_sk: Int
+    cs_call_center_sk: Int
+    cs_catalog_page_sk: Int
+    cs_coupon_amt: String
+    cs_ext_discount_amt: String
+    cs_ext_list_price: String
+    cs_ext_sales_price: String
+    cs_ext_ship_cost: String
+    cs_ext_tax: String
+    cs_ext_wholesale_cost: String
+    cs_item_sk: Int
+    cs_list_price: String
+    cs_net_paid: String
+    cs_net_paid_inc_ship: String
+    cs_net_paid_inc_ship_tax: String
+    cs_net_paid_inc_tax: String
+    cs_net_profit: String
+    cs_order_number: Int
+    cs_promo_sk: Int
+    cs_quantity: Int
+    cs_sales_price: String
+    cs_ship_addr_sk: Int
+    cs_ship_cdemo_sk: Int
+    cs_ship_customer_sk: Int
+    cs_ship_date_sk: Int
+    cs_ship_hdemo_sk: Int
+    cs_ship_mode_sk: Int
+    cs_sold_date_sk: Int
+    cs_sold_time_sk: Int
+    cs_warehouse_sk: Int
+    cs_wholesale_cost: String
+}
+
+type tpcds_sf1_customer {
+    c_birth_country: String
+    c_birth_day: Int
+    c_birth_month: Int
+    c_birth_year: Int
+    c_current_addr_sk: Int
+    c_current_cdemo_sk: Int
+    c_current_hdemo_sk: Int
+    c_customer_id: String
+    c_customer_sk: Int
+    c_email_address: String
+    c_first_name: String
+    c_first_sales_date_sk: Int
+    c_first_shipto_date_sk: Int
+    c_last_name: String
+    c_last_review_date_sk: Int
+    c_login: String
+    c_preferred_cust_flag: String
+    c_salutation: String
+}
+
+type tpcds_sf1_customer_address {
+    ca_address_id: String
+    ca_address_sk: Int
+    ca_city: String
+    ca_country: String
+    ca_county: String
+    ca_gmt_offset: String
+    ca_location_type: String
+    ca_state: String
+    ca_street_name: String
+    ca_street_number: String
+    ca_street_type: String
+    ca_suite_number: String
+    ca_zip: String
+}
+
+type tpcds_sf1_customer_demographics {
+    cd_credit_rating: String
+    cd_demo_sk: Int
+    cd_dep_college_count: Int
+    cd_dep_count: Int
+    cd_dep_employed_count: Int
+    cd_education_status: String
+    cd_gender: String
+    cd_marital_status: String
+    cd_purchase_estimate: Int
+}
+
+type tpcds_sf1_date_dim {
+    d_current_day: String
+    d_current_month: String
+    d_current_quarter: String
+    d_current_week: String
+    d_current_year: String
+    d_date: String
+    d_date_id: String
+    d_date_sk: Int
+    d_day_name: String
+    d_dom: Int
+    d_dow: Int
+    d_first_dom: Int
+    d_following_holiday: String
+    d_fy_quarter_seq: Int
+    d_fy_week_seq: Int
+    d_fy_year: Int
+    d_holiday: String
+    d_last_dom: Int
+    d_month_seq: Int
+    d_moy: Int
+    d_qoy: Int
+    d_quarter_name: String
+    d_quarter_seq: Int
+    d_same_day_lq: Int
+    d_same_day_ly: Int
+    d_week_seq: Int
+    d_weekend: String
+    d_year: Int
+}
+
+type tpcds_sf1_dbgen_version {
+    dv_cmdline_args: String
+    dv_create_date: String
+    dv_create_time: String
+    dv_version: String
+}
+
+type tpcds_sf1_household_demographics {
+    hd_buy_potential: String
+    hd_demo_sk: Int
+    hd_dep_count: Int
+    hd_income_band_sk: Int
+    hd_vehicle_count: Int
+}
+
+type tpcds_sf1_income_band {
+    ib_income_band_sk: Int
+    ib_lower_bound: Int
+    ib_upper_bound: Int
+}
+
+type tpcds_sf1_inventory {
+    inv_date_sk: Int
+    inv_item_sk: Int
+    inv_quantity_on_hand: Int
+    inv_warehouse_sk: Int
+}
+
+type tpcds_sf1_item {
+    i_brand: String
+    i_brand_id: Int
+    i_category: String
+    i_category_id: Int
+    i_class: String
+    i_class_id: Int
+    i_color: String
+    i_container: String
+    i_current_price: String
+    i_formulation: String
+    i_item_desc: String
+    i_item_id: String
+    i_item_sk: Int
+    i_manager_id: Int
+    i_manufact: String
+    i_manufact_id: Int
+    i_product_name: String
+    i_rec_end_date: String
+    i_rec_start_date: String
+    i_size: String
+    i_units: String
+    i_wholesale_cost: String
+}
+
+type tpcds_sf1_promotion {
+    p_channel_catalog: String
+    p_channel_demo: String
+    p_channel_details: String
+    p_channel_dmail: String
+    p_channel_email: String
+    p_channel_event: String
+    p_channel_press: String
+    p_channel_radio: String
+    p_channel_tv: String
+    p_cost: String
+    p_discount_active: String
+    p_end_date_sk: Int
+    p_item_sk: Int
+    p_promo_id: String
+    p_promo_name: String
+    p_promo_sk: Int
+    p_purpose: String
+    p_response_targe: Int
+    p_start_date_sk: Int
+}
+
+type tpcds_sf1_reason {
+    r_reason_desc: String
+    r_reason_id: String
+    r_reason_sk: Int
+}
+
+type tpcds_sf1_ship_mode {
+    sm_carrier: String
+    sm_code: String
+    sm_contract: String
+    sm_ship_mode_id: String
+    sm_ship_mode_sk: Int
+    sm_type: String
+}
+
+type tpcds_sf1_store {
+    s_city: String
+    s_closed_date_sk: Int
+    s_company_id: Int
+    s_company_name: String
+    s_country: String
+    s_county: String
+    s_division_id: Int
+    s_division_name: String
+    s_floor_space: Int
+    s_geography_class: String
+    s_gmt_offset: String
+    s_hours: String
+    s_manager: String
+    s_market_desc: String
+    s_market_id: Int
+    s_market_manager: String
+    s_number_employees: Int
+    s_rec_end_date: String
+    s_rec_start_date: String
+    s_state: String
+    s_store_id: String
+    s_store_name: String
+    s_store_sk: Int
+    s_street_name: String
+    s_street_number: String
+    s_street_type: String
+    s_suite_number: String
+    s_tax_precentage: String
+    s_zip: String
+}
+
+type tpcds_sf1_store_returns {
+    sr_addr_sk: Int
+    sr_cdemo_sk: Int
+    sr_customer_sk: Int
+    sr_fee: String
+    sr_hdemo_sk: Int
+    sr_item_sk: Int
+    sr_net_loss: String
+    sr_reason_sk: Int
+    sr_refunded_cash: String
+    sr_return_amt: String
+    sr_return_amt_inc_tax: String
+    sr_return_quantity: Int
+    sr_return_ship_cost: String
+    sr_return_tax: String
+    sr_return_time_sk: Int
+    sr_returned_date_sk: Int
+    sr_reversed_charge: String
+    sr_store_credit: String
+    sr_store_sk: Int
+    sr_ticket_number: Int
+}
+
+type tpcds_sf1_store_sales {
+    ss_addr_sk: Int
+    ss_cdemo_sk: Int
+    ss_coupon_amt: String
+    ss_customer_sk: Int
+    ss_ext_discount_amt: String
+    ss_ext_list_price: String
+    ss_ext_sales_price: String
+    ss_ext_tax: String
+    ss_ext_wholesale_cost: String
+    ss_hdemo_sk: Int
+    ss_item_sk: Int
+    ss_list_price: String
+    ss_net_paid: String
+    ss_net_paid_inc_tax: String
+    ss_net_profit: String
+    ss_promo_sk: Int
+    ss_quantity: Int
+    ss_sales_price: String
+    ss_sold_date_sk: Int
+    ss_sold_time_sk: Int
+    ss_store_sk: Int
+    ss_ticket_number: Int
+    ss_wholesale_cost: String
+}
+
+type tpcds_sf1_time_dim {
+    t_am_pm: String
+    t_hour: Int
+    t_meal_time: String
+    t_minute: Int
+    t_second: Int
+    t_shift: String
+    t_sub_shift: String
+    t_time: Int
+    t_time_id: String
+    t_time_sk: Int
+}
+
+type tpcds_sf1_warehouse {
+    w_city: String
+    w_country: String
+    w_county: String
+    w_gmt_offset: String
+    w_state: String
+    w_street_name: String
+    w_street_number: String
+    w_street_type: String
+    w_suite_number: String
+    w_warehouse_id: String
+    w_warehouse_name: String
+    w_warehouse_sk: Int
+    w_warehouse_sq_ft: Int
+    w_zip: String
+}
+
+type tpcds_sf1_web_page {
+    wp_access_date_sk: Int
+    wp_autogen_flag: String
+    wp_char_count: Int
+    wp_creation_date_sk: Int
+    wp_customer_sk: Int
+    wp_image_count: Int
+    wp_link_count: Int
+    wp_max_ad_count: Int
+    wp_rec_end_date: String
+    wp_rec_start_date: String
+    wp_type: String
+    wp_url: String
+    wp_web_page_id: String
+    wp_web_page_sk: Int
+}
+
+type tpcds_sf1_web_returns {
+    wr_account_credit: String
+    wr_fee: String
+    wr_item_sk: Int
+    wr_net_loss: String
+    wr_order_number: Int
+    wr_reason_sk: Int
+    wr_refunded_addr_sk: Int
+    wr_refunded_cash: String
+    wr_refunded_cdemo_sk: Int
+    wr_refunded_customer_sk: Int
+    wr_refunded_hdemo_sk: Int
+    wr_return_amt: String
+    wr_return_amt_inc_tax: String
+    wr_return_quantity: Int
+    wr_return_ship_cost: String
+    wr_return_tax: String
+    wr_returned_date_sk: Int
+    wr_returned_time_sk: Int
+    wr_returning_addr_sk: Int
+    wr_returning_cdemo_sk: Int
+    wr_returning_customer_sk: Int
+    wr_returning_hdemo_sk: Int
+    wr_reversed_charge: String
+    wr_web_page_sk: Int
+}
+
+type tpcds_sf1_web_sales {
+    ws_bill_addr_sk: Int
+    ws_bill_cdemo_sk: Int
+    ws_bill_customer_sk: Int
+    ws_bill_hdemo_sk: Int
+    ws_coupon_amt: String
+    ws_ext_discount_amt: String
+    ws_ext_list_price: String
+    ws_ext_sales_price: String
+    ws_ext_ship_cost: String
+    ws_ext_tax: String
+    ws_ext_wholesale_cost: String
+    ws_item_sk: Int
+    ws_list_price: String
+    ws_net_paid: String
+    ws_net_paid_inc_ship: String
+    ws_net_paid_inc_ship_tax: String
+    ws_net_paid_inc_tax: String
+    ws_net_profit: String
+    ws_order_number: Int
+    ws_promo_sk: Int
+    ws_quantity: Int
+    ws_sales_price: String
+    ws_ship_addr_sk: Int
+    ws_ship_cdemo_sk: Int
+    ws_ship_customer_sk: Int
+    ws_ship_date_sk: Int
+    ws_ship_hdemo_sk: Int
+    ws_ship_mode_sk: Int
+    ws_sold_date_sk: Int
+    ws_sold_time_sk: Int
+    ws_warehouse_sk: Int
+    ws_web_page_sk: Int
+    ws_web_site_sk: Int
+    ws_wholesale_cost: String
+}
+
+type tpcds_sf1_web_site {
+    web_city: String
+    web_class: String
+    web_close_date_sk: Int
+    web_company_id: Int
+    web_company_name: String
+    web_country: String
+    web_county: String
+    web_gmt_offset: String
+    web_manager: String
+    web_market_manager: String
+    web_mkt_class: String
+    web_mkt_desc: String
+    web_mkt_id: Int
+    web_name: String
+    web_open_date_sk: Int
+    web_rec_end_date: String
+    web_rec_start_date: String
+    web_site_id: String
+    web_site_sk: Int
+    web_state: String
+    web_street_name: String
+    web_street_number: String
+    web_street_type: String
+    web_suite_number: String
+    web_tax_percentage: String
+    web_zip: String
+}
+
+type tpcds_sf30000_call_center {
+    cc_call_center_id: String
+    cc_call_center_sk: Int
+    cc_city: String
+    cc_class: String
+    cc_closed_date_sk: Int
+    cc_company: Int
+    cc_company_name: String
+    cc_country: String
+    cc_county: String
+    cc_division: Int
+    cc_division_name: String
+    cc_employees: Int
+    cc_gmt_offset: String
+    cc_hours: String
+    cc_manager: String
+    cc_market_manager: String
+    cc_mkt_class: String
+    cc_mkt_desc: String
+    cc_mkt_id: Int
+    cc_name: String
+    cc_open_date_sk: Int
+    cc_rec_end_date: String
+    cc_rec_start_date: String
+    cc_sq_ft: Int
+    cc_state: String
+    cc_street_name: String
+    cc_street_number: String
+    cc_street_type: String
+    cc_suite_number: String
+    cc_tax_percentage: String
+    cc_zip: String
+}
+
+type tpcds_sf30000_catalog_page {
+    cp_catalog_number: Int
+    cp_catalog_page_id: String
+    cp_catalog_page_number: Int
+    cp_catalog_page_sk: Int
+    cp_department: String
+    cp_description: String
+    cp_end_date_sk: Int
+    cp_start_date_sk: Int
+    cp_type: String
+}
+
+type tpcds_sf30000_catalog_returns {
+    cr_call_center_sk: Int
+    cr_catalog_page_sk: Int
+    cr_fee: String
+    cr_item_sk: Int
+    cr_net_loss: String
+    cr_order_number: Int
+    cr_reason_sk: Int
+    cr_refunded_addr_sk: Int
+    cr_refunded_cash: String
+    cr_refunded_cdemo_sk: Int
+    cr_refunded_customer_sk: Int
+    cr_refunded_hdemo_sk: Int
+    cr_return_amount: String
+    cr_return_amt_inc_tax: String
+    cr_return_quantity: Int
+    cr_return_ship_cost: String
+    cr_return_tax: String
+    cr_returned_date_sk: Int
+    cr_returned_time_sk: Int
+    cr_returning_addr_sk: Int
+    cr_returning_cdemo_sk: Int
+    cr_returning_customer_sk: Int
+    cr_returning_hdemo_sk: Int
+    cr_reversed_charge: String
+    cr_ship_mode_sk: Int
+    cr_store_credit: String
+    cr_warehouse_sk: Int
+}
+
+type tpcds_sf30000_catalog_sales {
+    cs_bill_addr_sk: Int
+    cs_bill_cdemo_sk: Int
+    cs_bill_customer_sk: Int
+    cs_bill_hdemo_sk: Int
+    cs_call_center_sk: Int
+    cs_catalog_page_sk: Int
+    cs_coupon_amt: String
+    cs_ext_discount_amt: String
+    cs_ext_list_price: String
+    cs_ext_sales_price: String
+    cs_ext_ship_cost: String
+    cs_ext_tax: String
+    cs_ext_wholesale_cost: String
+    cs_item_sk: Int
+    cs_list_price: String
+    cs_net_paid: String
+    cs_net_paid_inc_ship: String
+    cs_net_paid_inc_ship_tax: String
+    cs_net_paid_inc_tax: String
+    cs_net_profit: String
+    cs_order_number: Int
+    cs_promo_sk: Int
+    cs_quantity: Int
+    cs_sales_price: String
+    cs_ship_addr_sk: Int
+    cs_ship_cdemo_sk: Int
+    cs_ship_customer_sk: Int
+    cs_ship_date_sk: Int
+    cs_ship_hdemo_sk: Int
+    cs_ship_mode_sk: Int
+    cs_sold_date_sk: Int
+    cs_sold_time_sk: Int
+    cs_warehouse_sk: Int
+    cs_wholesale_cost: String
+}
+
+type tpcds_sf30000_customer {
+    c_birth_country: String
+    c_birth_day: Int
+    c_birth_month: Int
+    c_birth_year: Int
+    c_current_addr_sk: Int
+    c_current_cdemo_sk: Int
+    c_current_hdemo_sk: Int
+    c_customer_id: String
+    c_customer_sk: Int
+    c_email_address: String
+    c_first_name: String
+    c_first_sales_date_sk: Int
+    c_first_shipto_date_sk: Int
+    c_last_name: String
+    c_last_review_date_sk: Int
+    c_login: String
+    c_preferred_cust_flag: String
+    c_salutation: String
+}
+
+type tpcds_sf30000_customer_address {
+    ca_address_id: String
+    ca_address_sk: Int
+    ca_city: String
+    ca_country: String
+    ca_county: String
+    ca_gmt_offset: String
+    ca_location_type: String
+    ca_state: String
+    ca_street_name: String
+    ca_street_number: String
+    ca_street_type: String
+    ca_suite_number: String
+    ca_zip: String
+}
+
+type tpcds_sf30000_customer_demographics {
+    cd_credit_rating: String
+    cd_demo_sk: Int
+    cd_dep_college_count: Int
+    cd_dep_count: Int
+    cd_dep_employed_count: Int
+    cd_education_status: String
+    cd_gender: String
+    cd_marital_status: String
+    cd_purchase_estimate: Int
+}
+
+type tpcds_sf30000_date_dim {
+    d_current_day: String
+    d_current_month: String
+    d_current_quarter: String
+    d_current_week: String
+    d_current_year: String
+    d_date: String
+    d_date_id: String
+    d_date_sk: Int
+    d_day_name: String
+    d_dom: Int
+    d_dow: Int
+    d_first_dom: Int
+    d_following_holiday: String
+    d_fy_quarter_seq: Int
+    d_fy_week_seq: Int
+    d_fy_year: Int
+    d_holiday: String
+    d_last_dom: Int
+    d_month_seq: Int
+    d_moy: Int
+    d_qoy: Int
+    d_quarter_name: String
+    d_quarter_seq: Int
+    d_same_day_lq: Int
+    d_same_day_ly: Int
+    d_week_seq: Int
+    d_weekend: String
+    d_year: Int
+}
+
+type tpcds_sf30000_dbgen_version {
+    dv_cmdline_args: String
+    dv_create_date: String
+    dv_create_time: String
+    dv_version: String
+}
+
+type tpcds_sf30000_household_demographics {
+    hd_buy_potential: String
+    hd_demo_sk: Int
+    hd_dep_count: Int
+    hd_income_band_sk: Int
+    hd_vehicle_count: Int
+}
+
+type tpcds_sf30000_income_band {
+    ib_income_band_sk: Int
+    ib_lower_bound: Int
+    ib_upper_bound: Int
+}
+
+type tpcds_sf30000_inventory {
+    inv_date_sk: Int
+    inv_item_sk: Int
+    inv_quantity_on_hand: Int
+    inv_warehouse_sk: Int
+}
+
+type tpcds_sf30000_item {
+    i_brand: String
+    i_brand_id: Int
+    i_category: String
+    i_category_id: Int
+    i_class: String
+    i_class_id: Int
+    i_color: String
+    i_container: String
+    i_current_price: String
+    i_formulation: String
+    i_item_desc: String
+    i_item_id: String
+    i_item_sk: Int
+    i_manager_id: Int
+    i_manufact: String
+    i_manufact_id: Int
+    i_product_name: String
+    i_rec_end_date: String
+    i_rec_start_date: String
+    i_size: String
+    i_units: String
+    i_wholesale_cost: String
+}
+
+type tpcds_sf30000_promotion {
+    p_channel_catalog: String
+    p_channel_demo: String
+    p_channel_details: String
+    p_channel_dmail: String
+    p_channel_email: String
+    p_channel_event: String
+    p_channel_press: String
+    p_channel_radio: String
+    p_channel_tv: String
+    p_cost: String
+    p_discount_active: String
+    p_end_date_sk: Int
+    p_item_sk: Int
+    p_promo_id: String
+    p_promo_name: String
+    p_promo_sk: Int
+    p_purpose: String
+    p_response_targe: Int
+    p_start_date_sk: Int
+}
+
+type tpcds_sf30000_reason {
+    r_reason_desc: String
+    r_reason_id: String
+    r_reason_sk: Int
+}
+
+type tpcds_sf30000_ship_mode {
+    sm_carrier: String
+    sm_code: String
+    sm_contract: String
+    sm_ship_mode_id: String
+    sm_ship_mode_sk: Int
+    sm_type: String
+}
+
+type tpcds_sf30000_store {
+    s_city: String
+    s_closed_date_sk: Int
+    s_company_id: Int
+    s_company_name: String
+    s_country: String
+    s_county: String
+    s_division_id: Int
+    s_division_name: String
+    s_floor_space: Int
+    s_geography_class: String
+    s_gmt_offset: String
+    s_hours: String
+    s_manager: String
+    s_market_desc: String
+    s_market_id: Int
+    s_market_manager: String
+    s_number_employees: Int
+    s_rec_end_date: String
+    s_rec_start_date: String
+    s_state: String
+    s_store_id: String
+    s_store_name: String
+    s_store_sk: Int
+    s_street_name: String
+    s_street_number: String
+    s_street_type: String
+    s_suite_number: String
+    s_tax_precentage: String
+    s_zip: String
+}
+
+type tpcds_sf30000_store_returns {
+    sr_addr_sk: Int
+    sr_cdemo_sk: Int
+    sr_customer_sk: Int
+    sr_fee: String
+    sr_hdemo_sk: Int
+    sr_item_sk: Int
+    sr_net_loss: String
+    sr_reason_sk: Int
+    sr_refunded_cash: String
+    sr_return_amt: String
+    sr_return_amt_inc_tax: String
+    sr_return_quantity: Int
+    sr_return_ship_cost: String
+    sr_return_tax: String
+    sr_return_time_sk: Int
+    sr_returned_date_sk: Int
+    sr_reversed_charge: String
+    sr_store_credit: String
+    sr_store_sk: Int
+    sr_ticket_number: Int
+}
+
+type tpcds_sf30000_store_sales {
+    ss_addr_sk: Int
+    ss_cdemo_sk: Int
+    ss_coupon_amt: String
+    ss_customer_sk: Int
+    ss_ext_discount_amt: String
+    ss_ext_list_price: String
+    ss_ext_sales_price: String
+    ss_ext_tax: String
+    ss_ext_wholesale_cost: String
+    ss_hdemo_sk: Int
+    ss_item_sk: Int
+    ss_list_price: String
+    ss_net_paid: String
+    ss_net_paid_inc_tax: String
+    ss_net_profit: String
+    ss_promo_sk: Int
+    ss_quantity: Int
+    ss_sales_price: String
+    ss_sold_date_sk: Int
+    ss_sold_time_sk: Int
+    ss_store_sk: Int
+    ss_ticket_number: Int
+    ss_wholesale_cost: String
+}
+
+type tpcds_sf30000_time_dim {
+    t_am_pm: String
+    t_hour: Int
+    t_meal_time: String
+    t_minute: Int
+    t_second: Int
+    t_shift: String
+    t_sub_shift: String
+    t_time: Int
+    t_time_id: String
+    t_time_sk: Int
+}
+
+type tpcds_sf30000_warehouse {
+    w_city: String
+    w_country: String
+    w_county: String
+    w_gmt_offset: String
+    w_state: String
+    w_street_name: String
+    w_street_number: String
+    w_street_type: String
+    w_suite_number: String
+    w_warehouse_id: String
+    w_warehouse_name: String
+    w_warehouse_sk: Int
+    w_warehouse_sq_ft: Int
+    w_zip: String
+}
+
+type tpcds_sf30000_web_page {
+    wp_access_date_sk: Int
+    wp_autogen_flag: String
+    wp_char_count: Int
+    wp_creation_date_sk: Int
+    wp_customer_sk: Int
+    wp_image_count: Int
+    wp_link_count: Int
+    wp_max_ad_count: Int
+    wp_rec_end_date: String
+    wp_rec_start_date: String
+    wp_type: String
+    wp_url: String
+    wp_web_page_id: String
+    wp_web_page_sk: Int
+}
+
+type tpcds_sf30000_web_returns {
+    wr_account_credit: String
+    wr_fee: String
+    wr_item_sk: Int
+    wr_net_loss: String
+    wr_order_number: Int
+    wr_reason_sk: Int
+    wr_refunded_addr_sk: Int
+    wr_refunded_cash: String
+    wr_refunded_cdemo_sk: Int
+    wr_refunded_customer_sk: Int
+    wr_refunded_hdemo_sk: Int
+    wr_return_amt: String
+    wr_return_amt_inc_tax: String
+    wr_return_quantity: Int
+    wr_return_ship_cost: String
+    wr_return_tax: String
+    wr_returned_date_sk: Int
+    wr_returned_time_sk: Int
+    wr_returning_addr_sk: Int
+    wr_returning_cdemo_sk: Int
+    wr_returning_customer_sk: Int
+    wr_returning_hdemo_sk: Int
+    wr_reversed_charge: String
+    wr_web_page_sk: Int
+}
+
+type tpcds_sf30000_web_sales {
+    ws_bill_addr_sk: Int
+    ws_bill_cdemo_sk: Int
+    ws_bill_customer_sk: Int
+    ws_bill_hdemo_sk: Int
+    ws_coupon_amt: String
+    ws_ext_discount_amt: String
+    ws_ext_list_price: String
+    ws_ext_sales_price: String
+    ws_ext_ship_cost: String
+    ws_ext_tax: String
+    ws_ext_wholesale_cost: String
+    ws_item_sk: Int
+    ws_list_price: String
+    ws_net_paid: String
+    ws_net_paid_inc_ship: String
+    ws_net_paid_inc_ship_tax: String
+    ws_net_paid_inc_tax: String
+    ws_net_profit: String
+    ws_order_number: Int
+    ws_promo_sk: Int
+    ws_quantity: Int
+    ws_sales_price: String
+    ws_ship_addr_sk: Int
+    ws_ship_cdemo_sk: Int
+    ws_ship_customer_sk: Int
+    ws_ship_date_sk: Int
+    ws_ship_hdemo_sk: Int
+    ws_ship_mode_sk: Int
+    ws_sold_date_sk: Int
+    ws_sold_time_sk: Int
+    ws_warehouse_sk: Int
+    ws_web_page_sk: Int
+    ws_web_site_sk: Int
+    ws_wholesale_cost: String
+}
+
+type tpcds_sf30000_web_site {
+    web_city: String
+    web_class: String
+    web_close_date_sk: Int
+    web_company_id: Int
+    web_company_name: String
+    web_country: String
+    web_county: String
+    web_gmt_offset: String
+    web_manager: String
+    web_market_manager: String
+    web_mkt_class: String
+    web_mkt_desc: String
+    web_mkt_id: Int
+    web_name: String
+    web_open_date_sk: Int
+    web_rec_end_date: String
+    web_rec_start_date: String
+    web_site_id: String
+    web_site_sk: Int
+    web_state: String
+    web_street_name: String
+    web_street_number: String
+    web_street_type: String
+    web_suite_number: String
+    web_tax_percentage: String
+    web_zip: String
+}
+
+type tpcds_sf3000_call_center {
+    cc_call_center_id: String
+    cc_call_center_sk: Int
+    cc_city: String
+    cc_class: String
+    cc_closed_date_sk: Int
+    cc_company: Int
+    cc_company_name: String
+    cc_country: String
+    cc_county: String
+    cc_division: Int
+    cc_division_name: String
+    cc_employees: Int
+    cc_gmt_offset: String
+    cc_hours: String
+    cc_manager: String
+    cc_market_manager: String
+    cc_mkt_class: String
+    cc_mkt_desc: String
+    cc_mkt_id: Int
+    cc_name: String
+    cc_open_date_sk: Int
+    cc_rec_end_date: String
+    cc_rec_start_date: String
+    cc_sq_ft: Int
+    cc_state: String
+    cc_street_name: String
+    cc_street_number: String
+    cc_street_type: String
+    cc_suite_number: String
+    cc_tax_percentage: String
+    cc_zip: String
+}
+
+type tpcds_sf3000_catalog_page {
+    cp_catalog_number: Int
+    cp_catalog_page_id: String
+    cp_catalog_page_number: Int
+    cp_catalog_page_sk: Int
+    cp_department: String
+    cp_description: String
+    cp_end_date_sk: Int
+    cp_start_date_sk: Int
+    cp_type: String
+}
+
+type tpcds_sf3000_catalog_returns {
+    cr_call_center_sk: Int
+    cr_catalog_page_sk: Int
+    cr_fee: String
+    cr_item_sk: Int
+    cr_net_loss: String
+    cr_order_number: Int
+    cr_reason_sk: Int
+    cr_refunded_addr_sk: Int
+    cr_refunded_cash: String
+    cr_refunded_cdemo_sk: Int
+    cr_refunded_customer_sk: Int
+    cr_refunded_hdemo_sk: Int
+    cr_return_amount: String
+    cr_return_amt_inc_tax: String
+    cr_return_quantity: Int
+    cr_return_ship_cost: String
+    cr_return_tax: String
+    cr_returned_date_sk: Int
+    cr_returned_time_sk: Int
+    cr_returning_addr_sk: Int
+    cr_returning_cdemo_sk: Int
+    cr_returning_customer_sk: Int
+    cr_returning_hdemo_sk: Int
+    cr_reversed_charge: String
+    cr_ship_mode_sk: Int
+    cr_store_credit: String
+    cr_warehouse_sk: Int
+}
+
+type tpcds_sf3000_catalog_sales {
+    cs_bill_addr_sk: Int
+    cs_bill_cdemo_sk: Int
+    cs_bill_customer_sk: Int
+    cs_bill_hdemo_sk: Int
+    cs_call_center_sk: Int
+    cs_catalog_page_sk: Int
+    cs_coupon_amt: String
+    cs_ext_discount_amt: String
+    cs_ext_list_price: String
+    cs_ext_sales_price: String
+    cs_ext_ship_cost: String
+    cs_ext_tax: String
+    cs_ext_wholesale_cost: String
+    cs_item_sk: Int
+    cs_list_price: String
+    cs_net_paid: String
+    cs_net_paid_inc_ship: String
+    cs_net_paid_inc_ship_tax: String
+    cs_net_paid_inc_tax: String
+    cs_net_profit: String
+    cs_order_number: Int
+    cs_promo_sk: Int
+    cs_quantity: Int
+    cs_sales_price: String
+    cs_ship_addr_sk: Int
+    cs_ship_cdemo_sk: Int
+    cs_ship_customer_sk: Int
+    cs_ship_date_sk: Int
+    cs_ship_hdemo_sk: Int
+    cs_ship_mode_sk: Int
+    cs_sold_date_sk: Int
+    cs_sold_time_sk: Int
+    cs_warehouse_sk: Int
+    cs_wholesale_cost: String
+}
+
+type tpcds_sf3000_customer {
+    c_birth_country: String
+    c_birth_day: Int
+    c_birth_month: Int
+    c_birth_year: Int
+    c_current_addr_sk: Int
+    c_current_cdemo_sk: Int
+    c_current_hdemo_sk: Int
+    c_customer_id: String
+    c_customer_sk: Int
+    c_email_address: String
+    c_first_name: String
+    c_first_sales_date_sk: Int
+    c_first_shipto_date_sk: Int
+    c_last_name: String
+    c_last_review_date_sk: Int
+    c_login: String
+    c_preferred_cust_flag: String
+    c_salutation: String
+}
+
+type tpcds_sf3000_customer_address {
+    ca_address_id: String
+    ca_address_sk: Int
+    ca_city: String
+    ca_country: String
+    ca_county: String
+    ca_gmt_offset: String
+    ca_location_type: String
+    ca_state: String
+    ca_street_name: String
+    ca_street_number: String
+    ca_street_type: String
+    ca_suite_number: String
+    ca_zip: String
+}
+
+type tpcds_sf3000_customer_demographics {
+    cd_credit_rating: String
+    cd_demo_sk: Int
+    cd_dep_college_count: Int
+    cd_dep_count: Int
+    cd_dep_employed_count: Int
+    cd_education_status: String
+    cd_gender: String
+    cd_marital_status: String
+    cd_purchase_estimate: Int
+}
+
+type tpcds_sf3000_date_dim {
+    d_current_day: String
+    d_current_month: String
+    d_current_quarter: String
+    d_current_week: String
+    d_current_year: String
+    d_date: String
+    d_date_id: String
+    d_date_sk: Int
+    d_day_name: String
+    d_dom: Int
+    d_dow: Int
+    d_first_dom: Int
+    d_following_holiday: String
+    d_fy_quarter_seq: Int
+    d_fy_week_seq: Int
+    d_fy_year: Int
+    d_holiday: String
+    d_last_dom: Int
+    d_month_seq: Int
+    d_moy: Int
+    d_qoy: Int
+    d_quarter_name: String
+    d_quarter_seq: Int
+    d_same_day_lq: Int
+    d_same_day_ly: Int
+    d_week_seq: Int
+    d_weekend: String
+    d_year: Int
+}
+
+type tpcds_sf3000_dbgen_version {
+    dv_cmdline_args: String
+    dv_create_date: String
+    dv_create_time: String
+    dv_version: String
+}
+
+type tpcds_sf3000_household_demographics {
+    hd_buy_potential: String
+    hd_demo_sk: Int
+    hd_dep_count: Int
+    hd_income_band_sk: Int
+    hd_vehicle_count: Int
+}
+
+type tpcds_sf3000_income_band {
+    ib_income_band_sk: Int
+    ib_lower_bound: Int
+    ib_upper_bound: Int
+}
+
+type tpcds_sf3000_inventory {
+    inv_date_sk: Int
+    inv_item_sk: Int
+    inv_quantity_on_hand: Int
+    inv_warehouse_sk: Int
+}
+
+type tpcds_sf3000_item {
+    i_brand: String
+    i_brand_id: Int
+    i_category: String
+    i_category_id: Int
+    i_class: String
+    i_class_id: Int
+    i_color: String
+    i_container: String
+    i_current_price: String
+    i_formulation: String
+    i_item_desc: String
+    i_item_id: String
+    i_item_sk: Int
+    i_manager_id: Int
+    i_manufact: String
+    i_manufact_id: Int
+    i_product_name: String
+    i_rec_end_date: String
+    i_rec_start_date: String
+    i_size: String
+    i_units: String
+    i_wholesale_cost: String
+}
+
+type tpcds_sf3000_promotion {
+    p_channel_catalog: String
+    p_channel_demo: String
+    p_channel_details: String
+    p_channel_dmail: String
+    p_channel_email: String
+    p_channel_event: String
+    p_channel_press: String
+    p_channel_radio: String
+    p_channel_tv: String
+    p_cost: String
+    p_discount_active: String
+    p_end_date_sk: Int
+    p_item_sk: Int
+    p_promo_id: String
+    p_promo_name: String
+    p_promo_sk: Int
+    p_purpose: String
+    p_response_targe: Int
+    p_start_date_sk: Int
+}
+
+type tpcds_sf3000_reason {
+    r_reason_desc: String
+    r_reason_id: String
+    r_reason_sk: Int
+}
+
+type tpcds_sf3000_ship_mode {
+    sm_carrier: String
+    sm_code: String
+    sm_contract: String
+    sm_ship_mode_id: String
+    sm_ship_mode_sk: Int
+    sm_type: String
+}
+
+type tpcds_sf3000_store {
+    s_city: String
+    s_closed_date_sk: Int
+    s_company_id: Int
+    s_company_name: String
+    s_country: String
+    s_county: String
+    s_division_id: Int
+    s_division_name: String
+    s_floor_space: Int
+    s_geography_class: String
+    s_gmt_offset: String
+    s_hours: String
+    s_manager: String
+    s_market_desc: String
+    s_market_id: Int
+    s_market_manager: String
+    s_number_employees: Int
+    s_rec_end_date: String
+    s_rec_start_date: String
+    s_state: String
+    s_store_id: String
+    s_store_name: String
+    s_store_sk: Int
+    s_street_name: String
+    s_street_number: String
+    s_street_type: String
+    s_suite_number: String
+    s_tax_precentage: String
+    s_zip: String
+}
+
+type tpcds_sf3000_store_returns {
+    sr_addr_sk: Int
+    sr_cdemo_sk: Int
+    sr_customer_sk: Int
+    sr_fee: String
+    sr_hdemo_sk: Int
+    sr_item_sk: Int
+    sr_net_loss: String
+    sr_reason_sk: Int
+    sr_refunded_cash: String
+    sr_return_amt: String
+    sr_return_amt_inc_tax: String
+    sr_return_quantity: Int
+    sr_return_ship_cost: String
+    sr_return_tax: String
+    sr_return_time_sk: Int
+    sr_returned_date_sk: Int
+    sr_reversed_charge: String
+    sr_store_credit: String
+    sr_store_sk: Int
+    sr_ticket_number: Int
+}
+
+type tpcds_sf3000_store_sales {
+    ss_addr_sk: Int
+    ss_cdemo_sk: Int
+    ss_coupon_amt: String
+    ss_customer_sk: Int
+    ss_ext_discount_amt: String
+    ss_ext_list_price: String
+    ss_ext_sales_price: String
+    ss_ext_tax: String
+    ss_ext_wholesale_cost: String
+    ss_hdemo_sk: Int
+    ss_item_sk: Int
+    ss_list_price: String
+    ss_net_paid: String
+    ss_net_paid_inc_tax: String
+    ss_net_profit: String
+    ss_promo_sk: Int
+    ss_quantity: Int
+    ss_sales_price: String
+    ss_sold_date_sk: Int
+    ss_sold_time_sk: Int
+    ss_store_sk: Int
+    ss_ticket_number: Int
+    ss_wholesale_cost: String
+}
+
+type tpcds_sf3000_time_dim {
+    t_am_pm: String
+    t_hour: Int
+    t_meal_time: String
+    t_minute: Int
+    t_second: Int
+    t_shift: String
+    t_sub_shift: String
+    t_time: Int
+    t_time_id: String
+    t_time_sk: Int
+}
+
+type tpcds_sf3000_warehouse {
+    w_city: String
+    w_country: String
+    w_county: String
+    w_gmt_offset: String
+    w_state: String
+    w_street_name: String
+    w_street_number: String
+    w_street_type: String
+    w_suite_number: String
+    w_warehouse_id: String
+    w_warehouse_name: String
+    w_warehouse_sk: Int
+    w_warehouse_sq_ft: Int
+    w_zip: String
+}
+
+type tpcds_sf3000_web_page {
+    wp_access_date_sk: Int
+    wp_autogen_flag: String
+    wp_char_count: Int
+    wp_creation_date_sk: Int
+    wp_customer_sk: Int
+    wp_image_count: Int
+    wp_link_count: Int
+    wp_max_ad_count: Int
+    wp_rec_end_date: String
+    wp_rec_start_date: String
+    wp_type: String
+    wp_url: String
+    wp_web_page_id: String
+    wp_web_page_sk: Int
+}
+
+type tpcds_sf3000_web_returns {
+    wr_account_credit: String
+    wr_fee: String
+    wr_item_sk: Int
+    wr_net_loss: String
+    wr_order_number: Int
+    wr_reason_sk: Int
+    wr_refunded_addr_sk: Int
+    wr_refunded_cash: String
+    wr_refunded_cdemo_sk: Int
+    wr_refunded_customer_sk: Int
+    wr_refunded_hdemo_sk: Int
+    wr_return_amt: String
+    wr_return_amt_inc_tax: String
+    wr_return_quantity: Int
+    wr_return_ship_cost: String
+    wr_return_tax: String
+    wr_returned_date_sk: Int
+    wr_returned_time_sk: Int
+    wr_returning_addr_sk: Int
+    wr_returning_cdemo_sk: Int
+    wr_returning_customer_sk: Int
+    wr_returning_hdemo_sk: Int
+    wr_reversed_charge: String
+    wr_web_page_sk: Int
+}
+
+type tpcds_sf3000_web_sales {
+    ws_bill_addr_sk: Int
+    ws_bill_cdemo_sk: Int
+    ws_bill_customer_sk: Int
+    ws_bill_hdemo_sk: Int
+    ws_coupon_amt: String
+    ws_ext_discount_amt: String
+    ws_ext_list_price: String
+    ws_ext_sales_price: String
+    ws_ext_ship_cost: String
+    ws_ext_tax: String
+    ws_ext_wholesale_cost: String
+    ws_item_sk: Int
+    ws_list_price: String
+    ws_net_paid: String
+    ws_net_paid_inc_ship: String
+    ws_net_paid_inc_ship_tax: String
+    ws_net_paid_inc_tax: String
+    ws_net_profit: String
+    ws_order_number: Int
+    ws_promo_sk: Int
+    ws_quantity: Int
+    ws_sales_price: String
+    ws_ship_addr_sk: Int
+    ws_ship_cdemo_sk: Int
+    ws_ship_customer_sk: Int
+    ws_ship_date_sk: Int
+    ws_ship_hdemo_sk: Int
+    ws_ship_mode_sk: Int
+    ws_sold_date_sk: Int
+    ws_sold_time_sk: Int
+    ws_warehouse_sk: Int
+    ws_web_page_sk: Int
+    ws_web_site_sk: Int
+    ws_wholesale_cost: String
+}
+
+type tpcds_sf3000_web_site {
+    web_city: String
+    web_class: String
+    web_close_date_sk: Int
+    web_company_id: Int
+    web_company_name: String
+    web_country: String
+    web_county: String
+    web_gmt_offset: String
+    web_manager: String
+    web_market_manager: String
+    web_mkt_class: String
+    web_mkt_desc: String
+    web_mkt_id: Int
+    web_name: String
+    web_open_date_sk: Int
+    web_rec_end_date: String
+    web_rec_start_date: String
+    web_site_id: String
+    web_site_sk: Int
+    web_state: String
+    web_street_name: String
+    web_street_number: String
+    web_street_type: String
+    web_suite_number: String
+    web_tax_percentage: String
+    web_zip: String
+}
+
+type tpcds_sf300_call_center {
+    cc_call_center_id: String
+    cc_call_center_sk: Int
+    cc_city: String
+    cc_class: String
+    cc_closed_date_sk: Int
+    cc_company: Int
+    cc_company_name: String
+    cc_country: String
+    cc_county: String
+    cc_division: Int
+    cc_division_name: String
+    cc_employees: Int
+    cc_gmt_offset: String
+    cc_hours: String
+    cc_manager: String
+    cc_market_manager: String
+    cc_mkt_class: String
+    cc_mkt_desc: String
+    cc_mkt_id: Int
+    cc_name: String
+    cc_open_date_sk: Int
+    cc_rec_end_date: String
+    cc_rec_start_date: String
+    cc_sq_ft: Int
+    cc_state: String
+    cc_street_name: String
+    cc_street_number: String
+    cc_street_type: String
+    cc_suite_number: String
+    cc_tax_percentage: String
+    cc_zip: String
+}
+
+type tpcds_sf300_catalog_page {
+    cp_catalog_number: Int
+    cp_catalog_page_id: String
+    cp_catalog_page_number: Int
+    cp_catalog_page_sk: Int
+    cp_department: String
+    cp_description: String
+    cp_end_date_sk: Int
+    cp_start_date_sk: Int
+    cp_type: String
+}
+
+type tpcds_sf300_catalog_returns {
+    cr_call_center_sk: Int
+    cr_catalog_page_sk: Int
+    cr_fee: String
+    cr_item_sk: Int
+    cr_net_loss: String
+    cr_order_number: Int
+    cr_reason_sk: Int
+    cr_refunded_addr_sk: Int
+    cr_refunded_cash: String
+    cr_refunded_cdemo_sk: Int
+    cr_refunded_customer_sk: Int
+    cr_refunded_hdemo_sk: Int
+    cr_return_amount: String
+    cr_return_amt_inc_tax: String
+    cr_return_quantity: Int
+    cr_return_ship_cost: String
+    cr_return_tax: String
+    cr_returned_date_sk: Int
+    cr_returned_time_sk: Int
+    cr_returning_addr_sk: Int
+    cr_returning_cdemo_sk: Int
+    cr_returning_customer_sk: Int
+    cr_returning_hdemo_sk: Int
+    cr_reversed_charge: String
+    cr_ship_mode_sk: Int
+    cr_store_credit: String
+    cr_warehouse_sk: Int
+}
+
+type tpcds_sf300_catalog_sales {
+    cs_bill_addr_sk: Int
+    cs_bill_cdemo_sk: Int
+    cs_bill_customer_sk: Int
+    cs_bill_hdemo_sk: Int
+    cs_call_center_sk: Int
+    cs_catalog_page_sk: Int
+    cs_coupon_amt: String
+    cs_ext_discount_amt: String
+    cs_ext_list_price: String
+    cs_ext_sales_price: String
+    cs_ext_ship_cost: String
+    cs_ext_tax: String
+    cs_ext_wholesale_cost: String
+    cs_item_sk: Int
+    cs_list_price: String
+    cs_net_paid: String
+    cs_net_paid_inc_ship: String
+    cs_net_paid_inc_ship_tax: String
+    cs_net_paid_inc_tax: String
+    cs_net_profit: String
+    cs_order_number: Int
+    cs_promo_sk: Int
+    cs_quantity: Int
+    cs_sales_price: String
+    cs_ship_addr_sk: Int
+    cs_ship_cdemo_sk: Int
+    cs_ship_customer_sk: Int
+    cs_ship_date_sk: Int
+    cs_ship_hdemo_sk: Int
+    cs_ship_mode_sk: Int
+    cs_sold_date_sk: Int
+    cs_sold_time_sk: Int
+    cs_warehouse_sk: Int
+    cs_wholesale_cost: String
+}
+
+type tpcds_sf300_customer {
+    c_birth_country: String
+    c_birth_day: Int
+    c_birth_month: Int
+    c_birth_year: Int
+    c_current_addr_sk: Int
+    c_current_cdemo_sk: Int
+    c_current_hdemo_sk: Int
+    c_customer_id: String
+    c_customer_sk: Int
+    c_email_address: String
+    c_first_name: String
+    c_first_sales_date_sk: Int
+    c_first_shipto_date_sk: Int
+    c_last_name: String
+    c_last_review_date_sk: Int
+    c_login: String
+    c_preferred_cust_flag: String
+    c_salutation: String
+}
+
+type tpcds_sf300_customer_address {
+    ca_address_id: String
+    ca_address_sk: Int
+    ca_city: String
+    ca_country: String
+    ca_county: String
+    ca_gmt_offset: String
+    ca_location_type: String
+    ca_state: String
+    ca_street_name: String
+    ca_street_number: String
+    ca_street_type: String
+    ca_suite_number: String
+    ca_zip: String
+}
+
+type tpcds_sf300_customer_demographics {
+    cd_credit_rating: String
+    cd_demo_sk: Int
+    cd_dep_college_count: Int
+    cd_dep_count: Int
+    cd_dep_employed_count: Int
+    cd_education_status: String
+    cd_gender: String
+    cd_marital_status: String
+    cd_purchase_estimate: Int
+}
+
+type tpcds_sf300_date_dim {
+    d_current_day: String
+    d_current_month: String
+    d_current_quarter: String
+    d_current_week: String
+    d_current_year: String
+    d_date: String
+    d_date_id: String
+    d_date_sk: Int
+    d_day_name: String
+    d_dom: Int
+    d_dow: Int
+    d_first_dom: Int
+    d_following_holiday: String
+    d_fy_quarter_seq: Int
+    d_fy_week_seq: Int
+    d_fy_year: Int
+    d_holiday: String
+    d_last_dom: Int
+    d_month_seq: Int
+    d_moy: Int
+    d_qoy: Int
+    d_quarter_name: String
+    d_quarter_seq: Int
+    d_same_day_lq: Int
+    d_same_day_ly: Int
+    d_week_seq: Int
+    d_weekend: String
+    d_year: Int
+}
+
+type tpcds_sf300_dbgen_version {
+    dv_cmdline_args: String
+    dv_create_date: String
+    dv_create_time: String
+    dv_version: String
+}
+
+type tpcds_sf300_household_demographics {
+    hd_buy_potential: String
+    hd_demo_sk: Int
+    hd_dep_count: Int
+    hd_income_band_sk: Int
+    hd_vehicle_count: Int
+}
+
+type tpcds_sf300_income_band {
+    ib_income_band_sk: Int
+    ib_lower_bound: Int
+    ib_upper_bound: Int
+}
+
+type tpcds_sf300_inventory {
+    inv_date_sk: Int
+    inv_item_sk: Int
+    inv_quantity_on_hand: Int
+    inv_warehouse_sk: Int
+}
+
+type tpcds_sf300_item {
+    i_brand: String
+    i_brand_id: Int
+    i_category: String
+    i_category_id: Int
+    i_class: String
+    i_class_id: Int
+    i_color: String
+    i_container: String
+    i_current_price: String
+    i_formulation: String
+    i_item_desc: String
+    i_item_id: String
+    i_item_sk: Int
+    i_manager_id: Int
+    i_manufact: String
+    i_manufact_id: Int
+    i_product_name: String
+    i_rec_end_date: String
+    i_rec_start_date: String
+    i_size: String
+    i_units: String
+    i_wholesale_cost: String
+}
+
+type tpcds_sf300_promotion {
+    p_channel_catalog: String
+    p_channel_demo: String
+    p_channel_details: String
+    p_channel_dmail: String
+    p_channel_email: String
+    p_channel_event: String
+    p_channel_press: String
+    p_channel_radio: String
+    p_channel_tv: String
+    p_cost: String
+    p_discount_active: String
+    p_end_date_sk: Int
+    p_item_sk: Int
+    p_promo_id: String
+    p_promo_name: String
+    p_promo_sk: Int
+    p_purpose: String
+    p_response_targe: Int
+    p_start_date_sk: Int
+}
+
+type tpcds_sf300_reason {
+    r_reason_desc: String
+    r_reason_id: String
+    r_reason_sk: Int
+}
+
+type tpcds_sf300_ship_mode {
+    sm_carrier: String
+    sm_code: String
+    sm_contract: String
+    sm_ship_mode_id: String
+    sm_ship_mode_sk: Int
+    sm_type: String
+}
+
+type tpcds_sf300_store {
+    s_city: String
+    s_closed_date_sk: Int
+    s_company_id: Int
+    s_company_name: String
+    s_country: String
+    s_county: String
+    s_division_id: Int
+    s_division_name: String
+    s_floor_space: Int
+    s_geography_class: String
+    s_gmt_offset: String
+    s_hours: String
+    s_manager: String
+    s_market_desc: String
+    s_market_id: Int
+    s_market_manager: String
+    s_number_employees: Int
+    s_rec_end_date: String
+    s_rec_start_date: String
+    s_state: String
+    s_store_id: String
+    s_store_name: String
+    s_store_sk: Int
+    s_street_name: String
+    s_street_number: String
+    s_street_type: String
+    s_suite_number: String
+    s_tax_precentage: String
+    s_zip: String
+}
+
+type tpcds_sf300_store_returns {
+    sr_addr_sk: Int
+    sr_cdemo_sk: Int
+    sr_customer_sk: Int
+    sr_fee: String
+    sr_hdemo_sk: Int
+    sr_item_sk: Int
+    sr_net_loss: String
+    sr_reason_sk: Int
+    sr_refunded_cash: String
+    sr_return_amt: String
+    sr_return_amt_inc_tax: String
+    sr_return_quantity: Int
+    sr_return_ship_cost: String
+    sr_return_tax: String
+    sr_return_time_sk: Int
+    sr_returned_date_sk: Int
+    sr_reversed_charge: String
+    sr_store_credit: String
+    sr_store_sk: Int
+    sr_ticket_number: Int
+}
+
+type tpcds_sf300_store_sales {
+    ss_addr_sk: Int
+    ss_cdemo_sk: Int
+    ss_coupon_amt: String
+    ss_customer_sk: Int
+    ss_ext_discount_amt: String
+    ss_ext_list_price: String
+    ss_ext_sales_price: String
+    ss_ext_tax: String
+    ss_ext_wholesale_cost: String
+    ss_hdemo_sk: Int
+    ss_item_sk: Int
+    ss_list_price: String
+    ss_net_paid: String
+    ss_net_paid_inc_tax: String
+    ss_net_profit: String
+    ss_promo_sk: Int
+    ss_quantity: Int
+    ss_sales_price: String
+    ss_sold_date_sk: Int
+    ss_sold_time_sk: Int
+    ss_store_sk: Int
+    ss_ticket_number: Int
+    ss_wholesale_cost: String
+}
+
+type tpcds_sf300_time_dim {
+    t_am_pm: String
+    t_hour: Int
+    t_meal_time: String
+    t_minute: Int
+    t_second: Int
+    t_shift: String
+    t_sub_shift: String
+    t_time: Int
+    t_time_id: String
+    t_time_sk: Int
+}
+
+type tpcds_sf300_warehouse {
+    w_city: String
+    w_country: String
+    w_county: String
+    w_gmt_offset: String
+    w_state: String
+    w_street_name: String
+    w_street_number: String
+    w_street_type: String
+    w_suite_number: String
+    w_warehouse_id: String
+    w_warehouse_name: String
+    w_warehouse_sk: Int
+    w_warehouse_sq_ft: Int
+    w_zip: String
+}
+
+type tpcds_sf300_web_page {
+    wp_access_date_sk: Int
+    wp_autogen_flag: String
+    wp_char_count: Int
+    wp_creation_date_sk: Int
+    wp_customer_sk: Int
+    wp_image_count: Int
+    wp_link_count: Int
+    wp_max_ad_count: Int
+    wp_rec_end_date: String
+    wp_rec_start_date: String
+    wp_type: String
+    wp_url: String
+    wp_web_page_id: String
+    wp_web_page_sk: Int
+}
+
+type tpcds_sf300_web_returns {
+    wr_account_credit: String
+    wr_fee: String
+    wr_item_sk: Int
+    wr_net_loss: String
+    wr_order_number: Int
+    wr_reason_sk: Int
+    wr_refunded_addr_sk: Int
+    wr_refunded_cash: String
+    wr_refunded_cdemo_sk: Int
+    wr_refunded_customer_sk: Int
+    wr_refunded_hdemo_sk: Int
+    wr_return_amt: String
+    wr_return_amt_inc_tax: String
+    wr_return_quantity: Int
+    wr_return_ship_cost: String
+    wr_return_tax: String
+    wr_returned_date_sk: Int
+    wr_returned_time_sk: Int
+    wr_returning_addr_sk: Int
+    wr_returning_cdemo_sk: Int
+    wr_returning_customer_sk: Int
+    wr_returning_hdemo_sk: Int
+    wr_reversed_charge: String
+    wr_web_page_sk: Int
+}
+
+type tpcds_sf300_web_sales {
+    ws_bill_addr_sk: Int
+    ws_bill_cdemo_sk: Int
+    ws_bill_customer_sk: Int
+    ws_bill_hdemo_sk: Int
+    ws_coupon_amt: String
+    ws_ext_discount_amt: String
+    ws_ext_list_price: String
+    ws_ext_sales_price: String
+    ws_ext_ship_cost: String
+    ws_ext_tax: String
+    ws_ext_wholesale_cost: String
+    ws_item_sk: Int
+    ws_list_price: String
+    ws_net_paid: String
+    ws_net_paid_inc_ship: String
+    ws_net_paid_inc_ship_tax: String
+    ws_net_paid_inc_tax: String
+    ws_net_profit: String
+    ws_order_number: Int
+    ws_promo_sk: Int
+    ws_quantity: Int
+    ws_sales_price: String
+    ws_ship_addr_sk: Int
+    ws_ship_cdemo_sk: Int
+    ws_ship_customer_sk: Int
+    ws_ship_date_sk: Int
+    ws_ship_hdemo_sk: Int
+    ws_ship_mode_sk: Int
+    ws_sold_date_sk: Int
+    ws_sold_time_sk: Int
+    ws_warehouse_sk: Int
+    ws_web_page_sk: Int
+    ws_web_site_sk: Int
+    ws_wholesale_cost: String
+}
+
+type tpcds_sf300_web_site {
+    web_city: String
+    web_class: String
+    web_close_date_sk: Int
+    web_company_id: Int
+    web_company_name: String
+    web_country: String
+    web_county: String
+    web_gmt_offset: String
+    web_manager: String
+    web_market_manager: String
+    web_mkt_class: String
+    web_mkt_desc: String
+    web_mkt_id: Int
+    web_name: String
+    web_open_date_sk: Int
+    web_rec_end_date: String
+    web_rec_start_date: String
+    web_site_id: String
+    web_site_sk: Int
+    web_state: String
+    web_street_name: String
+    web_street_number: String
+    web_street_type: String
+    web_suite_number: String
+    web_tax_percentage: String
+    web_zip: String
+}
+
+type tpcds_tiny_call_center {
+    cc_call_center_id: String
+    cc_call_center_sk: Int
+    cc_city: String
+    cc_class: String
+    cc_closed_date_sk: Int
+    cc_company: Int
+    cc_company_name: String
+    cc_country: String
+    cc_county: String
+    cc_division: Int
+    cc_division_name: String
+    cc_employees: Int
+    cc_gmt_offset: String
+    cc_hours: String
+    cc_manager: String
+    cc_market_manager: String
+    cc_mkt_class: String
+    cc_mkt_desc: String
+    cc_mkt_id: Int
+    cc_name: String
+    cc_open_date_sk: Int
+    cc_rec_end_date: String
+    cc_rec_start_date: String
+    cc_sq_ft: Int
+    cc_state: String
+    cc_street_name: String
+    cc_street_number: String
+    cc_street_type: String
+    cc_suite_number: String
+    cc_tax_percentage: String
+    cc_zip: String
+}
+
+type tpcds_tiny_catalog_page {
+    cp_catalog_number: Int
+    cp_catalog_page_id: String
+    cp_catalog_page_number: Int
+    cp_catalog_page_sk: Int
+    cp_department: String
+    cp_description: String
+    cp_end_date_sk: Int
+    cp_start_date_sk: Int
+    cp_type: String
+}
+
+type tpcds_tiny_catalog_returns {
+    cr_call_center_sk: Int
+    cr_catalog_page_sk: Int
+    cr_fee: String
+    cr_item_sk: Int
+    cr_net_loss: String
+    cr_order_number: Int
+    cr_reason_sk: Int
+    cr_refunded_addr_sk: Int
+    cr_refunded_cash: String
+    cr_refunded_cdemo_sk: Int
+    cr_refunded_customer_sk: Int
+    cr_refunded_hdemo_sk: Int
+    cr_return_amount: String
+    cr_return_amt_inc_tax: String
+    cr_return_quantity: Int
+    cr_return_ship_cost: String
+    cr_return_tax: String
+    cr_returned_date_sk: Int
+    cr_returned_time_sk: Int
+    cr_returning_addr_sk: Int
+    cr_returning_cdemo_sk: Int
+    cr_returning_customer_sk: Int
+    cr_returning_hdemo_sk: Int
+    cr_reversed_charge: String
+    cr_ship_mode_sk: Int
+    cr_store_credit: String
+    cr_warehouse_sk: Int
+}
+
+type tpcds_tiny_catalog_sales {
+    cs_bill_addr_sk: Int
+    cs_bill_cdemo_sk: Int
+    cs_bill_customer_sk: Int
+    cs_bill_hdemo_sk: Int
+    cs_call_center_sk: Int
+    cs_catalog_page_sk: Int
+    cs_coupon_amt: String
+    cs_ext_discount_amt: String
+    cs_ext_list_price: String
+    cs_ext_sales_price: String
+    cs_ext_ship_cost: String
+    cs_ext_tax: String
+    cs_ext_wholesale_cost: String
+    cs_item_sk: Int
+    cs_list_price: String
+    cs_net_paid: String
+    cs_net_paid_inc_ship: String
+    cs_net_paid_inc_ship_tax: String
+    cs_net_paid_inc_tax: String
+    cs_net_profit: String
+    cs_order_number: Int
+    cs_promo_sk: Int
+    cs_quantity: Int
+    cs_sales_price: String
+    cs_ship_addr_sk: Int
+    cs_ship_cdemo_sk: Int
+    cs_ship_customer_sk: Int
+    cs_ship_date_sk: Int
+    cs_ship_hdemo_sk: Int
+    cs_ship_mode_sk: Int
+    cs_sold_date_sk: Int
+    cs_sold_time_sk: Int
+    cs_warehouse_sk: Int
+    cs_wholesale_cost: String
+}
+
+type tpcds_tiny_customer {
+    c_birth_country: String
+    c_birth_day: Int
+    c_birth_month: Int
+    c_birth_year: Int
+    c_current_addr_sk: Int
+    c_current_cdemo_sk: Int
+    c_current_hdemo_sk: Int
+    c_customer_id: String
+    c_customer_sk: Int
+    c_email_address: String
+    c_first_name: String
+    c_first_sales_date_sk: Int
+    c_first_shipto_date_sk: Int
+    c_last_name: String
+    c_last_review_date_sk: Int
+    c_login: String
+    c_preferred_cust_flag: String
+    c_salutation: String
+}
+
+type tpcds_tiny_customer_address {
+    ca_address_id: String
+    ca_address_sk: Int
+    ca_city: String
+    ca_country: String
+    ca_county: String
+    ca_gmt_offset: String
+    ca_location_type: String
+    ca_state: String
+    ca_street_name: String
+    ca_street_number: String
+    ca_street_type: String
+    ca_suite_number: String
+    ca_zip: String
+}
+
+type tpcds_tiny_customer_demographics {
+    cd_credit_rating: String
+    cd_demo_sk: Int
+    cd_dep_college_count: Int
+    cd_dep_count: Int
+    cd_dep_employed_count: Int
+    cd_education_status: String
+    cd_gender: String
+    cd_marital_status: String
+    cd_purchase_estimate: Int
+}
+
+type tpcds_tiny_date_dim {
+    d_current_day: String
+    d_current_month: String
+    d_current_quarter: String
+    d_current_week: String
+    d_current_year: String
+    d_date: String
+    d_date_id: String
+    d_date_sk: Int
+    d_day_name: String
+    d_dom: Int
+    d_dow: Int
+    d_first_dom: Int
+    d_following_holiday: String
+    d_fy_quarter_seq: Int
+    d_fy_week_seq: Int
+    d_fy_year: Int
+    d_holiday: String
+    d_last_dom: Int
+    d_month_seq: Int
+    d_moy: Int
+    d_qoy: Int
+    d_quarter_name: String
+    d_quarter_seq: Int
+    d_same_day_lq: Int
+    d_same_day_ly: Int
+    d_week_seq: Int
+    d_weekend: String
+    d_year: Int
+}
+
+type tpcds_tiny_dbgen_version {
+    dv_cmdline_args: String
+    dv_create_date: String
+    dv_create_time: String
+    dv_version: String
+}
+
+type tpcds_tiny_household_demographics {
+    hd_buy_potential: String
+    hd_demo_sk: Int
+    hd_dep_count: Int
+    hd_income_band_sk: Int
+    hd_vehicle_count: Int
+}
+
+type tpcds_tiny_income_band {
+    ib_income_band_sk: Int
+    ib_lower_bound: Int
+    ib_upper_bound: Int
+}
+
+type tpcds_tiny_inventory {
+    inv_date_sk: Int
+    inv_item_sk: Int
+    inv_quantity_on_hand: Int
+    inv_warehouse_sk: Int
+}
+
+type tpcds_tiny_item {
+    i_brand: String
+    i_brand_id: Int
+    i_category: String
+    i_category_id: Int
+    i_class: String
+    i_class_id: Int
+    i_color: String
+    i_container: String
+    i_current_price: String
+    i_formulation: String
+    i_item_desc: String
+    i_item_id: String
+    i_item_sk: Int
+    i_manager_id: Int
+    i_manufact: String
+    i_manufact_id: Int
+    i_product_name: String
+    i_rec_end_date: String
+    i_rec_start_date: String
+    i_size: String
+    i_units: String
+    i_wholesale_cost: String
+}
+
+type tpcds_tiny_promotion {
+    p_channel_catalog: String
+    p_channel_demo: String
+    p_channel_details: String
+    p_channel_dmail: String
+    p_channel_email: String
+    p_channel_event: String
+    p_channel_press: String
+    p_channel_radio: String
+    p_channel_tv: String
+    p_cost: String
+    p_discount_active: String
+    p_end_date_sk: Int
+    p_item_sk: Int
+    p_promo_id: String
+    p_promo_name: String
+    p_promo_sk: Int
+    p_purpose: String
+    p_response_targe: Int
+    p_start_date_sk: Int
+}
+
+type tpcds_tiny_reason {
+    r_reason_desc: String
+    r_reason_id: String
+    r_reason_sk: Int
+}
+
+type tpcds_tiny_ship_mode {
+    sm_carrier: String
+    sm_code: String
+    sm_contract: String
+    sm_ship_mode_id: String
+    sm_ship_mode_sk: Int
+    sm_type: String
+}
+
+type tpcds_tiny_store {
+    s_city: String
+    s_closed_date_sk: Int
+    s_company_id: Int
+    s_company_name: String
+    s_country: String
+    s_county: String
+    s_division_id: Int
+    s_division_name: String
+    s_floor_space: Int
+    s_geography_class: String
+    s_gmt_offset: String
+    s_hours: String
+    s_manager: String
+    s_market_desc: String
+    s_market_id: Int
+    s_market_manager: String
+    s_number_employees: Int
+    s_rec_end_date: String
+    s_rec_start_date: String
+    s_state: String
+    s_store_id: String
+    s_store_name: String
+    s_store_sk: Int
+    s_street_name: String
+    s_street_number: String
+    s_street_type: String
+    s_suite_number: String
+    s_tax_precentage: String
+    s_zip: String
+}
+
+type tpcds_tiny_store_returns {
+    sr_addr_sk: Int
+    sr_cdemo_sk: Int
+    sr_customer_sk: Int
+    sr_fee: String
+    sr_hdemo_sk: Int
+    sr_item_sk: Int
+    sr_net_loss: String
+    sr_reason_sk: Int
+    sr_refunded_cash: String
+    sr_return_amt: String
+    sr_return_amt_inc_tax: String
+    sr_return_quantity: Int
+    sr_return_ship_cost: String
+    sr_return_tax: String
+    sr_return_time_sk: Int
+    sr_returned_date_sk: Int
+    sr_reversed_charge: String
+    sr_store_credit: String
+    sr_store_sk: Int
+    sr_ticket_number: Int
+}
+
+type tpcds_tiny_store_sales {
+    ss_addr_sk: Int
+    ss_cdemo_sk: Int
+    ss_coupon_amt: String
+    ss_customer_sk: Int
+    ss_ext_discount_amt: String
+    ss_ext_list_price: String
+    ss_ext_sales_price: String
+    ss_ext_tax: String
+    ss_ext_wholesale_cost: String
+    ss_hdemo_sk: Int
+    ss_item_sk: Int
+    ss_list_price: String
+    ss_net_paid: String
+    ss_net_paid_inc_tax: String
+    ss_net_profit: String
+    ss_promo_sk: Int
+    ss_quantity: Int
+    ss_sales_price: String
+    ss_sold_date_sk: Int
+    ss_sold_time_sk: Int
+    ss_store_sk: Int
+    ss_ticket_number: Int
+    ss_wholesale_cost: String
+}
+
+type tpcds_tiny_time_dim {
+    t_am_pm: String
+    t_hour: Int
+    t_meal_time: String
+    t_minute: Int
+    t_second: Int
+    t_shift: String
+    t_sub_shift: String
+    t_time: Int
+    t_time_id: String
+    t_time_sk: Int
+}
+
+type tpcds_tiny_warehouse {
+    w_city: String
+    w_country: String
+    w_county: String
+    w_gmt_offset: String
+    w_state: String
+    w_street_name: String
+    w_street_number: String
+    w_street_type: String
+    w_suite_number: String
+    w_warehouse_id: String
+    w_warehouse_name: String
+    w_warehouse_sk: Int
+    w_warehouse_sq_ft: Int
+    w_zip: String
+}
+
+type tpcds_tiny_web_page {
+    wp_access_date_sk: Int
+    wp_autogen_flag: String
+    wp_char_count: Int
+    wp_creation_date_sk: Int
+    wp_customer_sk: Int
+    wp_image_count: Int
+    wp_link_count: Int
+    wp_max_ad_count: Int
+    wp_rec_end_date: String
+    wp_rec_start_date: String
+    wp_type: String
+    wp_url: String
+    wp_web_page_id: String
+    wp_web_page_sk: Int
+}
+
+type tpcds_tiny_web_returns {
+    wr_account_credit: String
+    wr_fee: String
+    wr_item_sk: Int
+    wr_net_loss: String
+    wr_order_number: Int
+    wr_reason_sk: Int
+    wr_refunded_addr_sk: Int
+    wr_refunded_cash: String
+    wr_refunded_cdemo_sk: Int
+    wr_refunded_customer_sk: Int
+    wr_refunded_hdemo_sk: Int
+    wr_return_amt: String
+    wr_return_amt_inc_tax: String
+    wr_return_quantity: Int
+    wr_return_ship_cost: String
+    wr_return_tax: String
+    wr_returned_date_sk: Int
+    wr_returned_time_sk: Int
+    wr_returning_addr_sk: Int
+    wr_returning_cdemo_sk: Int
+    wr_returning_customer_sk: Int
+    wr_returning_hdemo_sk: Int
+    wr_reversed_charge: String
+    wr_web_page_sk: Int
+}
+
+type tpcds_tiny_web_sales {
+    ws_bill_addr_sk: Int
+    ws_bill_cdemo_sk: Int
+    ws_bill_customer_sk: Int
+    ws_bill_hdemo_sk: Int
+    ws_coupon_amt: String
+    ws_ext_discount_amt: String
+    ws_ext_list_price: String
+    ws_ext_sales_price: String
+    ws_ext_ship_cost: String
+    ws_ext_tax: String
+    ws_ext_wholesale_cost: String
+    ws_item_sk: Int
+    ws_list_price: String
+    ws_net_paid: String
+    ws_net_paid_inc_ship: String
+    ws_net_paid_inc_ship_tax: String
+    ws_net_paid_inc_tax: String
+    ws_net_profit: String
+    ws_order_number: Int
+    ws_promo_sk: Int
+    ws_quantity: Int
+    ws_sales_price: String
+    ws_ship_addr_sk: Int
+    ws_ship_cdemo_sk: Int
+    ws_ship_customer_sk: Int
+    ws_ship_date_sk: Int
+    ws_ship_hdemo_sk: Int
+    ws_ship_mode_sk: Int
+    ws_sold_date_sk: Int
+    ws_sold_time_sk: Int
+    ws_warehouse_sk: Int
+    ws_web_page_sk: Int
+    ws_web_site_sk: Int
+    ws_wholesale_cost: String
+}
+
+type tpcds_tiny_web_site {
+    web_city: String
+    web_class: String
+    web_close_date_sk: Int
+    web_company_id: Int
+    web_company_name: String
+    web_country: String
+    web_county: String
+    web_gmt_offset: String
+    web_manager: String
+    web_market_manager: String
+    web_mkt_class: String
+    web_mkt_desc: String
+    web_mkt_id: Int
+    web_name: String
+    web_open_date_sk: Int
+    web_rec_end_date: String
+    web_rec_start_date: String
+    web_site_id: String
+    web_site_sk: Int
+    web_state: String
+    web_street_name: String
+    web_street_number: String
+    web_street_type: String
+    web_suite_number: String
+    web_tax_percentage: String
+    web_zip: String
+}
+
+type tpch_sf100000_customer {
+    acctbal: Float
+    address: String
+    comment: String
+    custkey: Int
+    mktsegment: String
+    name: String
+    nationkey: Int
+    phone: String
+}
+
+type tpch_sf100000_lineitem {
+    comment: String
+    commitdate: String
+    discount: Float
+    extendedprice: Float
+    linenumber: Int
+    linestatus: String
+    orderkey: Int
+    partkey: Int
+    quantity: Float
+    receiptdate: String
+    returnflag: String
+    shipdate: String
+    shipinstruct: String
+    shipmode: String
+    suppkey: Int
+    tax: Float
+}
+
+type tpch_sf100000_nation {
+    comment: String
+    name: String
+    nationkey: Int
+    regionkey: Int
+}
+
+type tpch_sf100000_orders {
+    clerk: String
+    comment: String
+    custkey: Int
+    orderdate: String
+    orderkey: Int
+    orderpriority: String
+    orderstatus: String
+    shippriority: Int
+    totalprice: Float
+}
+
+type tpch_sf100000_part {
+    brand: String
+    comment: String
+    container: String
+    mfgr: String
+    name: String
+    partkey: Int
+    retailprice: Float
+    size: Int
+    type: String
+}
+
+type tpch_sf100000_partsupp {
+    availqty: Int
+    comment: String
+    partkey: Int
+    suppkey: Int
+    supplycost: Float
+}
+
+type tpch_sf100000_region {
+    comment: String
+    name: String
+    regionkey: Int
+}
+
+type tpch_sf100000_supplier {
+    acctbal: Float
+    address: String
+    comment: String
+    name: String
+    nationkey: Int
+    phone: String
+    suppkey: Int
+}
+
+type tpch_sf10000_customer {
+    acctbal: Float
+    address: String
+    comment: String
+    custkey: Int
+    mktsegment: String
+    name: String
+    nationkey: Int
+    phone: String
+}
+
+type tpch_sf10000_lineitem {
+    comment: String
+    commitdate: String
+    discount: Float
+    extendedprice: Float
+    linenumber: Int
+    linestatus: String
+    orderkey: Int
+    partkey: Int
+    quantity: Float
+    receiptdate: String
+    returnflag: String
+    shipdate: String
+    shipinstruct: String
+    shipmode: String
+    suppkey: Int
+    tax: Float
+}
+
+type tpch_sf10000_nation {
+    comment: String
+    name: String
+    nationkey: Int
+    regionkey: Int
+}
+
+type tpch_sf10000_orders {
+    clerk: String
+    comment: String
+    custkey: Int
+    orderdate: String
+    orderkey: Int
+    orderpriority: String
+    orderstatus: String
+    shippriority: Int
+    totalprice: Float
+}
+
+type tpch_sf10000_part {
+    brand: String
+    comment: String
+    container: String
+    mfgr: String
+    name: String
+    partkey: Int
+    retailprice: Float
+    size: Int
+    type: String
+}
+
+type tpch_sf10000_partsupp {
+    availqty: Int
+    comment: String
+    partkey: Int
+    suppkey: Int
+    supplycost: Float
+}
+
+type tpch_sf10000_region {
+    comment: String
+    name: String
+    regionkey: Int
+}
+
+type tpch_sf10000_supplier {
+    acctbal: Float
+    address: String
+    comment: String
+    name: String
+    nationkey: Int
+    phone: String
+    suppkey: Int
+}
+
+type tpch_sf1000_customer {
+    acctbal: Float
+    address: String
+    comment: String
+    custkey: Int
+    mktsegment: String
+    name: String
+    nationkey: Int
+    phone: String
+}
+
+type tpch_sf1000_lineitem {
+    comment: String
+    commitdate: String
+    discount: Float
+    extendedprice: Float
+    linenumber: Int
+    linestatus: String
+    orderkey: Int
+    partkey: Int
+    quantity: Float
+    receiptdate: String
+    returnflag: String
+    shipdate: String
+    shipinstruct: String
+    shipmode: String
+    suppkey: Int
+    tax: Float
+}
+
+type tpch_sf1000_nation {
+    comment: String
+    name: String
+    nationkey: Int
+    regionkey: Int
+}
+
+type tpch_sf1000_orders {
+    clerk: String
+    comment: String
+    custkey: Int
+    orderdate: String
+    orderkey: Int
+    orderpriority: String
+    orderstatus: String
+    shippriority: Int
+    totalprice: Float
+}
+
+type tpch_sf1000_part {
+    brand: String
+    comment: String
+    container: String
+    mfgr: String
+    name: String
+    partkey: Int
+    retailprice: Float
+    size: Int
+    type: String
+}
+
+type tpch_sf1000_partsupp {
+    availqty: Int
+    comment: String
+    partkey: Int
+    suppkey: Int
+    supplycost: Float
+}
+
+type tpch_sf1000_region {
+    comment: String
+    name: String
+    regionkey: Int
+}
+
+type tpch_sf1000_supplier {
+    acctbal: Float
+    address: String
+    comment: String
+    name: String
+    nationkey: Int
+    phone: String
+    suppkey: Int
+}
+
+type tpch_sf100_customer {
+    acctbal: Float
+    address: String
+    comment: String
+    custkey: Int
+    mktsegment: String
+    name: String
+    nationkey: Int
+    phone: String
+}
+
+type tpch_sf100_lineitem {
+    comment: String
+    commitdate: String
+    discount: Float
+    extendedprice: Float
+    linenumber: Int
+    linestatus: String
+    orderkey: Int
+    partkey: Int
+    quantity: Float
+    receiptdate: String
+    returnflag: String
+    shipdate: String
+    shipinstruct: String
+    shipmode: String
+    suppkey: Int
+    tax: Float
+}
+
+type tpch_sf100_nation {
+    comment: String
+    name: String
+    nationkey: Int
+    regionkey: Int
+}
+
+type tpch_sf100_orders {
+    clerk: String
+    comment: String
+    custkey: Int
+    orderdate: String
+    orderkey: Int
+    orderpriority: String
+    orderstatus: String
+    shippriority: Int
+    totalprice: Float
+}
+
+type tpch_sf100_part {
+    brand: String
+    comment: String
+    container: String
+    mfgr: String
+    name: String
+    partkey: Int
+    retailprice: Float
+    size: Int
+    type: String
+}
+
+type tpch_sf100_partsupp {
+    availqty: Int
+    comment: String
+    partkey: Int
+    suppkey: Int
+    supplycost: Float
+}
+
+type tpch_sf100_region {
+    comment: String
+    name: String
+    regionkey: Int
+}
+
+type tpch_sf100_supplier {
+    acctbal: Float
+    address: String
+    comment: String
+    name: String
+    nationkey: Int
+    phone: String
+    suppkey: Int
+}
+
+type tpch_sf1_customer {
+    acctbal: Float
+    address: String
+    comment: String
+    custkey: Int
+    mktsegment: String
+    name: String
+    nationkey: Int
+    phone: String
+}
+
+type tpch_sf1_lineitem {
+    comment: String
+    commitdate: String
+    discount: Float
+    extendedprice: Float
+    linenumber: Int
+    linestatus: String
+    orderkey: Int
+    partkey: Int
+    quantity: Float
+    receiptdate: String
+    returnflag: String
+    shipdate: String
+    shipinstruct: String
+    shipmode: String
+    suppkey: Int
+    tax: Float
+}
+
+type tpch_sf1_nation {
+    comment: String
+    name: String
+    nationkey: Int
+    regionkey: Int
+}
+
+type tpch_sf1_orders {
+    clerk: String
+    comment: String
+    custkey: Int
+    orderdate: String
+    orderkey: Int
+    orderpriority: String
+    orderstatus: String
+    shippriority: Int
+    totalprice: Float
+}
+
+type tpch_sf1_part {
+    brand: String
+    comment: String
+    container: String
+    mfgr: String
+    name: String
+    partkey: Int
+    retailprice: Float
+    size: Int
+    type: String
+}
+
+type tpch_sf1_partsupp {
+    availqty: Int
+    comment: String
+    partkey: Int
+    suppkey: Int
+    supplycost: Float
+}
+
+type tpch_sf1_region {
+    comment: String
+    name: String
+    regionkey: Int
+}
+
+type tpch_sf1_supplier {
+    acctbal: Float
+    address: String
+    comment: String
+    name: String
+    nationkey: Int
+    phone: String
+    suppkey: Int
+}
+
+type tpch_sf30000_customer {
+    acctbal: Float
+    address: String
+    comment: String
+    custkey: Int
+    mktsegment: String
+    name: String
+    nationkey: Int
+    phone: String
+}
+
+type tpch_sf30000_lineitem {
+    comment: String
+    commitdate: String
+    discount: Float
+    extendedprice: Float
+    linenumber: Int
+    linestatus: String
+    orderkey: Int
+    partkey: Int
+    quantity: Float
+    receiptdate: String
+    returnflag: String
+    shipdate: String
+    shipinstruct: String
+    shipmode: String
+    suppkey: Int
+    tax: Float
+}
+
+type tpch_sf30000_nation {
+    comment: String
+    name: String
+    nationkey: Int
+    regionkey: Int
+}
+
+type tpch_sf30000_orders {
+    clerk: String
+    comment: String
+    custkey: Int
+    orderdate: String
+    orderkey: Int
+    orderpriority: String
+    orderstatus: String
+    shippriority: Int
+    totalprice: Float
+}
+
+type tpch_sf30000_part {
+    brand: String
+    comment: String
+    container: String
+    mfgr: String
+    name: String
+    partkey: Int
+    retailprice: Float
+    size: Int
+    type: String
+}
+
+type tpch_sf30000_partsupp {
+    availqty: Int
+    comment: String
+    partkey: Int
+    suppkey: Int
+    supplycost: Float
+}
+
+type tpch_sf30000_region {
+    comment: String
+    name: String
+    regionkey: Int
+}
+
+type tpch_sf30000_supplier {
+    acctbal: Float
+    address: String
+    comment: String
+    name: String
+    nationkey: Int
+    phone: String
+    suppkey: Int
+}
+
+type tpch_sf3000_customer {
+    acctbal: Float
+    address: String
+    comment: String
+    custkey: Int
+    mktsegment: String
+    name: String
+    nationkey: Int
+    phone: String
+}
+
+type tpch_sf3000_lineitem {
+    comment: String
+    commitdate: String
+    discount: Float
+    extendedprice: Float
+    linenumber: Int
+    linestatus: String
+    orderkey: Int
+    partkey: Int
+    quantity: Float
+    receiptdate: String
+    returnflag: String
+    shipdate: String
+    shipinstruct: String
+    shipmode: String
+    suppkey: Int
+    tax: Float
+}
+
+type tpch_sf3000_nation {
+    comment: String
+    name: String
+    nationkey: Int
+    regionkey: Int
+}
+
+type tpch_sf3000_orders {
+    clerk: String
+    comment: String
+    custkey: Int
+    orderdate: String
+    orderkey: Int
+    orderpriority: String
+    orderstatus: String
+    shippriority: Int
+    totalprice: Float
+}
+
+type tpch_sf3000_part {
+    brand: String
+    comment: String
+    container: String
+    mfgr: String
+    name: String
+    partkey: Int
+    retailprice: Float
+    size: Int
+    type: String
+}
+
+type tpch_sf3000_partsupp {
+    availqty: Int
+    comment: String
+    partkey: Int
+    suppkey: Int
+    supplycost: Float
+}
+
+type tpch_sf3000_region {
+    comment: String
+    name: String
+    regionkey: Int
+}
+
+type tpch_sf3000_supplier {
+    acctbal: Float
+    address: String
+    comment: String
+    name: String
+    nationkey: Int
+    phone: String
+    suppkey: Int
+}
+
+type tpch_sf300_customer {
+    acctbal: Float
+    address: String
+    comment: String
+    custkey: Int
+    mktsegment: String
+    name: String
+    nationkey: Int
+    phone: String
+}
+
+type tpch_sf300_lineitem {
+    comment: String
+    commitdate: String
+    discount: Float
+    extendedprice: Float
+    linenumber: Int
+    linestatus: String
+    orderkey: Int
+    partkey: Int
+    quantity: Float
+    receiptdate: String
+    returnflag: String
+    shipdate: String
+    shipinstruct: String
+    shipmode: String
+    suppkey: Int
+    tax: Float
+}
+
+type tpch_sf300_nation {
+    comment: String
+    name: String
+    nationkey: Int
+    regionkey: Int
+}
+
+type tpch_sf300_orders {
+    clerk: String
+    comment: String
+    custkey: Int
+    orderdate: String
+    orderkey: Int
+    orderpriority: String
+    orderstatus: String
+    shippriority: Int
+    totalprice: Float
+}
+
+type tpch_sf300_part {
+    brand: String
+    comment: String
+    container: String
+    mfgr: String
+    name: String
+    partkey: Int
+    retailprice: Float
+    size: Int
+    type: String
+}
+
+type tpch_sf300_partsupp {
+    availqty: Int
+    comment: String
+    partkey: Int
+    suppkey: Int
+    supplycost: Float
+}
+
+type tpch_sf300_region {
+    comment: String
+    name: String
+    regionkey: Int
+}
+
+type tpch_sf300_supplier {
+    acctbal: Float
+    address: String
+    comment: String
+    name: String
+    nationkey: Int
+    phone: String
+    suppkey: Int
+}
+
+type tpch_tiny_customer {
+    acctbal: Float
+    address: String
+    comment: String
+    custkey: Int
+    mktsegment: String
+    name: String
+    nationkey: Int
+    phone: String
+}
+
+type tpch_tiny_lineitem {
+    comment: String
+    commitdate: String
+    discount: Float
+    extendedprice: Float
+    linenumber: Int
+    linestatus: String
+    orderkey: Int
+    partkey: Int
+    quantity: Float
+    receiptdate: String
+    returnflag: String
+    shipdate: String
+    shipinstruct: String
+    shipmode: String
+    suppkey: Int
+    tax: Float
+}
+
+type tpch_tiny_nation {
+    comment: String
+    name: String
+    nationkey: Int
+    regionkey: Int
+}
+
+type tpch_tiny_orders {
+    clerk: String
+    comment: String
+    custkey: Int
+    orderdate: String
+    orderkey: Int
+    orderpriority: String
+    orderstatus: String
+    shippriority: Int
+    totalprice: Float
+}
+
+type tpch_tiny_part {
+    brand: String
+    comment: String
+    container: String
+    mfgr: String
+    name: String
+    partkey: Int
+    retailprice: Float
+    size: Int
+    type: String
+}
+
+type tpch_tiny_partsupp {
+    availqty: Int
+    comment: String
+    partkey: Int
+    suppkey: Int
+    supplycost: Float
+}
+
+type tpch_tiny_region {
+    comment: String
+    name: String
+    regionkey: Int
+}
+
+type tpch_tiny_supplier {
+    acctbal: Float
+    address: String
+    comment: String
+    name: String
+    nationkey: Int
+    phone: String
+    suppkey: Int
+}
+
+input FilterInput {
+    field: String
+    operator: String
+    value: String
+}
