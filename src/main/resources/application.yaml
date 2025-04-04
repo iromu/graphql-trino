@@ -1,0 +1,64 @@
+server.port: 8885
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,info
+
+logging:
+  level:
+    org:
+      springframework:
+        data: debug
+        graphql: debug
+
+
+spring:
+  application:
+    name: graphql-trino
+  graphql:
+    graphiql:
+      enabled: true
+    websocket:
+      path: /api
+    rsocket:
+      mapping: api
+    path: /api
+  cloud:
+    consul:
+      discovery:
+        instance-group: data
+
+#graphiql.enabled: true
+#graphiql.endpoint: /graphql
+#graphiql.mapping: /graphiql
+#graphiql.page-title: GraphiQL
+
+graphql:
+  spqr:
+    gui:
+      enabled: true
+
+# NO TLS support
+spring.datasource.driver-class-name: io.trino.jdbc.TrinoDriver
+spring.datasource.url: jdbc:trino://localhost:8084
+spring.datasource.username: trino
+# Enable JDBC TLS support
+# comment/change the line spring.datasource.url with:
+# spring.datasource.url=jdbc:trino://<TRINO_IP>:8080?SSL=true
+# spring.datasource.password=<PASSWORD>
+
+
+spring.rsocket.server.mapping-path: /api
+spring.rsocket.server.port: 7003
+spring.rsocket.server.transport: tcp
+
+spring.profiles.active: base,local
+spring.profiles.group.base: common,trino,redis-cache
+
+springdoc.api-docs.enabled: false
+
+---
+spring.config.activate.on-profile: cloud-config
+spring.config.import: ${SPRING_CONFIG_IMPORT:configserver:http://spring-cloud-config:8080/config}

@@ -1,0 +1,5 @@
+type Query {
+    catalogs: [String]
+    schemas(catalog: String!): [String]
+    tables(catalog: String!, schema: String!): [String]
+}

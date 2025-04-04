@@ -1,0 +1,11 @@
+services:
+
+  trino:
+    container_name: trino
+    image: trinodb/trino:latest
+    restart: always
+    ports:
+      - "8084:8080"
+    volumes:
+      - ./docker/trino/etc:/etc/trino
+
