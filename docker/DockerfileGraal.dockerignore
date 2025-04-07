@@ -1,0 +1,15 @@
+data
+.git
+.gitmodules
+.idea
+idea
+target
+**/target
+docker
+tmp
+*.jar
+*.class
+*.log
+.flattened-pom.xml
+**/.flattened-pom.xml
+*.md

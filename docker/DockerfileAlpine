@@ -1,0 +1,49 @@
+FROM eclipse-temurin:23-jre-alpine AS builder
+ARG TARGETARCH
+ARG TARGETPLATFORM
+
+LABEL architecture=$TARGETARCH
+WORKDIR /app
+
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} application.jar
+
+RUN java -Djarmode=layertools -jar application.jar list
+RUN java -Djarmode=layertools -jar application.jar extract
+RUN rm -fr application.jar
+
+RUN ls -lah application || true
+RUN ls -lah application/BOOT-INF/classes || true
+RUN ls -lah application/BOOT-INF/lib || true
+RUN ls -lah dependencies/BOOT-INF/lib || true
+RUN ls -lah snapshot-dependencies/BOOT-INF/lib || true
+
+FROM --platform=linux/amd64 builder AS platform-amd64
+RUN rm -fr dependencies/BOOT-INF/lib/*aarch64.jar
+RUN rm -fr dependencies/BOOT-INF/lib/*win-x86_64.jar
+
+
+FROM --platform=linux/arm64 builder AS platform-arm64
+RUN rm -fr dependencies/BOOT-INF/lib/*x86_64.jar
+
+
+FROM platform-${TARGETARCH} AS final
+
+RUN apk add --no-cache bash
+RUN apk add --no-cache libgcc
+
+VOLUME /tmp
+WORKDIR /app
+
+COPY docker/run.sh /app/
+RUN chmod +x run.sh
+
+ENV SPRING_PROFILES_ACTIVE=base,docker
+
+ADD https://gist.githubusercontent.com/iromu/2bca8255f4954a93d92055d557a740fa/raw/b61f4e48e42a1558b643c1095e3ac5a0ff24e37f/health-check.sh /health-check.sh
+RUN chmod +x /health-check.sh
+
+ENV JAVA_OPTS="-XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Xss512k -Xms64M -Xmx150M "
+
+CMD ["/app/run.sh"]
+

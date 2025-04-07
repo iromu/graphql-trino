@@ -13,7 +13,6 @@ logging:
         data: debug
         graphql: debug
 
-
 spring:
   application:
     name: graphql-trino
@@ -29,11 +28,6 @@ spring:
     consul:
       discovery:
         instance-group: data
-
-#graphiql.enabled: true
-#graphiql.endpoint: /graphql
-#graphiql.mapping: /graphiql
-#graphiql.page-title: GraphiQL
 
 graphql:
   spqr:
@@ -60,5 +54,6 @@ spring.profiles.group.base: common,trino,redis-cache
 springdoc.api-docs.enabled: false
 
 ---
-spring.config.activate.on-profile: cloud-config
-spring.config.import: ${SPRING_CONFIG_IMPORT:configserver:http://spring-cloud-config:8080/config}
+spring.config.activate.on-profile: docker
+spring.config.import: ${SPRING_CONFIG_IMPORT:optional:configserver:http://spring-cloud-config:8080/config}
+spring.datasource.url: jdbc:trino://trino:8080

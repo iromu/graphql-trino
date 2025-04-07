@@ -35,11 +35,13 @@ public class GraphQLDynamicSchemaService {
         Set<GraphQLType> additionalTypes = new HashSet<>();
 
         for (String catalog : trinoSchemaService.getCatalogs()) {
-            if ("system".equals(catalog))
+            if ("system".equals(catalog)) {
                 continue;
+            }
             for (String schema : trinoSchemaService.getSchemas(catalog)) {
-                if ("information_schema".equals(schema))
+                if ("information_schema".equals(schema)) {
                     continue;
+                }
                 for (String table : trinoSchemaService.getTables(catalog, schema)) {
                     // Create a unique name for each table type (avoid collisions)
                     String typeName = catalog + "_" + schema + "_" + table;
