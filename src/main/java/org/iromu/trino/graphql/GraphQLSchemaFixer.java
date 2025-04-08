@@ -26,7 +26,7 @@ public class GraphQLSchemaFixer {
 
 	private static final Pattern ENCODED_CHAR_PATTERN = Pattern.compile("_U([0-9A-Fa-f]{4,6})_");
 
-	private static final Pattern VALID_CHAR_PATTERN = Pattern.compile("^[_A-Za-z][_0-9A-Za-z]*$");
+	public static final Pattern VALID_CHAR_PATTERN = Pattern.compile("^[_A-Za-z][_0-9A-Za-z]*$");
 
 	public String sanitizeSchema(String input) {
 		if (VALID_CHAR_PATTERN.matcher(input).matches())
