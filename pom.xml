@@ -12,7 +12,7 @@
   <groupId>org.iromu.trino</groupId>
   <artifactId>graphql-trino</artifactId>
 
-  <version>${revision}${sha1}${changelist}</version>
+  <version>${revision}</version>
 
   <properties>
     <revision>0.0.1-SNAPSHOT</revision>
