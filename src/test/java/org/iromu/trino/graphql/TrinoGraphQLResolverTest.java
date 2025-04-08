@@ -44,10 +44,10 @@ class TrinoGraphQLResolverTest {
 				""";
 
 		graphQlTester.document(query)
-				.execute()
-				.path("data.catalogs")
-				.entityList(String.class)
-				.contains("hive", "mysql"); // Verify expected catalogs
+			.execute()
+			.path("data.catalogs")
+			.entityList(String.class)
+			.contains("hive", "mysql"); // Verify expected catalogs
 	}
 
 	@Test
@@ -59,10 +59,10 @@ class TrinoGraphQLResolverTest {
 				""";
 
 		graphQlTester.document(query)
-				.execute()
-				.path("data.schemas")
-				.entityList(String.class)
-				.contains("default", "sales"); // Verify expected catalogs
+			.execute()
+			.path("data.schemas")
+			.entityList(String.class)
+			.contains("default", "sales"); // Verify expected catalogs
 	}
 
 	@Test

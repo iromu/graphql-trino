@@ -29,7 +29,8 @@ public class GraphQLSchemaFixer {
 	public static final Pattern VALID_CHAR_PATTERN = Pattern.compile("^[_A-Za-z][_0-9A-Za-z]*$");
 
 	public String sanitizeSchema(String input) {
-		if (input == null || input.isEmpty()) return input;
+		if (input == null || input.isEmpty())
+			return input;
 
 		StringBuilder sanitized = new StringBuilder();
 
@@ -37,13 +38,10 @@ public class GraphQLSchemaFixer {
 		for (int i = 0; i < codePoints.length; i++) {
 			int cp = codePoints[i];
 
-			// Special handling for the first character: must not start with digit
-			if (i == 0 && Character.isDigit(cp)) {
+			// Special handling for the first character
+			if (i == 0 && !((cp >= 'A' && cp <= 'Z') || (cp >= 'a' && cp <= 'z') || cp == '_')) {
 				sanitized.append("_U").append(String.format("%04X", cp)).append("_");
-			} else if ((cp >= 'A' && cp <= 'Z') ||
-					(cp >= 'a' && cp <= 'z') ||
-					(cp >= '0' && cp <= '9') ||
-					cp == '_') {
+			} else if ((cp >= 'A' && cp <= 'Z') || (cp >= 'a' && cp <= 'z') || (cp >= '0' && cp <= '9') || cp == '_') {
 				sanitized.appendCodePoint(cp);
 			} else {
 				sanitized.append("_U").append(String.format("%04X", cp)).append("_");
@@ -52,7 +50,6 @@ public class GraphQLSchemaFixer {
 
 		return sanitized.toString();
 	}
-
 
 	public String restoreSanitizedSchema(String input) {
 		Matcher matcher = ENCODED_CHAR_PATTERN.matcher(input);

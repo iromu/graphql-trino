@@ -112,10 +112,10 @@ public class TrinoQueryService {
 	public Stream<Map<String, Object>> queryTableWithFiltersStream(String catalog, String schema, String table,
 																   int limit, List<Map<String, Object>> filters) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM ").append(catalog)
-				.append(".")
-				.append(schema)
-				.append(".")
-				.append(table);
+			.append(".")
+			.append(schema)
+			.append(".")
+			.append(table);
 
 		List<Object> params = new ArrayList<>();
 

@@ -33,9 +33,9 @@ public class GraphQLSchemaEndpoint {
 	public GraphQLSchemaEndpoint(GraphQLSchema graphQLSchema) {
 		this.graphQLSchema = graphQLSchema;
 		this.schemaPrinter = new SchemaPrinter(SchemaPrinter.Options.defaultOptions()
-				.includeScalarTypes(true)
-				.includeSchemaDefinition(true)
-				.includeDirectives(true));
+			.includeScalarTypes(true)
+			.includeSchemaDefinition(true)
+			.includeDirectives(true));
 	}
 
 	@GetMapping(value = "/schema.graphqls", produces = "text/plain")
