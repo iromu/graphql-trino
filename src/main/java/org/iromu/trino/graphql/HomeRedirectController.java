@@ -13,10 +13,10 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 @Configuration
 public class HomeRedirectController {
 
-    @Bean
-    public RouterFunction<ServerResponse> redirectToGraphiql() {
-        return route(GET("/"),
-                req -> ServerResponse.temporaryRedirect(URI.create(req.uri().getPath() + "graphiql")).build());
-    }
+	@Bean
+	public RouterFunction<ServerResponse> redirectToGraphiql() {
+		return route(GET("/"),
+				req -> ServerResponse.temporaryRedirect(URI.create(req.uri().getPath() + "graphiql")).build());
+	}
 
 }

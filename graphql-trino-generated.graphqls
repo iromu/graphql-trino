@@ -31,6 +31,7 @@ directive @specifiedBy(
 ) on SCALAR
 
 type Query {
+    catalogs: [String]
     tpcds_sf100000_call_center(filters: [FilterInput], limit: Int): [tpcds_sf100000_call_center]
     tpcds_sf100000_catalog_page(filters: [FilterInput], limit: Int): [tpcds_sf100000_catalog_page]
     tpcds_sf100000_catalog_returns(filters: [FilterInput], limit: Int): [tpcds_sf100000_catalog_returns]
@@ -6486,7 +6487,13 @@ type tpch_tiny_supplier {
 }
 
 input FilterInput {
-    field: String
-    operator: String
-    value: String
+    booleanValue: Boolean
+    dateValue: String
+    "Column name"
+    field: String!
+    floatValue: Float
+    intValue: Int
+    "Filter operation (e.g.: eq, lt, gt, like)"
+    operator: String!
+    stringValue: String
 }

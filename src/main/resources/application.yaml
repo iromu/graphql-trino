@@ -48,12 +48,12 @@ spring.rsocket.server.mapping-path: /api
 spring.rsocket.server.port: 7003
 spring.rsocket.server.transport: tcp
 
-spring.profiles.active: base,local
-spring.profiles.group.base: common,trino,redis-cache
-
-springdoc.api-docs.enabled: false
+spring.profiles.active: local
 
 ---
 spring.config.activate.on-profile: docker
 spring.config.import: ${SPRING_CONFIG_IMPORT:optional:configserver:http://spring-cloud-config:8080/config}
 spring.datasource.url: jdbc:trino://trino:8080
+server.port: 8080
+spring.rsocket.server.port: 7000
+app.schemaFolder: /etc/schema

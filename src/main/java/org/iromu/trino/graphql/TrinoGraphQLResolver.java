@@ -12,28 +12,28 @@ import java.util.List;
 @Controller
 public class TrinoGraphQLResolver {
 
-    private final TrinoSchemaService trinoSchemaService;
+	private final TrinoSchemaService trinoSchemaService;
 
-    public TrinoGraphQLResolver(TrinoSchemaService trinoSchemaService) {
-        this.trinoSchemaService = trinoSchemaService;
-    }
+	public TrinoGraphQLResolver(TrinoSchemaService trinoSchemaService) {
+		this.trinoSchemaService = trinoSchemaService;
+	}
 
-    // List all catalogs in Trino
-    @QueryMapping
-    public List<String> catalogs() {
-        return trinoSchemaService.getCatalogs();
-    }
+	// List all catalogs in Trino
+	@QueryMapping
+	public List<String> catalogs() {
+		return trinoSchemaService.getCatalogs();
+	}
 
-    // List schemas in a specific catalog
-    @QueryMapping
-    public List<String> schemas(@Argument String catalog) {
-        return trinoSchemaService.getSchemas(catalog);
-    }
+	// List schemas in a specific catalog
+	@QueryMapping
+	public List<String> schemas(@Argument String catalog) {
+		return trinoSchemaService.getSchemas(catalog);
+	}
 
-    // List tables in a specific catalog and schema
-    @QueryMapping
-    public List<String> tables(@Argument String catalog, @Argument String schema) {
-        return trinoSchemaService.getTables(catalog, schema);
-    }
+	// List tables in a specific catalog and schema
+	@QueryMapping
+	public List<String> tables(@Argument String catalog, @Argument String schema) {
+		return trinoSchemaService.getTables(catalog, schema);
+	}
 
 }

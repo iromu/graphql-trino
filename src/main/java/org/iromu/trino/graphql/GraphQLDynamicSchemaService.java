@@ -20,10 +20,12 @@ public class GraphQLDynamicSchemaService {
     private final TrinoSchemaService trinoSchemaService;
 
     private final TrinoQueryService trinoQueryService;
+    private final GraphQLSchemaFixer fixer;
 
-    public GraphQLDynamicSchemaService(TrinoSchemaService trinoSchemaService, TrinoQueryService trinoQueryService) {
+    public GraphQLDynamicSchemaService(TrinoSchemaService trinoSchemaService, TrinoQueryService trinoQueryService, GraphQLSchemaFixer fixer) {
         this.trinoSchemaService = trinoSchemaService;
         this.trinoQueryService = trinoQueryService;
+        this.fixer = fixer;
     }
 
     public GraphQLSchema generateSchema() {
@@ -34,26 +36,33 @@ public class GraphQLDynamicSchemaService {
         // Store created types to register later
         Set<GraphQLType> additionalTypes = new HashSet<>();
 
+        queryBuilder.field(GraphQLFieldDefinition.newFieldDefinition()
+                .name("catalogs")
+                .type(GraphQLList.list(GraphQLString))
+                .dataFetcher(env -> trinoSchemaService.getCatalogs())
+                .build());
+
         for (String catalog : trinoSchemaService.getCatalogs()) {
-            if ("system".equals(catalog)) {
-                continue;
-            }
+//            if ("system".equals(catalog)) {
+//                continue;
+//            }
             for (String schema : trinoSchemaService.getSchemas(catalog)) {
-                if ("information_schema".equals(schema)) {
-                    continue;
-                }
+//                if ("information_schema".equals(schema)) {
+//                    continue;
+//                }
                 for (String table : trinoSchemaService.getTables(catalog, schema)) {
                     // Create a unique name for each table type (avoid collisions)
                     String typeName = catalog + "_" + schema + "_" + table;
                     String queryFieldName = catalog + "_" + schema + "_" + table;
-                    log.info("Query {}", typeName);
 
                     // Define GraphQLObjectType for the table
                     GraphQLObjectType tableType = createTableType(catalog, schema, table, typeName);
+                    if (tableType.getFieldDefinitions().isEmpty()) continue;
                     additionalTypes.add(tableType);
 
                     // Add a field for each table with filter arguments
                     for (GraphQLObjectType.Builder builder : List.of(queryBuilder, subscriptionBuilder)) {
+
                         builder.field(GraphQLFieldDefinition.newFieldDefinition()
                                 .name(queryFieldName)
                                 .type(GraphQLList.list(GraphQLTypeReference.typeRef(typeName)))
@@ -121,33 +130,6 @@ public class GraphQLDynamicSchemaService {
         }
 
         return typeBuilder.build();
-    }
-
-    // Map Trino types to GraphQL types
-    private GraphQLOutputType mapColumnType2(String trinoType) {
-        if (trinoType.startsWith("varchar") || trinoType.startsWith("char")) {
-            return GraphQLScalarType.newScalar().name("String").coercing(new graphql.schema.Coercing<>() {
-                public String serialize(Object dataFetcherResult) {
-                    return dataFetcherResult.toString();
-                }
-
-                public String parseValue(Object input) {
-                    return input.toString();
-                }
-
-                public String parseLiteral(Object input) {
-                    return input.toString();
-                }
-            }).build();
-        } else if (trinoType.equals("integer") || trinoType.equals("bigint")) {
-            return Scalars.GraphQLInt;
-        } else if (trinoType.equals("double") || trinoType.equals("real")) {
-            return Scalars.GraphQLFloat;
-        } else if (trinoType.equals("boolean")) {
-            return Scalars.GraphQLBoolean;
-        } else {
-            return GraphQLString; // Default fallback
-        }
     }
 
     private GraphQLOutputType mapColumnType(String trinoType) {

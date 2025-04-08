@@ -9,3 +9,10 @@ services:
     volumes:
       - ./docker/trino/etc:/etc/trino
 
+  graphql-trino:
+    container_name: graphql-trino
+    image: iromu/graphql-trino:latest
+    ports:
+      - "8886:8080"
+    volumes:
+      - ./docker/graphql-trino/etc:/etc/graphql-trino

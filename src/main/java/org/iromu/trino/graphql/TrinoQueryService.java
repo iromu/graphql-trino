@@ -15,8 +15,11 @@ public class TrinoQueryService {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public TrinoQueryService(JdbcTemplate jdbcTemplate) {
+    private final GraphQLSchemaFixer fixer;
+
+    public TrinoQueryService(JdbcTemplate jdbcTemplate, GraphQLSchemaFixer fixer) {
         this.jdbcTemplate = jdbcTemplate;
+        this.fixer = fixer;
     }
 
     private Object extractFilterValue(Map<String, Object> filter) {
@@ -28,8 +31,13 @@ public class TrinoQueryService {
         throw new IllegalArgumentException("No valid value in filter: " + filter);
     }
 
-    public List<Map<String, Object>> queryTableWithFilters(String catalog, String schema, String table, int limit,
+    public List<Map<String, Object>> queryTableWithFilters(String _catalog, String _schema, String _table, int limit,
                                                            List<Map<String, Object>> filters) {
+
+        String catalog = fixer.restoreSanitizedSchema(_catalog);
+        String schema = fixer.restoreSanitizedSchema(_schema);
+        String table = fixer.restoreSanitizedSchema(_table);
+
         // Construct the base SQL query (can be more dynamic if needed)
         StringBuilder query = new StringBuilder("SELECT t1.* FROM " + catalog + "." + schema + "." + table + " t1");
 
@@ -39,7 +47,7 @@ public class TrinoQueryService {
             // Iterate through filters and add conditions to the WHERE clause
             for (int i = 0; i < filters.size(); i++) {
                 Map<String, Object> filter = filters.get(i);
-                String field = (String) filter.get("field");
+                String field = fixer.restoreSanitizedSchema((String) filter.get("field"));
                 String operator = (String) filter.get("operator");
                 Object value = extractFilterValue(filter);
 
@@ -71,7 +79,18 @@ public class TrinoQueryService {
         query.append(" LIMIT ").append(limit);
         log.info("{}", query); // Execute the query using the Trino service or another
         // database connector
-        return jdbcTemplate.queryForList(query.toString());
+        List<Map<String, Object>> maps = jdbcTemplate.queryForList(query.toString());
+        for (Map<String, Object> map : maps) {
+            for (String key : map.keySet()) {
+                String sanitized = fixer.sanitizeSchema(key);
+                if (!key.equals(sanitized)) {
+                    map.put(sanitized, map.get(key));
+                    map.remove(key);
+                }
+            }
+
+        }
+        return maps;
     }
 
     public Stream<Map<String, Object>> queryTableWithFiltersStream(String catalog, String schema, String table,
