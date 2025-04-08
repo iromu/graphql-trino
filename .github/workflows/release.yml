@@ -42,7 +42,7 @@ jobs:
       - name: Commit changed and create Git tag
         run: |
           VERSION=$(./mvnw -B --no-transfer-progress help:evaluate -Dexpression=revision -q -DforceStdout)
-          find . -name 'pom.xml' | xargs git add
+          git add pom.xml
           git commit -m "Tagged version v${VERSION} [skip-ci]"
           git push
 
@@ -64,7 +64,7 @@ jobs:
           ./mvnw -B --no-transfer-progress versions:set-property -Dproperty=revision -DnewVersion=$NEXT_SNAPSHOT
           ./mvnw -B --no-transfer-progress versions:commit
 
-          find . -name 'pom.xml' | xargs git add
+          git add pom.xml
           git commit -m "Increment version to ${NEXT_SNAPSHOT} [skip-ci]"
           git push origin
         env:
