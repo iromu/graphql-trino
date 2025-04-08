@@ -39,7 +39,7 @@ jobs:
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.projectKey=iromu_graphql-trino \
           clean verify \
-          org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -P sonar
+          org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
