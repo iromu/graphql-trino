@@ -40,11 +40,14 @@ public class GraphQLDynamicSchemaService {
 
 	private final GraphQLSchemaFixer fixer;
 
+	private final AppProperties app;
+
 	public GraphQLDynamicSchemaService(TrinoSchemaService trinoSchemaService, TrinoQueryService trinoQueryService,
-									   GraphQLSchemaFixer fixer) {
+									   GraphQLSchemaFixer fixer, AppProperties app) {
 		this.trinoSchemaService = trinoSchemaService;
 		this.trinoQueryService = trinoQueryService;
 		this.fixer = fixer;
+		this.app = app;
 	}
 
 	public GraphQLSchema generateSchema() {
@@ -66,16 +69,16 @@ public class GraphQLDynamicSchemaService {
 			// continue;
 			// }
 
-			if (!VALID_CHAR_PATTERN.matcher(catalog).matches())
+			if (app.isIgnoreObjectsWithWrongCharacters() && !VALID_CHAR_PATTERN.matcher(catalog).matches())
 				continue;
 			for (String schema : trinoSchemaService.getSchemas(catalog)) {
 				// if ("information_schema".equals(schema)) {
 				// continue;
 				// }
-				if (!VALID_CHAR_PATTERN.matcher(schema).matches())
+				if (app.isIgnoreObjectsWithWrongCharacters() && !VALID_CHAR_PATTERN.matcher(schema).matches())
 					continue;
 				for (String table : trinoSchemaService.getTables(catalog, schema)) {
-					if (!VALID_CHAR_PATTERN.matcher(table).matches())
+					if (app.isIgnoreObjectsWithWrongCharacters() && !VALID_CHAR_PATTERN.matcher(table).matches())
 						continue;
 					// Create a unique name for each table type (avoid collisions)
 					String typeName = catalog + "_" + schema + "_" + table;
@@ -150,7 +153,7 @@ public class GraphQLDynamicSchemaService {
 			String columnName = (String) column.get("Column");
 			String columnType = (String) column.get("Type");
 
-			if (!VALID_CHAR_PATTERN.matcher(columnName).matches())
+			if (app.isIgnoreObjectsWithWrongCharacters() && !VALID_CHAR_PATTERN.matcher(columnName).matches())
 				continue;
 			typeBuilder.field(GraphQLFieldDefinition.newFieldDefinition()
 				.name(columnName)
@@ -162,9 +165,9 @@ public class GraphQLDynamicSchemaService {
 	}
 
 	private GraphQLOutputType mapColumnType(String trinoType) {
-		return switch (trinoType.toLowerCase()) {
+		return switch (trinoType.toLowerCase().replaceFirst("\\(.+\\)", "")) {
 			case "integer", "bigint", "int" -> Scalars.GraphQLInt;
-			case "double", "float" -> Scalars.GraphQLFloat;
+			case "decimal", "double", "float" -> Scalars.GraphQLFloat;
 			case "boolean" -> Scalars.GraphQLBoolean;
 			default -> GraphQLString;
 		};

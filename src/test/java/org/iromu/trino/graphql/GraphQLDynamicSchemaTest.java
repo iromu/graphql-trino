@@ -31,7 +31,7 @@ import java.util.Map;
 
 @AutoConfigureGraphQlTester
 @GraphQlTest
-@Import({GraphQLConfig.class, GraphQLDynamicSchemaService.class, GraphQLSchemaFixer.class})
+@Import({GraphQLConfig.class, GraphQLDynamicSchemaService.class, GraphQLSchemaFixer.class, AppProperties.class})
 public class GraphQLDynamicSchemaTest {
 
 	@Autowired

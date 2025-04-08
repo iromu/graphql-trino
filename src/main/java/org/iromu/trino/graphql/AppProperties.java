@@ -50,4 +50,6 @@ public class AppProperties {
 	 */
 	private boolean ignoreObjectsWithWrongCharacters = true;
 
+	private boolean ignoreCache = false;
+
 }

@@ -37,30 +37,31 @@ public class TrinoSchemaService {
 
 	private final ObjectMapper objectMapper;
 
-	private final AppProperties appProperties;
+	private final AppProperties app;
 
 	private final GraphQLSchemaFixer fixer;
 
-	public TrinoSchemaService(JdbcTemplate jdbcTemplate, ObjectMapper objectMapper, AppProperties appProperties,
+	public TrinoSchemaService(JdbcTemplate jdbcTemplate, ObjectMapper objectMapper, AppProperties app,
 							  GraphQLSchemaFixer fixer) {
 		this.jdbcTemplate = jdbcTemplate;
 		this.objectMapper = objectMapper;
-		this.appProperties = appProperties;
+		this.app = app;
 		this.fixer = fixer;
 	}
 
 	// Get all catalogs
 	@SneakyThrows
 	public List<String> getCatalogs() {
-		Paths.get(appProperties.getSchemaFolder()).toFile().mkdirs();
-		File file = Paths.get(appProperties.getSchemaFolder(), "catalogs.json").toFile();
-		if (file.exists()) {
+		Paths.get(app.getSchemaFolder()).toFile().mkdirs();
+		File file = Paths.get(app.getSchemaFolder(), "catalogs.json").toFile();
+		if (app.isIgnoreCache() && file.exists()) {
 			return objectMapper.readValue(file, new TypeReference<>() {
 			});
 		}
 		log.info("SHOW CATALOGS");
 		List<String> catalogs = jdbcTemplate.queryForList("SHOW CATALOGS", String.class);
-		catalogs.replaceAll(s -> fixer.sanitizeSchema(s));
+		if (app.isReplaceObjectsNameCharacters())
+			catalogs.replaceAll(s -> fixer.sanitizeSchema(s));
 		objectMapper.writeValue(file, catalogs);
 		return catalogs;
 	}
@@ -70,9 +71,9 @@ public class TrinoSchemaService {
 	public List<String> getSchemas(String _catalog) {
 		String catalog = fixer.sanitizeSchema(_catalog);
 
-		Paths.get(appProperties.getSchemaFolder(), catalog).toFile().mkdirs();
-		File file = Paths.get(appProperties.getSchemaFolder(), catalog, "schemas.json").toFile();
-		if (file.exists()) {
+		Paths.get(app.getSchemaFolder(), catalog).toFile().mkdirs();
+		File file = Paths.get(app.getSchemaFolder(), catalog, "schemas.json").toFile();
+		if (app.isIgnoreCache() && file.exists()) {
 			return objectMapper.readValue(file, new TypeReference<>() {
 			});
 		}
@@ -80,7 +81,8 @@ public class TrinoSchemaService {
 		try {
 			List<String> schemas = jdbcTemplate
 				.queryForList("SHOW SCHEMAS FROM " + fixer.restoreSanitizedSchema(_catalog), String.class);
-			schemas.replaceAll(s -> fixer.sanitizeSchema(s));
+			if (app.isReplaceObjectsNameCharacters())
+				schemas.replaceAll(s -> fixer.sanitizeSchema(s));
 			objectMapper.writeValue(file, schemas);
 			return schemas;
 		} catch (Exception e) {
@@ -96,9 +98,9 @@ public class TrinoSchemaService {
 		String catalog = fixer.sanitizeSchema(_catalog);
 		String schema = fixer.sanitizeSchema(_schema);
 
-		Paths.get(appProperties.getSchemaFolder(), catalog, schema).toFile().mkdirs();
-		File file = Paths.get(appProperties.getSchemaFolder(), catalog, schema, "tables.json").toFile();
-		if (file.exists()) {
+		Paths.get(app.getSchemaFolder(), catalog, schema).toFile().mkdirs();
+		File file = Paths.get(app.getSchemaFolder(), catalog, schema, "tables.json").toFile();
+		if (app.isIgnoreCache() && file.exists()) {
 			return objectMapper.readValue(file, new TypeReference<>() {
 			});
 		}
@@ -106,7 +108,8 @@ public class TrinoSchemaService {
 		try {
 			List<String> tables = jdbcTemplate.queryForList("SHOW TABLES FROM " + fixer.restoreSanitizedSchema(_catalog)
 					+ "." + fixer.restoreSanitizedSchema(_schema), String.class);
-			tables.replaceAll(s -> fixer.sanitizeSchema(s));
+			if (app.isReplaceObjectsNameCharacters())
+				tables.replaceAll(s -> fixer.sanitizeSchema(s));
 			objectMapper.writeValue(file, tables);
 			return tables;
 		} catch (Exception e) {
@@ -123,9 +126,9 @@ public class TrinoSchemaService {
 		String schema = fixer.sanitizeSchema(_schema);
 		String table = fixer.sanitizeSchema(_table);
 
-		Paths.get(appProperties.getSchemaFolder(), catalog, schema, table).toFile().mkdirs();
-		File file = Paths.get(appProperties.getSchemaFolder(), catalog, schema, table, "columns.json").toFile();
-		if (file.exists()) {
+		Paths.get(app.getSchemaFolder(), catalog, schema, table).toFile().mkdirs();
+		File file = Paths.get(app.getSchemaFolder(), catalog, schema, table, "columns.json").toFile();
+		if (app.isIgnoreCache() && file.exists()) {
 			return objectMapper.readValue(file, new TypeReference<>() {
 			});
 		}
@@ -134,13 +137,14 @@ public class TrinoSchemaService {
 			List<Map<String, Object>> columns = jdbcTemplate
 				.queryForList("DESCRIBE " + fixer.restoreSanitizedSchema(_catalog) + "."
 					+ fixer.restoreSanitizedSchema(_schema) + "." + fixer.restoreSanitizedSchema(_table));
-			for (Map<String, Object> column : columns) {
-				// Check if the map contains the "Column" key
-				if (column.containsKey("Column")) {
-					// Replace the value of the "Column" key
-					column.put("Column", fixer.sanitizeSchema((String) column.get("Column")));
+			if (app.isReplaceObjectsNameCharacters())
+				for (Map<String, Object> column : columns) {
+					// Check if the map contains the "Column" key
+					if (column.containsKey("Column")) {
+						// Replace the value of the "Column" key
+						column.put("Column", fixer.sanitizeSchema((String) column.get("Column")));
+					}
 				}
-			}
 
 			objectMapper.writeValue(file, columns);
 			return columns;
