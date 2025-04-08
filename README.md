@@ -3,7 +3,6 @@
 [![Apache License 2](https://img.shields.io/badge/license-ASF2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 ![Build Status](https://github.com/iromu/graphql-trino/actions/workflows/snapshots.yml/badge.svg?branch=main)
 ![Sonar Coverage](https://img.shields.io/sonar/coverage/iromu_graphql-trino?server=https%3A%2F%2Fsonarcloud.io)
-[![Coveralls](https://img.shields.io/coverallsCoverage/github/iromu/graphql-trino)](https://coveralls.io/github/iromu/graphql-trino?branch=main)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=iromu_graphql-trino&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=iromu_graphql-trino)
 [![Maven Central](https://img.shields.io/maven-central/v/org.iromu.trino/graphql-trino?label=release)](https://repo1.maven.org/maven2/org/iromu/trino/)
 [![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fcentral.sonatype.com%2Frepository%2Fmaven-snapshots%2Forg%2Firomu%2Ftrino%2Fgraphql-trino%2Fmaven-metadata.xml&label=snapshot)](https://central.sonatype.com/service/rest/repository/browse/maven-snapshots/org/iromu/trino/)
