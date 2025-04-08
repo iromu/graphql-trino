@@ -32,7 +32,7 @@
     <dependency>
       <groupId>org.jetbrains</groupId>
       <artifactId>annotations</artifactId>
-      <version>24.0.1</version> <!-- Check for the latest version -->
+      <version>26.0.2</version> <!-- Check for the latest version -->
       <scope>compile</scope>
     </dependency>
 
