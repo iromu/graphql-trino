@@ -53,7 +53,7 @@ public class GraphQLSchemaFixer {
 
 	public String restoreSanitizedSchema(String input) {
 		Matcher matcher = ENCODED_CHAR_PATTERN.matcher(input);
-		StringBuffer result = new StringBuffer();
+		StringBuilder result = new StringBuilder();
 
 		while (matcher.find()) {
 			String hex = matcher.group(1);

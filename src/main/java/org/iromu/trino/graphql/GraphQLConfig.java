@@ -35,11 +35,6 @@ public class GraphQLConfig {
 		return schemaService.generateSchema();
 	}
 
-	// @Bean
-	// public GraphQL graphQL(GraphQLSchema schema) {
-	// return GraphQL.newGraphQL(schema).build();
-	// }
-
 	@Bean
 	public GraphQlSourceBuilderCustomizer federationTransform(GraphQLSchema schema) {
 		return builder -> builder.configureGraphQl(graphQLBuilder -> graphQLBuilder.schema(schema));

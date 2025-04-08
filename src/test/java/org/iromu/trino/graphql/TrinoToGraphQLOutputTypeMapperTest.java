@@ -10,26 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TrinoToGraphQLOutputTypeMapperTest {
 
 	@ParameterizedTest(name = "Trino type \"{0}\" should map to GraphQL type \"{1}\"")
-	@CsvSource({
-		"boolean, GraphQLBoolean",
-		"tinyint, GraphQLInt",
-		"smallint, GraphQLInt",
-		"integer, GraphQLInt",
-		"bigint, GraphQLString",
-		"real, GraphQLFloat",
-		"double, GraphQLFloat",
-		"varchar, GraphQLString",
-		"char, GraphQLString",
-		"varbinary, GraphQLString",
-		"json, GraphQLString",
-		"uuid, GraphQLString",
-		"ipaddress, GraphQLString",
-		"date, GraphQLString",
-		"time, GraphQLString",
-		"timestamp, GraphQLString",
-		"interval, GraphQLString",
-		"'decimal(10,2)', GraphQLString"
-	})
+	@CsvSource({"boolean, GraphQLBoolean", "tinyint, GraphQLInt", "smallint, GraphQLInt", "integer, GraphQLInt",
+		"bigint, GraphQLString", "real, GraphQLFloat", "double, GraphQLFloat", "varchar, GraphQLString",
+		"char, GraphQLString", "varbinary, GraphQLString", "json, GraphQLString", "uuid, GraphQLString",
+		"ipaddress, GraphQLString", "date, GraphQLString", "time, GraphQLString", "timestamp, GraphQLString",
+		"interval, GraphQLString", "'decimal(10,2)', GraphQLString"})
 	void testPrimitiveTypes(String trinoType, String expectedGraphQLType) {
 		GraphQLOutputType gqlType = TrinoToGraphQLOutputTypeMapper.mapType(trinoType);
 
@@ -50,4 +35,5 @@ public class TrinoToGraphQLOutputTypeMapperTest {
 				throw new IllegalArgumentException("Unexpected GraphQL type: " + expectedGraphQLType);
 		}
 	}
+
 }

@@ -37,15 +37,12 @@ public class GraphQLDynamicSchemaService {
 
 	private final TrinoQueryService trinoQueryService;
 
-	private final GraphQLSchemaFixer fixer;
-
 	private final AppProperties app;
 
 	public GraphQLDynamicSchemaService(TrinoSchemaService trinoSchemaService, TrinoQueryService trinoQueryService,
-									   GraphQLSchemaFixer fixer, AppProperties app) {
+									   AppProperties app) {
 		this.trinoSchemaService = trinoSchemaService;
 		this.trinoQueryService = trinoQueryService;
-		this.fixer = fixer;
 		this.app = app;
 	}
 
@@ -64,18 +61,14 @@ public class GraphQLDynamicSchemaService {
 			.build());
 
 		for (String catalog : trinoSchemaService.getCatalogs()) {
-			// if ("system".equals(catalog)) {
-			// continue;
-			// }
-
-			if (app.isIgnoreObjectsWithWrongCharacters() && !VALID_CHAR_PATTERN.matcher(catalog).matches())
+			if (app.isIgnoreObjectsWithWrongCharacters() && !VALID_CHAR_PATTERN.matcher(catalog).matches()) {
 				continue;
+			}
 			for (String schema : trinoSchemaService.getSchemas(catalog)) {
-				// if ("information_schema".equals(schema)) {
-				// continue;
-				// }
-				if (app.isIgnoreObjectsWithWrongCharacters() && !VALID_CHAR_PATTERN.matcher(schema).matches())
+
+				if (app.isIgnoreObjectsWithWrongCharacters() && !VALID_CHAR_PATTERN.matcher(schema).matches()) {
 					continue;
+				}
 				for (String table : trinoSchemaService.getTables(catalog, schema)) {
 					if (app.isIgnoreObjectsWithWrongCharacters() && !VALID_CHAR_PATTERN.matcher(table).matches())
 						continue;
@@ -107,6 +100,7 @@ public class GraphQLDynamicSchemaService {
 								List<Map<String, Object>> filters = env.getArgument("filters");
 
 								// Fetch and filter data based on filters
+								// noinspection DataFlowIssue
 								return trinoQueryService.queryTableWithFilters(catalog, schema, table, limit, filters);
 							})
 							.build());
@@ -162,6 +156,5 @@ public class GraphQLDynamicSchemaService {
 
 		return typeBuilder.build();
 	}
-
 
 }

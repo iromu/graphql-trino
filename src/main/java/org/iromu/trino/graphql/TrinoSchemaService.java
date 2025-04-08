@@ -52,6 +52,7 @@ public class TrinoSchemaService {
 	// Get all catalogs
 	@SneakyThrows
 	public List<String> getCatalogs() {
+		// noinspection ResultOfMethodCallIgnored
 		Paths.get(app.getSchemaFolder()).toFile().mkdirs();
 		File file = Paths.get(app.getSchemaFolder(), "catalogs.json").toFile();
 		if (!app.isIgnoreCache() && file.exists()) {
@@ -61,7 +62,7 @@ public class TrinoSchemaService {
 		log.info("SHOW CATALOGS");
 		List<String> catalogs = jdbcTemplate.queryForList("SHOW CATALOGS", String.class);
 		if (app.isReplaceObjectsNameCharacters())
-			catalogs.replaceAll(s -> fixer.sanitizeSchema(s));
+			catalogs.replaceAll(fixer::sanitizeSchema);
 		objectMapper.writeValue(file, catalogs);
 		return catalogs;
 	}
@@ -71,6 +72,7 @@ public class TrinoSchemaService {
 	public List<String> getSchemas(String _catalog) {
 		String catalog = fixer.sanitizeSchema(_catalog);
 
+		// noinspection ResultOfMethodCallIgnored
 		Paths.get(app.getSchemaFolder(), catalog).toFile().mkdirs();
 		File file = Paths.get(app.getSchemaFolder(), catalog, "schemas.json").toFile();
 		if (!app.isIgnoreCache() && file.exists()) {
@@ -82,7 +84,7 @@ public class TrinoSchemaService {
 			List<String> schemas = jdbcTemplate
 				.queryForList("SHOW SCHEMAS FROM " + fixer.restoreSanitizedSchema(_catalog), String.class);
 			if (app.isReplaceObjectsNameCharacters())
-				schemas.replaceAll(s -> fixer.sanitizeSchema(s));
+				schemas.replaceAll(fixer::sanitizeSchema);
 			objectMapper.writeValue(file, schemas);
 			return schemas;
 		} catch (Exception e) {
@@ -98,6 +100,7 @@ public class TrinoSchemaService {
 		String catalog = fixer.sanitizeSchema(_catalog);
 		String schema = fixer.sanitizeSchema(_schema);
 
+		// noinspection ResultOfMethodCallIgnored
 		Paths.get(app.getSchemaFolder(), catalog, schema).toFile().mkdirs();
 		File file = Paths.get(app.getSchemaFolder(), catalog, schema, "tables.json").toFile();
 		if (!app.isIgnoreCache() && file.exists()) {
@@ -109,7 +112,7 @@ public class TrinoSchemaService {
 			List<String> tables = jdbcTemplate.queryForList("SHOW TABLES FROM " + fixer.restoreSanitizedSchema(_catalog)
 					+ "." + fixer.restoreSanitizedSchema(_schema), String.class);
 			if (app.isReplaceObjectsNameCharacters())
-				tables.replaceAll(s -> fixer.sanitizeSchema(s));
+				tables.replaceAll(fixer::sanitizeSchema);
 			objectMapper.writeValue(file, tables);
 			return tables;
 		} catch (Exception e) {
@@ -126,6 +129,7 @@ public class TrinoSchemaService {
 		String schema = fixer.sanitizeSchema(_schema);
 		String table = fixer.sanitizeSchema(_table);
 
+		// noinspection ResultOfMethodCallIgnored
 		Paths.get(app.getSchemaFolder(), catalog, schema, table).toFile().mkdirs();
 		File file = Paths.get(app.getSchemaFolder(), catalog, schema, table, "columns.json").toFile();
 		if (!app.isIgnoreCache() && file.exists()) {

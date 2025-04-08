@@ -36,7 +36,7 @@ public class TrinoToGraphQLOutputTypeMapper {
 		}
 
 		if (trinoType.startsWith("decimal(")) {
-			return Scalars.GraphQLString;  // Mapping decimal to String for simplicity
+			return Scalars.GraphQLString; // Mapping decimal to String for simplicity
 		}
 
 		// Base types using switch
@@ -73,4 +73,5 @@ public class TrinoToGraphQLOutputTypeMapper {
 			.field(f -> f.name("value").type(Scalars.GraphQLString))
 			.build();
 	}
+
 }
