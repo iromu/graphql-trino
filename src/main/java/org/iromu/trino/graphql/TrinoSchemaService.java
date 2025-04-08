@@ -61,7 +61,7 @@ public class TrinoSchemaService {
         }
         log.info("SHOW SCHEMAS FROM {}", _catalog);
         try {
-            List<String> schemas = jdbcTemplate.queryForList("SHOW SCHEMAS FROM " + _catalog, String.class);
+            List<String> schemas = jdbcTemplate.queryForList("SHOW SCHEMAS FROM " + fixer.restoreSanitizedSchema(_catalog), String.class);
             schemas.replaceAll(s -> fixer.sanitizeSchema(s));
             objectMapper.writeValue(file, schemas);
             return schemas;
@@ -86,7 +86,7 @@ public class TrinoSchemaService {
         }
         log.info("SHOW TABLES FROM {}.{}", _catalog, _schema);
         try {
-            List<String> tables = jdbcTemplate.queryForList("SHOW TABLES FROM " + _catalog + "." + _schema, String.class);
+            List<String> tables = jdbcTemplate.queryForList("SHOW TABLES FROM " + fixer.restoreSanitizedSchema(_catalog) + "." + fixer.restoreSanitizedSchema(_schema), String.class);
             tables.replaceAll(s -> fixer.sanitizeSchema(s));
             objectMapper.writeValue(file, tables);
             return tables;
@@ -113,7 +113,7 @@ public class TrinoSchemaService {
         log.info("DESCRIBE {}.{}.{}", _catalog, _schema, _table);
         try {
             List<Map<String, Object>> columns = jdbcTemplate
-                    .queryForList("DESCRIBE " + _catalog + "." + _schema + "." + _table);
+                    .queryForList("DESCRIBE " + fixer.restoreSanitizedSchema(_catalog) + "." + fixer.restoreSanitizedSchema(_schema) + "." + fixer.restoreSanitizedSchema(_table));
             for (Map<String, Object> column : columns) {
                 // Check if the map contains the "Column" key
                 if (column.containsKey("Column")) {
