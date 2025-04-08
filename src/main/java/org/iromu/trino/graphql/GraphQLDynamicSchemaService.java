@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static graphql.Scalars.GraphQLString;
 import static org.iromu.trino.graphql.GraphQLSchemaFixer.VALID_CHAR_PATTERN;
 
 @Service
@@ -60,7 +59,7 @@ public class GraphQLDynamicSchemaService {
 
 		queryBuilder.field(GraphQLFieldDefinition.newFieldDefinition()
 			.name("catalogs")
-			.type(GraphQLList.list(GraphQLString))
+			.type(GraphQLList.list(Scalars.GraphQLString))
 			.dataFetcher(env -> trinoSchemaService.getCatalogs())
 			.build());
 
@@ -157,20 +156,12 @@ public class GraphQLDynamicSchemaService {
 				continue;
 			typeBuilder.field(GraphQLFieldDefinition.newFieldDefinition()
 				.name(columnName)
-				.type(mapColumnType(columnType))
+				.type(TrinoToGraphQLOutputTypeMapper.mapType(columnType))
 				.build());
 		}
 
 		return typeBuilder.build();
 	}
 
-	private GraphQLOutputType mapColumnType(String trinoType) {
-		return switch (trinoType.toLowerCase().replaceFirst("\\(.+\\)", "")) {
-			case "integer", "bigint", "int" -> Scalars.GraphQLInt;
-			case "decimal", "double", "float" -> Scalars.GraphQLFloat;
-			case "boolean" -> Scalars.GraphQLBoolean;
-			default -> GraphQLString;
-		};
-	}
 
 }
