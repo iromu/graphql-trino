@@ -67,6 +67,7 @@ public class TrinoSchemaService {
             return schemas;
         } catch (Exception e) {
             log.error("{} {}", _catalog, e.getMessage());
+            objectMapper.writeValue(file, new ArrayList<>());
             return new ArrayList<>();
         }
     }
@@ -91,6 +92,7 @@ public class TrinoSchemaService {
             return tables;
         } catch (Exception e) {
             log.error("{}.{} {}", _catalog, _schema, e.getMessage());
+            objectMapper.writeValue(file, new ArrayList<>());
             return new ArrayList<>();
         }
     }
@@ -124,6 +126,7 @@ public class TrinoSchemaService {
             return columns;
         } catch (Exception e) {
             log.error("{}.{}.{} {}", _catalog, _schema, _table, e.getMessage());
+            objectMapper.writeValue(file, new ArrayList<>());
             return new ArrayList<>();
         }
     }
