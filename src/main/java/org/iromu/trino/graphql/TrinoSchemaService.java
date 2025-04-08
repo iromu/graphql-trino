@@ -54,7 +54,7 @@ public class TrinoSchemaService {
 	public List<String> getCatalogs() {
 		Paths.get(app.getSchemaFolder()).toFile().mkdirs();
 		File file = Paths.get(app.getSchemaFolder(), "catalogs.json").toFile();
-		if (app.isIgnoreCache() && file.exists()) {
+		if (!app.isIgnoreCache() && file.exists()) {
 			return objectMapper.readValue(file, new TypeReference<>() {
 			});
 		}
@@ -73,7 +73,7 @@ public class TrinoSchemaService {
 
 		Paths.get(app.getSchemaFolder(), catalog).toFile().mkdirs();
 		File file = Paths.get(app.getSchemaFolder(), catalog, "schemas.json").toFile();
-		if (app.isIgnoreCache() && file.exists()) {
+		if (!app.isIgnoreCache() && file.exists()) {
 			return objectMapper.readValue(file, new TypeReference<>() {
 			});
 		}
@@ -100,7 +100,7 @@ public class TrinoSchemaService {
 
 		Paths.get(app.getSchemaFolder(), catalog, schema).toFile().mkdirs();
 		File file = Paths.get(app.getSchemaFolder(), catalog, schema, "tables.json").toFile();
-		if (app.isIgnoreCache() && file.exists()) {
+		if (!app.isIgnoreCache() && file.exists()) {
 			return objectMapper.readValue(file, new TypeReference<>() {
 			});
 		}
@@ -128,7 +128,7 @@ public class TrinoSchemaService {
 
 		Paths.get(app.getSchemaFolder(), catalog, schema, table).toFile().mkdirs();
 		File file = Paths.get(app.getSchemaFolder(), catalog, schema, table, "columns.json").toFile();
-		if (app.isIgnoreCache() && file.exists()) {
+		if (!app.isIgnoreCache() && file.exists()) {
 			return objectMapper.readValue(file, new TypeReference<>() {
 			});
 		}
