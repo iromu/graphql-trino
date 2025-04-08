@@ -30,11 +30,24 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = AppProperties.APP_PREFIX)
 public class AppProperties {
 
-    /**
-     * Prefix for Spring properties.
-     */
-    public static final String APP_PREFIX = "app";
+	/**
+	 * Prefix for Spring properties.
+	 */
+	public static final String APP_PREFIX = "app";
 
-    private String schemaFolder = "/etc/schema";
+	/**
+	 * Filesystem location to store the schema from Trino.
+	 */
+	private String schemaFolder = "/etc/schema";
+
+	/**
+	 * Replaces characters that are not allowed on GraphLQ Schema.
+	 */
+	private boolean replaceObjectsNameCharacters = false;
+
+	/**
+	 * Ignores object names with characters that are not allowed on GraphLQ Schema.
+	 */
+	private boolean ignoreObjectsWithWrongCharacters = true;
 
 }

@@ -1,3 +1,4 @@
+# Maven
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -34,3 +35,7 @@ build/
 ### Mac OS ###
 .DS_Store
 
+### APP ###
+application-local.yaml
+docker/graphql-trino/etc/schema
+!docker/graphql-trino/etc/schema/.gitkeep
