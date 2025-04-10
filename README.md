@@ -118,7 +118,7 @@ services:
       - APP_EXCLUDE_CATALOGS_0=system
       - APP_EXCLUDE_SCHEMAS_0=information_schema
       - APP_EXCLUDE_SCHEMAS_1=pg_catalog
-
+```
 
 ## 🧪 Example GraphQL Query
 
