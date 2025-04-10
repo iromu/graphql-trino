@@ -15,6 +15,7 @@ import static org.mockito.Mockito.*;
 class DefaultJoinDetectorTest {
 
 	private JdbcTemplate jdbcTemplate;
+
 	private DefaultJoinDetector joinDetector;
 
 	private ByteArrayOutputStream outContent;
@@ -87,4 +88,5 @@ class DefaultJoinDetectorTest {
 			throw new RuntimeException("Reflection failed", e);
 		}
 	}
+
 }

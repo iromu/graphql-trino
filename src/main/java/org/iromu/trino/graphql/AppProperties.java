@@ -34,16 +34,19 @@ import java.util.List;
  *
  * <p>
  * This configuration class supports customization of:
+ * </p>
  * <ul>
  * <li>Filesystem location for storing schemas fetched from Trino</li>
  * <li>Schema sanitization options for invalid GraphQL object names</li>
  * <li>Caching behavior</li>
  * <li>Catalog and schema inclusion/exclusion filtering</li>
  * </ul>
- * </p>
+ *
  *
  * <p>
- * Example configuration in {@code application.yml}: <pre>
+ * Example configuration in {@code application.yml}:
+ * </p>
+ * <pre>
  * app:
  *   schema-folder: /tmp/schema
  *   replace-objects-name-characters: true
@@ -56,7 +59,6 @@ import java.util.List;
  *   exclude-schemas:
  *     - information_schema
  * </pre>
- * </p>
  *
  * @author Ivan Rodriguez
  * @see org.springframework.boot.context.properties.ConfigurationProperties

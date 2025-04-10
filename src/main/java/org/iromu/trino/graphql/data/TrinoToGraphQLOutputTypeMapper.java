@@ -33,6 +33,13 @@ import graphql.schema.GraphQLOutputType;
  */
 public class TrinoToGraphQLOutputTypeMapper {
 
+	// Define the KeyValue type once as a static final field to avoid redefining it
+	private static final GraphQLOutputType KEY_VALUE_TYPE = GraphQLObjectType.newObject()
+		.name("KeyValue")
+		.field(f -> f.name("key").type(Scalars.GraphQLString))
+		.field(f -> f.name("value").type(Scalars.GraphQLString))
+		.build();
+
 	/**
 	 * Maps a Trino SQL type string to a corresponding GraphQL output type.
 	 * @param trinoType the SQL type from Trino (e.g., "varchar", "array(bigint)")
@@ -82,7 +89,7 @@ public class TrinoToGraphQLOutputTypeMapper {
 	 * @return a {@link GraphQLList} of {@link GraphQLObjectType} "KeyValue"
 	 */
 	private static GraphQLOutputType handleMap() {
-		return GraphQLList.list(getKeyValueObjectType());
+		return GraphQLList.list(KEY_VALUE_TYPE);
 	}
 
 	/**
@@ -95,18 +102,6 @@ public class TrinoToGraphQLOutputTypeMapper {
 		int start = type.indexOf('(') + 1;
 		int end = type.lastIndexOf(')');
 		return type.substring(start, end).trim();
-	}
-
-	/**
-	 * Defines a reusable GraphQL object type for representing key-value pairs.
-	 * @return a {@link GraphQLObjectType} with "key" and "value" string fields
-	 */
-	private static GraphQLOutputType getKeyValueObjectType() {
-		return GraphQLObjectType.newObject()
-			.name("KeyValue")
-			.field(f -> f.name("key").type(Scalars.GraphQLString))
-			.field(f -> f.name("value").type(Scalars.GraphQLString))
-			.build();
 	}
 
 }

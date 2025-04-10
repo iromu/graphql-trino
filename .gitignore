@@ -39,3 +39,7 @@ build/
 application-local.yaml
 docker/graphql-trino/etc/schema
 !docker/graphql-trino/etc/schema/.gitkeep
+
+docker/trino/etc/catalog
+!docker/trino/etc/catalog/tpcds.properties
+!docker/trino/etc/catalog/tpch.properties
