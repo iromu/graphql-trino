@@ -21,10 +21,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Main entry point for the GraphQL-Trino Spring Boot application.
+ *
+ * @author Ivan Rodriguez
+ */
 @SpringBootApplication
 @Slf4j
 public class GraphQLTrinoApplication {
 
+	/**
+	 * Main method to launch the Spring Boot application.
+	 * @param args command-line arguments passed to the application
+	 */
 	@Generated
 	public static void main(String[] args) {
 		SpringApplication.run(GraphQLTrinoApplication.class, args);

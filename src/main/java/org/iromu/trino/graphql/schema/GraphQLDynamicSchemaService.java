@@ -14,12 +14,16 @@
  * limitations under the License.
  */
 
-package org.iromu.trino.graphql;
+package org.iromu.trino.graphql.schema;
 
 import graphql.Scalars;
 import graphql.language.SchemaDefinition;
 import graphql.schema.*;
 import lombok.extern.slf4j.Slf4j;
+import org.iromu.trino.graphql.AppProperties;
+import org.iromu.trino.graphql.data.TrinoQueryService;
+import org.iromu.trino.graphql.data.TrinoSchemaService;
+import org.iromu.trino.graphql.data.TrinoToGraphQLOutputTypeMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -27,8 +31,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static org.iromu.trino.graphql.GraphQLSchemaFixer.VALID_CHAR_PATTERN;
+import static org.iromu.trino.graphql.schema.GraphQLSchemaFixer.VALID_CHAR_PATTERN;
 
+/**
+ * Service responsible for dynamically generating a {@link GraphQLSchema} from Trino
+ * metadata.
+ * <p>
+ * This service builds GraphQL query and subscription fields for each table in Trino,
+ * exposing them as strongly-typed GraphQL types. It supports filtering via a flexible
+ * input type and maps Trino data types to corresponding GraphQL types.
+ * </p>
+ *
+ * <p>
+ * It integrates with {@link TrinoSchemaService} to read catalog/schema/table/column
+ * structure and with {@link TrinoQueryService} to provide data fetching at query time.
+ * </p>
+ *
+ * <p>
+ * Filter operations are also supported using a custom enum and input type definition.
+ * </p>
+ *
+ * @author Ivan Rodriguez
+ */
 @Service
 @Slf4j
 public class GraphQLDynamicSchemaService {
@@ -39,13 +63,28 @@ public class GraphQLDynamicSchemaService {
 
 	private final AppProperties app;
 
+	/**
+	 * Constructs a dynamic schema service with injected dependencies.
+	 * @param trinoSchemaService service for accessing Trino catalog/schema/table metadata
+	 * @param trinoQueryService service responsible for executing queries with filtering
+	 * @param app application properties containing configuration flags
+	 */
 	public GraphQLDynamicSchemaService(TrinoSchemaService trinoSchemaService, TrinoQueryService trinoQueryService,
-									   AppProperties app) {
+			AppProperties app) {
 		this.trinoSchemaService = trinoSchemaService;
 		this.trinoQueryService = trinoQueryService;
 		this.app = app;
 	}
 
+	/**
+	 * Dynamically builds a {@link GraphQLSchema} from Trino metadata.
+	 * <p>
+	 * For every valid table in every valid schema and catalog, a corresponding
+	 * {@link graphql.schema.GraphQLObjectType} is created and exposed via GraphQL.
+	 * Filtering is supported via a {@code filters} argument and optional {@code limit}.
+	 * </p>
+	 * @return the fully constructed {@link GraphQLSchema}
+	 */
 	public GraphQLSchema generateSchema() {
 		GraphQLSchema.Builder schemaBuilder = GraphQLSchema.newSchema();
 		GraphQLObjectType.Builder queryBuilder = GraphQLObjectType.newObject().name("Query");
@@ -63,6 +102,9 @@ public class GraphQLDynamicSchemaService {
 		for (String catalog : trinoSchemaService.getCatalogs()) {
 			if (app.isIgnoreObjectsWithWrongCharacters() && !VALID_CHAR_PATTERN.matcher(catalog).matches()) {
 				continue;
+			}
+			if (!"system".equalsIgnoreCase(catalog)) {
+				List<String> joins = trinoSchemaService.getJoins(catalog);
 			}
 			for (String schema : trinoSchemaService.getSchemas(catalog)) {
 
@@ -90,10 +132,10 @@ public class GraphQLDynamicSchemaService {
 							.type(GraphQLList.list(GraphQLTypeReference.typeRef(typeName)))
 							.argument(GraphQLArgument.newArgument().name("limit").type(Scalars.GraphQLInt))
 							.argument(GraphQLArgument.newArgument()
-									.name("filters") // Add filters argument
-									.type(GraphQLList.list(FILTER_INPUT_TYPE)) // Accept a
-								// list of
-								// filters
+								.name("filters") // Add filters argument
+								.type(GraphQLList.list(FILTER_INPUT_TYPE)) // Accept a
+							// list of
+							// filters
 							)
 							.dataFetcher(env -> {
 								Integer limit = env.getArgument("limit") != null ? env.getArgument("limit") : 1000;
@@ -117,6 +159,40 @@ public class GraphQLDynamicSchemaService {
 		return schemaBuilder.build();
 	}
 
+	/**
+	 * Enum type defining supported filtering operations.
+	 * <p>
+	 * Used by the {@link #FILTER_INPUT_TYPE} to represent SQL-like operators such as
+	 * {@code EQ}, {@code GT}, {@code LIKE}, etc.
+	 * </p>
+	 */
+	public static final GraphQLEnumType OPERATOR_ENUM = GraphQLEnumType.newEnum()
+		.name("FilterOperator")
+		.description("SQL-compatible filter operations")
+		.value("EQ", "eq", "Equal to (=)")
+		.value("NEQ", "neq", "Not equal to (!= or <>)")
+		.value("GT", "gt", "Greater than (>)")
+		.value("GTE", "gte", "Greater than or equal (>=)")
+		.value("LT", "lt", "Less than (<)")
+		.value("LTE", "lte", "Less than or equal (<=)")
+		.value("LIKE", "like", "String match (LIKE)")
+		.value("NOT_LIKE", "not_like", "Not string match (NOT LIKE)")
+		.value("IN", "in", "In list (IN)")
+		.value("NOT_IN", "not_in", "Not in list (NOT IN)")
+		.value("IS_NULL", "is_null", "Is NULL")
+		.value("IS_NOT_NULL", "is_not_null", "Is NOT NULL")
+		.value("BETWEEN", "between", "Between values")
+		.value("NOT_BETWEEN", "not_between", "Not between values")
+		.build();
+
+	/**
+	 * Defines an input type used to apply filters to table queries.
+	 *
+	 * <p>
+	 * Supports a variety of value types (string, int, float, etc.) as well as value lists
+	 * for operations like {@code IN} and {@code BETWEEN}.
+	 * </p>
+	 */
 	public static final GraphQLInputObjectType FILTER_INPUT_TYPE = GraphQLInputObjectType.newInputObject()
 		.name("FilterInput")
 		.field(GraphQLInputObjectField.newInputObjectField()
@@ -125,8 +201,8 @@ public class GraphQLDynamicSchemaService {
 			.type(GraphQLNonNull.nonNull(Scalars.GraphQLString)))
 		.field(GraphQLInputObjectField.newInputObjectField()
 			.name("operator")
-			.description("Filter operation (e.g.: eq, lt, gt, like)")
-			.type(GraphQLNonNull.nonNull(Scalars.GraphQLString)))
+			.description("Filter operation")
+			.type(GraphQLNonNull.nonNull(OPERATOR_ENUM)))
 
 		// Flexible value fields (only one should be used per input)
 		.field(GraphQLInputObjectField.newInputObjectField().name("stringValue").type(Scalars.GraphQLString))
@@ -137,8 +213,25 @@ public class GraphQLDynamicSchemaService {
 		// 8601
 		// date
 		// string
+		.field(GraphQLInputObjectField.newInputObjectField()
+			.name("values")
+			.description("List of values for IN, BETWEEN, etc.")
+			.type(GraphQLList.list(Scalars.GraphQLString)))
 		.build();
 
+	/**
+	 * Creates a {@link GraphQLObjectType} for a Trino table.
+	 *
+	 * <p>
+	 * Each column in the table is mapped to a GraphQL field with a matching type using
+	 * {@link TrinoToGraphQLOutputTypeMapper}.
+	 * </p>
+	 * @param catalog the catalog the table belongs to
+	 * @param schema the schema the table belongs to
+	 * @param table the table name
+	 * @param typeName the unique GraphQL type name for this table
+	 * @return the generated {@link GraphQLObjectType}
+	 */
 	private GraphQLObjectType createTableType(String catalog, String schema, String table, String typeName) {
 		GraphQLObjectType.Builder typeBuilder = GraphQLObjectType.newObject().name(typeName);
 
@@ -150,6 +243,7 @@ public class GraphQLDynamicSchemaService {
 				continue;
 			typeBuilder.field(GraphQLFieldDefinition.newFieldDefinition()
 				.name(columnName)
+				.description("Trino type: " + columnType)
 				.type(TrinoToGraphQLOutputTypeMapper.mapType(columnType))
 				.build());
 		}

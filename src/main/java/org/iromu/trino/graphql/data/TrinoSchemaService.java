@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package org.iromu.trino.graphql;
+package org.iromu.trino.graphql.data;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.iromu.trino.graphql.AppProperties;
+import org.iromu.trino.graphql.schema.GraphQLSchemaFixer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +30,16 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
+/**
+ * Service responsible for interacting with the Trino metadata system. It retrieves and
+ * caches catalogs, schemas, tables, columns, and join information. Uses
+ * {@link JdbcTemplate} for SQL execution, and caches results locally using
+ * {@link ObjectMapper}.
+ *
+ * @author Ivan Rodriguez
+ */
 @Service
 @Slf4j
 public class TrinoSchemaService {
@@ -41,15 +52,29 @@ public class TrinoSchemaService {
 
 	private final GraphQLSchemaFixer fixer;
 
+	private final JoinDetector joinDetector;
+
+	/**
+	 * Constructs a new {@code TrinoSchemaService} with all required dependencies.
+	 * @param jdbcTemplate the JDBC template for SQL queries
+	 * @param objectMapper the object mapper for caching metadata to JSON files
+	 * @param app application configuration properties
+	 * @param fixer helper for sanitizing/restoring schema and table names
+	 * @param joinDetector optional join detection component
+	 */
 	public TrinoSchemaService(JdbcTemplate jdbcTemplate, ObjectMapper objectMapper, AppProperties app,
-							  GraphQLSchemaFixer fixer) {
+			GraphQLSchemaFixer fixer, Optional<JoinDetector> joinDetector) {
 		this.jdbcTemplate = jdbcTemplate;
 		this.objectMapper = objectMapper;
 		this.app = app;
 		this.fixer = fixer;
+		this.joinDetector = joinDetector == null ? null : joinDetector.orElse(null);
 	}
 
-	// Get all catalogs
+	/**
+	 * Retrieves all available catalogs from Trino, optionally using a cached version.
+	 * @return a list of catalog names
+	 */
 	@SneakyThrows
 	public List<String> getCatalogs() {
 		// noinspection ResultOfMethodCallIgnored
@@ -67,7 +92,11 @@ public class TrinoSchemaService {
 		return catalogs;
 	}
 
-	// Get all schemas in a specific catalog
+	/**
+	 * Retrieves all schemas for a given catalog, optionally using a cached version.
+	 * @param _catalog the sanitized catalog name
+	 * @return a list of schema names
+	 */
 	@SneakyThrows
 	public List<String> getSchemas(String _catalog) {
 		String catalog = fixer.sanitizeSchema(_catalog);
@@ -87,14 +116,21 @@ public class TrinoSchemaService {
 				schemas.replaceAll(fixer::sanitizeSchema);
 			objectMapper.writeValue(file, schemas);
 			return schemas;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			log.error("{} {}", _catalog, e.getMessage());
 			objectMapper.writeValue(file, new ArrayList<>());
 			return new ArrayList<>();
 		}
 	}
 
-	// Get all tables in a specific catalog and schema
+	/**
+	 * Retrieves all tables for a given catalog and schema, optionally using a cached
+	 * version.
+	 * @param _catalog the sanitized catalog name
+	 * @param _schema the sanitized schema name
+	 * @return a list of table names
+	 */
 	@SneakyThrows
 	public List<String> getTables(String _catalog, String _schema) {
 		String catalog = fixer.sanitizeSchema(_catalog);
@@ -115,14 +151,55 @@ public class TrinoSchemaService {
 				tables.replaceAll(fixer::sanitizeSchema);
 			objectMapper.writeValue(file, tables);
 			return tables;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			log.error("{}.{} {}", _catalog, _schema, e.getMessage());
 			objectMapper.writeValue(file, new ArrayList<>());
 			return new ArrayList<>();
 		}
 	}
 
-	// Get columns for a table
+	/**
+	 * Attempts to retrieve detected joins for the given catalog.
+	 * @param _catalog the sanitized catalog name
+	 * @return a list of join relationships as strings, or an empty list if detection
+	 * fails or is unavailable
+	 */
+	@SneakyThrows
+	public List<String> getJoins(String _catalog) {
+		if (joinDetector == null)
+			return new ArrayList<>();
+		String catalog = fixer.sanitizeSchema(_catalog);
+
+		// noinspection ResultOfMethodCallIgnored
+		Paths.get(app.getSchemaFolder(), catalog).toFile().mkdirs();
+		File file = Paths.get(app.getSchemaFolder(), catalog, "joins.json").toFile();
+		// if (!app.isIgnoreCache() && file.exists()) {
+		// return objectMapper.readValue(file, new TypeReference<>() {
+		// });
+		// }
+		log.info("DETECT JOINS {}", _catalog);
+		try {
+			List<String> tables = joinDetector.detect(_catalog);
+			if (app.isReplaceObjectsNameCharacters())
+				tables.replaceAll(fixer::sanitizeSchema);
+			objectMapper.writeValue(file, tables);
+			return tables;
+		}
+		catch (Exception e) {
+			log.error("{} {}", _catalog, e.getMessage());
+			objectMapper.writeValue(file, new ArrayList<>());
+			return new ArrayList<>();
+		}
+	}
+
+	/**
+	 * Retrieves column metadata for a specific table, optionally using a cached version.
+	 * @param _catalog the sanitized catalog name
+	 * @param _schema the sanitized schema name
+	 * @param _table the sanitized table name
+	 * @return a list of maps, each representing a column's metadata
+	 */
 	@SneakyThrows
 	public List<Map<String, Object>> getColumns(String _catalog, String _schema, String _table) {
 		String catalog = fixer.sanitizeSchema(_catalog);
@@ -140,7 +217,7 @@ public class TrinoSchemaService {
 		try {
 			List<Map<String, Object>> columns = jdbcTemplate
 				.queryForList("DESCRIBE " + fixer.restoreSanitizedSchema(_catalog) + "."
-					+ fixer.restoreSanitizedSchema(_schema) + "." + fixer.restoreSanitizedSchema(_table));
+						+ fixer.restoreSanitizedSchema(_schema) + "." + fixer.restoreSanitizedSchema(_table));
 			if (app.isReplaceObjectsNameCharacters())
 				for (Map<String, Object> column : columns) {
 					// Check if the map contains the "Column" key
@@ -152,7 +229,8 @@ public class TrinoSchemaService {
 
 			objectMapper.writeValue(file, columns);
 			return columns;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			log.error("{}.{}.{} {}", _catalog, _schema, _table, e.getMessage());
 			objectMapper.writeValue(file, new ArrayList<>());
 			return new ArrayList<>();

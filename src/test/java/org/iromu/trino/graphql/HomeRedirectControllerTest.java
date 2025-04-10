@@ -21,6 +21,9 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+/**
+ * @author Ivan Rodriguez
+ */
 public class HomeRedirectControllerTest {
 
 	@Test

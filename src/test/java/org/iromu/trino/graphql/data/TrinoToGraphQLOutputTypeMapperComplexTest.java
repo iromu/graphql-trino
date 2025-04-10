@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.iromu.trino.graphql;
+package org.iromu.trino.graphql.data;
 
 import graphql.Scalars;
 import graphql.schema.GraphQLList;
@@ -26,6 +26,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
+/**
+ * @author Ivan Rodriguez
+ */
 public class TrinoToGraphQLOutputTypeMapperComplexTest {
 
 	@Test

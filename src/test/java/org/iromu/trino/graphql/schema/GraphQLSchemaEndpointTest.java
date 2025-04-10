@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-package org.iromu.trino.graphql;
+package org.iromu.trino.graphql.schema;
 
 import graphql.schema.GraphQLCodeRegistry;
 import graphql.schema.GraphQLSchema;
+import org.iromu.trino.graphql.security.WebFluxSecurityConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -30,7 +32,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * @author Ivan Rodriguez
+ */
 @WebFluxTest(GraphQLSchemaEndpoint.class)
+@Import(WebFluxSecurityConfig.class)
 class GraphQLSchemaEndpointTest {
 
 	@Autowired

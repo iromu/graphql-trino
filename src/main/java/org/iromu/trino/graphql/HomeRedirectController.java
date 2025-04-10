@@ -26,9 +26,34 @@ import java.net.URI;
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
+/**
+ * Configuration class responsible for setting up a redirection from the root URL ("/") to
+ * the GraphiQL interface.
+ *
+ * <p>
+ * This class defines a Spring WebFlux router function to handle HTTP GET requests to the
+ * root path ("/") and redirects the user to the GraphiQL interface. The redirection is
+ * temporary, ensuring that the user is redirected to the appropriate GraphiQL path
+ * ("/graphiql").
+ * </p>
+ *
+ * @author Ivan Rodriguez
+ */
 @Configuration
 public class HomeRedirectController {
 
+	/**
+	 * Bean definition for the router function that handles redirection to GraphiQL.
+	 *
+	 * <p>
+	 * This method defines the behavior of routing HTTP GET requests made to the root path
+	 * ("/") to a temporary redirect to the "/graphiql" path. The redirection is performed
+	 * using {@link ServerResponse#temporaryRedirect(URI)} and the URI is dynamically
+	 * constructed using the current request URI.
+	 * </p>
+	 * @return a {@link RouterFunction} that routes HTTP GET requests to the root path and
+	 * redirects them to "/graphiql"
+	 */
 	@Bean
 	public RouterFunction<ServerResponse> redirectToGraphiql() {
 		return route(GET("/"),

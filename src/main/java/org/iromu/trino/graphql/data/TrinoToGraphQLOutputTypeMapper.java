@@ -14,15 +14,30 @@
  * limitations under the License.
  */
 
-package org.iromu.trino.graphql;
+package org.iromu.trino.graphql.data;
 
 import graphql.Scalars;
 import graphql.schema.GraphQLList;
 import graphql.schema.GraphQLObjectType;
 import graphql.schema.GraphQLOutputType;
 
+/**
+ * Maps Trino SQL types to GraphQL output types. Handles primitive types as well as
+ * complex types like arrays and maps.
+ *
+ * <p>
+ * Note: Complex types like {@code map} are represented as GraphQL lists of objects with
+ * {@code key} and {@code value} fields.
+ *
+ * @author Ivan Rodriguez
+ */
 public class TrinoToGraphQLOutputTypeMapper {
 
+	/**
+	 * Maps a Trino SQL type string to a corresponding GraphQL output type.
+	 * @param trinoType the SQL type from Trino (e.g., "varchar", "array(bigint)")
+	 * @return the corresponding {@link GraphQLOutputType}
+	 */
 	public static GraphQLOutputType mapType(String trinoType) {
 		trinoType = trinoType.trim().toLowerCase();
 
@@ -51,21 +66,41 @@ public class TrinoToGraphQLOutputTypeMapper {
 		};
 	}
 
+	/**
+	 * Handles mapping of Trino {@code array(<type>)} to GraphQL {@code [<type>]}.
+	 * @param trinoType the full array type string (e.g., "array(varchar)")
+	 * @return the GraphQL list type corresponding to the array's inner type
+	 */
 	private static GraphQLOutputType handleArray(String trinoType) {
 		String innerType = extractInner(trinoType);
 		return GraphQLList.list(mapType(innerType));
 	}
 
+	/**
+	 * Handles Trino {@code map(key_type, value_type)} by mapping to a GraphQL list of
+	 * KeyValue objects.
+	 * @return a {@link GraphQLList} of {@link GraphQLObjectType} "KeyValue"
+	 */
 	private static GraphQLOutputType handleMap() {
 		return GraphQLList.list(getKeyValueObjectType());
 	}
 
+	/**
+	 * Extracts the inner type from a parameterized type string. For example:
+	 * {@code array(bigint)} -> {@code bigint}
+	 * @param type the full type string
+	 * @return the inner type string
+	 */
 	private static String extractInner(String type) {
 		int start = type.indexOf('(') + 1;
 		int end = type.lastIndexOf(')');
 		return type.substring(start, end).trim();
 	}
 
+	/**
+	 * Defines a reusable GraphQL object type for representing key-value pairs.
+	 * @return a {@link GraphQLObjectType} with "key" and "value" string fields
+	 */
 	private static GraphQLOutputType getKeyValueObjectType() {
 		return GraphQLObjectType.newObject()
 			.name("KeyValue")
