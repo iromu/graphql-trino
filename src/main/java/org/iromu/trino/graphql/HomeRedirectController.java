@@ -37,12 +37,6 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
  * ("/graphiql").
  * </p>
  *
- * <p>
- * The router function is registered as a Spring bean and is configured via the
- * {@link @Configuration} annotation, which indicates that this class contains Spring bean
- * definitions.
- * </p>
- *
  * @author Ivan Rodriguez
  */
 @Configuration

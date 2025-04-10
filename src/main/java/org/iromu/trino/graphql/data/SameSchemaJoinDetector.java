@@ -10,17 +10,56 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * A {@link JoinDetector} implementation that detects possible join relationships between
+ * tables within the same schema in a given Trino catalog.
+ * <p>
+ * This detector focuses on columns with the same name that exist in multiple tables
+ * within the same schema. It applies normalization and basic heuristics to infer
+ * potential joins, particularly targeting common naming conventions like *_id fields.
+ * </p>
+ *
+ * <p>
+ * The results are printed to the console and returned as a list of strings (currently
+ * unused, can be enhanced to include detailed join metadata).
+ * </p>
+ *
+ * <pre>{@code
+ * Example:
+ *   table_a.user_id ↔ table_b.user_id
+ *   table_a.id → table_b.user_id
+ * }</pre>
+ *
+ * <p>
+ * Marked as {@code @Primary} to make it the default bean when multiple
+ * {@code JoinDetector}s are present.
+ * </p>
+ *
  * @author Ivan Rodriguez
  */
 @Primary
 @Component
 public class SameSchemaJoinDetector extends JoinDetector {
 
+	/**
+	 * Constructs a SameSchemaJoinDetector with the given JDBC template.
+	 * @param jdbcTemplate JDBC template used to query metadata from Trino
+	 */
 	public SameSchemaJoinDetector(JdbcTemplate jdbcTemplate) {
 		super(jdbcTemplate);
 	}
 
-	// Method to detect joins for a specific catalog
+	/**
+	 * Detects join relationships between tables within the same schema of a given
+	 * catalog.
+	 * <p>
+	 * The detection is based on:
+	 * <ul>
+	 * <li>Identical column names across multiple tables within a schema</li>
+	 * <li>Heuristics for common foreign key naming conventions (e.g., *_id)</li>
+	 * </ul>
+	 * @param catalog the catalog to scan
+	 * @return an empty list (extendable to return detailed join information)
+	 */
 	public List<String> detect(String catalog) {
 		// Map to store columns by column name, also grouping by schema
 		Map<String, Map<String, List<ColumnInfo>>> schemaColumnMap = new HashMap<>();
@@ -73,7 +112,17 @@ public class SameSchemaJoinDetector extends JoinDetector {
 		return new ArrayList<>();
 	}
 
-	// Method to check if two columns are likely joinable based on name patterns
+	/**
+	 * Determines if two column names are likely to be involved in a join relationship.
+	 * <p>
+	 * Normalizes names (removes underscores and converts to lowercase) and supports
+	 * matching of common foreign key conventions (e.g., {@code user_id} with
+	 * {@code user_id}).
+	 * </p>
+	 * @param column1 the first column name
+	 * @param column2 the second column name
+	 * @return {@code true} if the columns are likely joinable, {@code false} otherwise
+	 */
 	private boolean isJoinable(String column1, String column2) {
 		// Normalize the column names (remove underscores and convert to lowercase)
 		String normalizedColumn1 = normalizeColumnName(column1);
@@ -95,7 +144,11 @@ public class SameSchemaJoinDetector extends JoinDetector {
 		return false;
 	}
 
-	// Normalize column name by removing underscores and converting to lowercase
+	/**
+	 * Utility to normalize column names for comparison purposes.
+	 * @param columnName the original column name
+	 * @return a normalized version with underscores removed and converted to lowercase
+	 */
 	private String normalizeColumnName(String columnName) {
 		return columnName.replace("_", "").toLowerCase();
 	}

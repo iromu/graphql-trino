@@ -9,15 +9,55 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Default implementation of the {@link JoinDetector} for automatically detecting
+ * potential join relationships between tables in a given Trino catalog.
+ * <p>
+ * This component analyzes the column names across all tables in the specified catalog to
+ * suggest join candidates. It uses naming conventions (e.g., foreign key suffix `_id`)
+ * and column name similarities to infer potential joins.
+ * </p>
+ *
+ * <p>
+ * Example detection includes:
+ * </p>
+ * <ul>
+ * <li>Columns ending in <code>_id</code> pointing to tables with a corresponding
+ * <code>id</code> column</li>
+ * <li>Columns with the same name existing across multiple tables</li>
+ * </ul>
+ *
+ * <p>
+ * Heuristics are applied to reduce false positives by checking normalized column name
+ * matches and known suffixes.
+ * </p>
+ *
  * @author Ivan Rodriguez
  */
 @Component
 public class DefaultJoinDetector extends JoinDetector {
 
+	/**
+	 * Constructs a {@code DefaultJoinDetector} with the provided {@link JdbcTemplate}.
+	 * @param jdbcTemplate the JDBC template used to query schema information
+	 */
 	public DefaultJoinDetector(JdbcTemplate jdbcTemplate) {
 		super(jdbcTemplate);
 	}
 
+	/**
+	 * Detects potential join relationships in the given catalog.
+	 * <p>
+	 * This method looks for:
+	 * <ul>
+	 * <li>Columns ending in <code>_id</code> that may reference <code>id</code> columns
+	 * in other tables</li>
+	 * <li>Columns with matching or similar names across tables</li>
+	 * </ul>
+	 * The results are printed to the console as part of the detection process.
+	 * @param catalog the catalog to scan for possible joins
+	 * @return a list of join strings (currently returns an empty list as the
+	 * implementation prints instead)
+	 */
 	public List<String> detect(String catalog) {
 		List<ColumnInfo> columns = getColumns(catalog);
 
@@ -72,7 +112,13 @@ public class DefaultJoinDetector extends JoinDetector {
 		return new ArrayList<>();
 	}
 
-	// Method to check if two columns are likely joinable based on name patterns
+	/**
+	 * Determines if two columns are likely joinable based on their names.
+	 * @param column1 the name of the first column
+	 * @param column2 the name of the second column
+	 * @return {@code true} if the columns are considered joinable, {@code false}
+	 * otherwise
+	 */
 	private boolean isJoinable(String column1, String column2) {
 		// Here we apply better heuristics to avoid false positives
 		// Example: Avoid matching `manager` with `company_name`, but allow `user_id` with
@@ -102,6 +148,11 @@ public class DefaultJoinDetector extends JoinDetector {
 		return false;
 	} // Normalize column name by removing underscores and converting to lowercase
 
+	/**
+	 * Normalizes a column name by removing underscores and converting to lowercase.
+	 * @param columnName the original column name
+	 * @return a normalized version of the column name
+	 */
 	private String normalizeColumnName(String columnName) {
 		return columnName.replace("_", "").toLowerCase();
 	}
