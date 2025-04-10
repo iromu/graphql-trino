@@ -100,14 +100,19 @@ public class GraphQLDynamicSchemaService {
 			.build());
 
 		for (String catalog : trinoSchemaService.getCatalogs()) {
+			if (app.getExcludeCatalogs() != null && app.getExcludeSchemas().contains(catalog)) {
+				continue;
+			}
+			if (app.getIncludeCatalogs() != null && !app.getIncludeCatalogs().contains(catalog)) {
+				continue;
+			}
 			if (app.isIgnoreObjectsWithWrongCharacters() && !VALID_CHAR_PATTERN.matcher(catalog).matches()) {
 				continue;
 			}
-			if (!"system".equalsIgnoreCase(catalog)) {
-				List<String> joins = trinoSchemaService.getJoins(catalog);
-			}
 			for (String schema : trinoSchemaService.getSchemas(catalog)) {
-
+				if (app.getExcludeSchemas() != null && app.getExcludeSchemas().contains(catalog)) {
+					continue;
+				}
 				if (app.isIgnoreObjectsWithWrongCharacters() && !VALID_CHAR_PATTERN.matcher(schema).matches()) {
 					continue;
 				}

@@ -21,23 +21,46 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
 /**
- * Configuration properties for the application.
- *
+ * Application-level configuration properties for customizing GraphQL schema generation
+ * and behavior when integrating with Trino.
  * <p>
- * This class holds configuration properties used by the application. It is annotated with
- * {@link ConfigurationProperties} to bind properties prefixed with "app" from the
- * application's configuration (e.g., `application.properties` or `application.yml`).
+ * These properties are loaded from external configuration sources such as
+ * {@code application.yml} or {@code application.properties} and are bound via the
+ * {@link ConfigurationProperties} annotation using the prefix {@code app}.
  * </p>
  *
  * <p>
- * The properties in this class are mainly related to the configuration of the schema
- * storage location, character sanitization for GraphQL schema objects, and caching
- * behavior. These settings help configure the system's behavior with respect to schema
- * handling and the handling of object names in GraphQL schemas.
+ * This configuration class supports customization of:
+ * <ul>
+ * <li>Filesystem location for storing schemas fetched from Trino</li>
+ * <li>Schema sanitization options for invalid GraphQL object names</li>
+ * <li>Caching behavior</li>
+ * <li>Catalog and schema inclusion/exclusion filtering</li>
+ * </ul>
+ * </p>
+ *
+ * <p>
+ * Example configuration in {@code application.yml}: <pre>
+ * app:
+ *   schema-folder: /tmp/schema
+ *   replace-objects-name-characters: true
+ *   ignore-objects-with-wrong-characters: false
+ *   ignore-cache: true
+ *   include-catalogs:
+ *     - my_catalog
+ *   exclude-catalogs:
+ *     - system
+ *   exclude-schemas:
+ *     - information_schema
+ * </pre>
  * </p>
  *
  * @author Ivan Rodriguez
+ * @see org.springframework.boot.context.properties.ConfigurationProperties
+ * @see org.springframework.context.annotation.Configuration
  */
 @Data
 @Configuration
@@ -46,47 +69,69 @@ import org.springframework.context.annotation.Configuration;
 public class AppProperties {
 
 	/**
-	 * Prefix used in application properties for binding.
+	 * Prefix used to bind properties from external configuration sources.
 	 */
 	public static final String APP_PREFIX = "app";
 
 	/**
-	 * Filesystem location to store the schema from Trino.
+	 * Filesystem directory where the Trino schema definitions will be stored.
+	 * <p>
+	 * Defaults to {@code /etc/schema}.
+	 * </p>
 	 */
 	private String schemaFolder = "/etc/schema";
 
 	/**
-	 * Indicates whether characters that are not allowed in GraphQL schema object names
-	 * should be replaced.
-	 *
+	 * Whether to replace characters that are invalid in GraphQL object names.
 	 * <p>
-	 * If this flag is set to {@code true}, characters in schema object names that are not
-	 * allowed by GraphQL standards will be replaced with valid characters. This may be
-	 * useful when dynamically generating GraphQL schemas based on external data.
+	 * If enabled, invalid characters will be automatically sanitized (e.g., replaced with
+	 * underscores) to conform to GraphQL naming rules.
 	 * </p>
 	 */
 	private boolean replaceObjectsNameCharacters = false;
 
 	/**
-	 * Indicates whether to ignore object names with characters that are not allowed in
-	 * GraphQL schema.
-	 *
+	 * Whether to skip GraphQL object names that contain invalid characters.
 	 * <p>
-	 * If set to {@code true}, object names with invalid characters will be ignored (i.e.,
-	 * skipped during processing). This can help avoid issues with invalid names in
-	 * dynamically generated schemas.
+	 * If enabled, objects with names that do not conform to GraphQL naming standards will
+	 * be ignored and excluded from the schema generation process.
 	 * </p>
 	 */
 	private boolean ignoreObjectsWithWrongCharacters = true;
 
 	/**
-	 * Indicates whether caching should be ignored.
-	 *
+	 * Whether to bypass caching mechanisms.
 	 * <p>
-	 * If set to {@code true}, caching mechanisms will be disabled. The default is
-	 * {@code false}, meaning caching is enabled.
+	 * When set to {@code true}, previously stored schema metadata will not be reused and
+	 * fresh data will be fetched on each operation. Useful for development or real-time
+	 * schema changes.
 	 * </p>
 	 */
 	private boolean ignoreCache = false;
+
+	/**
+	 * A list of catalog names to include in scanning and processing.
+	 * <p>
+	 * If specified, only these catalogs will be considered for schema analysis.
+	 * </p>
+	 */
+	private List<String> includeCatalogs;
+
+	/**
+	 * A list of catalog names to exclude from processing.
+	 * <p>
+	 * Defaults to {@code system} to avoid scanning internal system catalogs.
+	 * </p>
+	 */
+	private List<String> excludeCatalogs = List.of("system");
+
+	/**
+	 * A list of schema names to exclude within any catalog.
+	 * <p>
+	 * Defaults to {@code information_schema}, which is typically excluded as it contains
+	 * metadata tables rather than user data.
+	 * </p>
+	 */
+	private List<String> excludeSchemas = List.of("information_schema");
 
 }
