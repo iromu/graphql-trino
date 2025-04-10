@@ -1,6 +1,10 @@
+security.enabled: true
+
 spring:
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://your-auth-provider/.well-known/openid-configuration
+          issuer-uri: ${OAUTH2_ISSUER}
+
+

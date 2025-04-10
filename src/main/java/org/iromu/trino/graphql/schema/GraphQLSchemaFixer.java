@@ -14,20 +14,56 @@
  * limitations under the License.
  */
 
-package org.iromu.trino.graphql;
+package org.iromu.trino.graphql.schema;
 
 import org.springframework.stereotype.Component;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Utility component for sanitizing and restoring GraphQL schema names.
+ *
+ * <p>
+ * This class provides methods to sanitize schema names by replacing invalid characters
+ * with a Unicode escape sequence and restoring sanitized schema names back to their
+ * original form.
+ * </p>
+ *
+ * <p>
+ * The sanitation process ensures that schema names conform to a valid naming convention
+ * by replacing characters that would otherwise be invalid (such as special characters)
+ * with encoded Unicode representations.
+ * </p>
+ *
+ * @author Ivan Rodriguez
+ */
 @Component
 public class GraphQLSchemaFixer {
 
+	/**
+	 * Pattern to match encoded Unicode characters in the form _UXXXX_
+	 */
 	private static final Pattern ENCODED_CHAR_PATTERN = Pattern.compile("_U([0-9A-Fa-f]{4,6})_");
 
+	/**
+	 * Pattern to validate characters allowed in GraphQL schema names
+	 */
 	public static final Pattern VALID_CHAR_PATTERN = Pattern.compile("^[_A-Za-z][_0-9A-Za-z]*$");
 
+	/**
+	 * Sanitizes the input string by replacing invalid characters with their Unicode
+	 * escape sequences.
+	 *
+	 * <p>
+	 * This method ensures that schema names start with a valid character (letter or
+	 * underscore) and replaces any invalid character with a Unicode escape sequence of
+	 * the form _UXXXX_ where XXXX is the Unicode code point of the character.
+	 * </p>
+	 * @param input the schema name to sanitize
+	 * @return a sanitized version of the schema name, where invalid characters are
+	 * replaced by Unicode escapes
+	 */
 	public String sanitizeSchema(String input) {
 		if (input == null || input.isEmpty())
 			return input;
@@ -41,9 +77,11 @@ public class GraphQLSchemaFixer {
 			// Special handling for the first character
 			if (i == 0 && !((cp >= 'A' && cp <= 'Z') || (cp >= 'a' && cp <= 'z') || cp == '_')) {
 				sanitized.append("_U").append(String.format("%04X", cp)).append("_");
-			} else if ((cp >= 'A' && cp <= 'Z') || (cp >= 'a' && cp <= 'z') || (cp >= '0' && cp <= '9') || cp == '_') {
+			}
+			else if ((cp >= 'A' && cp <= 'Z') || (cp >= 'a' && cp <= 'z') || (cp >= '0' && cp <= '9') || cp == '_') {
 				sanitized.appendCodePoint(cp);
-			} else {
+			}
+			else {
 				sanitized.append("_U").append(String.format("%04X", cp)).append("_");
 			}
 		}
@@ -51,6 +89,18 @@ public class GraphQLSchemaFixer {
 		return sanitized.toString();
 	}
 
+	/**
+	 * Restores a sanitized schema name by decoding any Unicode escape sequences back to
+	 * the original characters.
+	 *
+	 * <p>
+	 * This method reverses the sanitation process, replacing any occurrences of the
+	 * Unicode escape sequences (e.g., _UXXXX_) with their corresponding characters.
+	 * </p>
+	 * @param input the sanitized schema name to restore
+	 * @return the restored schema name with Unicode escape sequences replaced by original
+	 * characters
+	 */
 	public String restoreSanitizedSchema(String input) {
 		Matcher matcher = ENCODED_CHAR_PATTERN.matcher(input);
 		StringBuilder result = new StringBuilder();

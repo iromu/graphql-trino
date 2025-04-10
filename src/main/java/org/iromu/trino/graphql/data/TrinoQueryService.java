@@ -14,15 +14,22 @@
  * limitations under the License.
  */
 
-package org.iromu.trino.graphql;
+package org.iromu.trino.graphql.data;
 
 import lombok.extern.slf4j.Slf4j;
+import org.iromu.trino.graphql.schema.GraphQLSchemaFixer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Service class responsible for executing SQL queries against Trino using JDBC. It
+ * supports dynamic querying of tables with optional filters and schema sanitization.
+ *
+ * @author Ivan Rodriguez
+ */
 @Service
 @Slf4j
 public class TrinoQueryService {
@@ -31,11 +38,23 @@ public class TrinoQueryService {
 
 	private final GraphQLSchemaFixer fixer;
 
+	/**
+	 * Constructs a new {@code TrinoQueryService} with required dependencies.
+	 * @param jdbcTemplate the {@code JdbcTemplate} used for executing SQL queries
+	 * @param fixer the {@code GraphQLSchemaFixer} used for sanitizing and restoring
+	 * schema/table names
+	 */
 	public TrinoQueryService(JdbcTemplate jdbcTemplate, GraphQLSchemaFixer fixer) {
 		this.jdbcTemplate = jdbcTemplate;
 		this.fixer = fixer;
 	}
 
+	/**
+	 * Extracts the value from a filter map by checking a predefined list of allowed keys.
+	 * @param filter a map representing a filter with various typed values
+	 * @return the non-null value from the filter
+	 * @throws IllegalArgumentException if no valid value is found
+	 */
 	private Object extractFilterValue(Map<String, Object> filter) {
 		for (String key : List.of("stringValue", "intValue", "floatValue", "booleanValue", "dateValue")) {
 			if (filter.get(key) != null) {
@@ -45,8 +64,19 @@ public class TrinoQueryService {
 		throw new IllegalArgumentException("No valid value in filter: " + filter);
 	}
 
+	/**
+	 * Executes a SQL query against a specific Trino table with optional filters and
+	 * limit.
+	 * @param _catalog the sanitized catalog name
+	 * @param _schema the sanitized schema name
+	 * @param _table the sanitized table name
+	 * @param limit the maximum number of rows to return
+	 * @param filters optional filters to apply as WHERE conditions
+	 * @return a list of maps, each representing a row of data with sanitized field names
+	 * @throws IllegalArgumentException if an unsupported operator is used in the filter
+	 */
 	public List<Map<String, Object>> queryTableWithFilters(String _catalog, String _schema, String _table, int limit,
-														   List<Map<String, Object>> filters) {
+			List<Map<String, Object>> filters) {
 
 		String catalog = fixer.restoreSanitizedSchema(_catalog);
 		String schema = fixer.restoreSanitizedSchema(_schema);

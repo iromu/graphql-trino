@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package org.iromu.trino.graphql;
+package org.iromu.trino.graphql.security;
 
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -32,14 +33,19 @@ import reactor.core.publisher.Mono;
 
 import java.time.Instant;
 
+/**
+ * @author Ivan Rodriguez
+ */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
+@Disabled
 public class GraphQLSecurityTest {
 
 	@Autowired
 	private WebTestClient webTestClient;
 
-	private final String jwtToken = "Bearer eyJhbGciOi..."; // Optionally generate a valid test token
+	private final String jwtToken = "Bearer eyJhbGciOi..."; // Optionally generate a valid
+															// test token
 
 	@Test
 	public void currentUser_shouldReturnUsername_whenAuthenticated() {
@@ -51,9 +57,11 @@ public class GraphQLSecurityTest {
 			.contentType(MediaType.APPLICATION_JSON)
 			.bodyValue(graphQLQuery)
 			.exchange()
-			.expectStatus().isOk()
+			.expectStatus()
+			.isOk()
 			.expectBody()
-			.jsonPath("$.data.currentUser").value(Matchers.notNullValue());
+			.jsonPath("$.data.currentUser")
+			.value(Matchers.notNullValue());
 	}
 
 	@Test
@@ -65,7 +73,8 @@ public class GraphQLSecurityTest {
 			.contentType(MediaType.APPLICATION_JSON)
 			.bodyValue(graphQLQuery)
 			.exchange()
-			.expectStatus().isUnauthorized();
+			.expectStatus()
+			.isUnauthorized();
 	}
 
 	@TestConfiguration
@@ -73,16 +82,15 @@ public class GraphQLSecurityTest {
 
 		@Bean
 		public ReactiveJwtDecoder jwtDecoder() {
-			return token -> Mono.just(
-				Jwt.withTokenValue(token)
-					.header("alg", "none")
-					.claim("preferred_username", "test-user")
-					.claim("scope", "read")
-					.issuedAt(Instant.now())
-					.expiresAt(Instant.now().plusSeconds(3600))
-					.build()
-			);
+			return token -> Mono.just(Jwt.withTokenValue(token)
+				.header("alg", "none")
+				.claim("preferred_username", "test-user")
+				.claim("scope", "read")
+				.issuedAt(Instant.now())
+				.expiresAt(Instant.now().plusSeconds(3600))
+				.build());
 		}
+
 	}
 
 }

@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package org.iromu.trino.graphql;
+package org.iromu.trino.graphql.data;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.iromu.trino.graphql.AppProperties;
+import org.iromu.trino.graphql.schema.GraphQLSchemaFixer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,6 +32,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
+/**
+ * @author Ivan Rodriguez
+ */
 class TrinoSchemaServiceTest {
 
 	private JdbcTemplate jdbcTemplate;
@@ -53,7 +58,7 @@ class TrinoSchemaServiceTest {
 		when(appProperties.isIgnoreCache()).thenReturn(true);
 		when(appProperties.isReplaceObjectsNameCharacters()).thenReturn(false);
 
-		service = new TrinoSchemaService(jdbcTemplate, objectMapper, appProperties, fixer);
+		service = new TrinoSchemaService(jdbcTemplate, objectMapper, appProperties, fixer, null);
 	}
 
 	@Test

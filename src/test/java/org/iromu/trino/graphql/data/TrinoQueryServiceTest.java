@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package org.iromu.trino.graphql;
+package org.iromu.trino.graphql.data;
 
+import org.iromu.trino.graphql.schema.GraphQLSchemaFixer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -28,6 +29,9 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+/**
+ * @author Ivan Rodriguez
+ */
 class TrinoQueryServiceTest {
 
 	private JdbcTemplate jdbcTemplate;
@@ -52,7 +56,7 @@ class TrinoQueryServiceTest {
 		int limit = 10;
 
 		List<Map<String, Object>> filters = List.of(Map.of("field", "name", "operator", "eq", "stringValue", "Alice"),
-			Map.of("field", "age", "operator", "gt", "intValue", 25));
+				Map.of("field", "age", "operator", "gt", "intValue", 25));
 
 		when(fixer.restoreSanitizedSchema(anyString())).thenAnswer(invocation -> invocation.getArgument(0));
 		when(fixer.sanitizeSchema(anyString())).thenAnswer(invocation -> invocation.getArgument(0));
@@ -83,7 +87,7 @@ class TrinoQueryServiceTest {
 		Map<String, Object> invalidFilter = Map.of("field", "age", "operator", "eq");
 
 		var ex = assertThrows(IllegalArgumentException.class,
-			() -> service.queryTableWithFilters("cat", "sch", "tbl", 1, List.of(invalidFilter)));
+				() -> service.queryTableWithFilters("cat", "sch", "tbl", 1, List.of(invalidFilter)));
 
 		assertTrue(ex.getMessage().contains("No valid value in filter"));
 	}
