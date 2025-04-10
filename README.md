@@ -108,7 +108,7 @@ means all the `app.*` properties can be overridden via Docker environment variab
 ```yaml
 services:
   graphql-trino:
-    image: your/image:tag
+    image: iromu/graphql-trino:latest
     environment:
       - APP_SCHEMA_FOLDER=/tmp/schema
       - APP_REPLACE_OBJECTS_NAME_CHARACTERS=true
