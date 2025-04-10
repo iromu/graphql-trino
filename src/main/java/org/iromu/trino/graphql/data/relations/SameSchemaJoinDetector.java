@@ -1,4 +1,4 @@
-package org.iromu.trino.graphql.data;
+package org.iromu.trino.graphql.data.relations;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -123,7 +123,7 @@ public class SameSchemaJoinDetector extends JoinDetector {
 	 * @param column2 the second column name
 	 * @return {@code true} if the columns are likely joinable, {@code false} otherwise
 	 */
-	private boolean isJoinable(String column1, String column2) {
+	boolean isJoinable(String column1, String column2) {
 		// Normalize the column names (remove underscores and convert to lowercase)
 		String normalizedColumn1 = normalizeColumnName(column1);
 		String normalizedColumn2 = normalizeColumnName(column2);

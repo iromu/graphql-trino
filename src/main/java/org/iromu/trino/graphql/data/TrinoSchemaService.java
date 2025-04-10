@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.iromu.trino.graphql.AppProperties;
+import org.iromu.trino.graphql.data.relations.JoinDetector;
 import org.iromu.trino.graphql.schema.GraphQLSchemaFixer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;

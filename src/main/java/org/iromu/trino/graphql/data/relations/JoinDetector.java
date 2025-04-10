@@ -1,4 +1,4 @@
-package org.iromu.trino.graphql.data;
+package org.iromu.trino.graphql.data.relations;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
