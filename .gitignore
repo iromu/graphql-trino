@@ -43,3 +43,4 @@ docker/graphql-trino/etc/schema
 docker/trino/etc/catalog
 !docker/trino/etc/catalog/tpcds.properties
 !docker/trino/etc/catalog/tpch.properties
+graphql-trino-generated.graphqls

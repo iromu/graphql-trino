@@ -12,10 +12,12 @@
   <groupId>org.iromu.trino</groupId>
   <artifactId>graphql-trino</artifactId>
 
-  <version>${revision}</version>
+  <version>${revision}${sha1}${changelist}</version>
 
   <properties>
-    <revision>0.0.4-SNAPSHOT</revision>
+    <revision>0.0.4</revision>
+    <changelist>-SNAPSHOT</changelist>
+    <sha1/>
 
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>

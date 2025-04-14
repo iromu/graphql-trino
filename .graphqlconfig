@@ -1,10 +1,10 @@
 {
   "name": "graphql-trino",
-  "schemaPath": "graphql-trino-generated.graphqls",
+  "schemaPath": "graphql-trino.graphqls",
   "extensions": {
     "endpoints": {
       "Default GraphQL Endpoint": {
-        "url": "http://localhost:8085/api",
+        "url": "http://localhost:8885/api",
         "headers": {
           "user-agent": "JS GraphQL"
         },
