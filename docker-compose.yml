@@ -1,16 +1,23 @@
 services:
 
+  postgres-samples:
+    image: postgres:alpine
+    volumes:
+      - ./docker/postgres/data:/data
+      - ./docker/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: example
+
   trino:
-    container_name: trino
     image: trinodb/trino:latest
-    restart: always
     ports:
       - "8084:8080"
     volumes:
       - ./docker/trino/etc:/etc/trino
 
   graphql-trino:
-    container_name: graphql-trino
     image: iromu/graphql-trino:latest
     ports:
       - "8886:8080"

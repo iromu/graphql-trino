@@ -134,10 +134,15 @@ public class GraphQLDynamicSchemaService {
 
 						builder.field(GraphQLFieldDefinition.newFieldDefinition()
 							.name(queryFieldName)
+							.description("Catalog: " + catalog + ", Schema: " + schema + ", Table: " + table)
 							.type(GraphQLList.list(GraphQLTypeReference.typeRef(typeName)))
-							.argument(GraphQLArgument.newArgument().name("limit").type(Scalars.GraphQLInt))
+							.argument(GraphQLArgument.newArgument()
+								.name("limit")
+								.type(Scalars.GraphQLInt)
+								.description("Limit number of rows"))
 							.argument(GraphQLArgument.newArgument()
 								.name("filters") // Add filters argument
+								.description("Filter selection")
 								.type(GraphQLList.list(FILTER_INPUT_TYPE)) // Accept a
 							// list of
 							// filters

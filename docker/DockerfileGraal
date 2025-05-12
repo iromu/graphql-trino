@@ -3,7 +3,7 @@ FROM ghcr.io/graalvm/native-image-community:23 AS bootstrap-stage
 
 RUN microdnf install -y freetype-devel; microdnf clean all
 
-COPY docker/health-check.sh /health-check.sh
+ADD https://gist.githubusercontent.com/iromu/2bca8255f4954a93d92055d557a740fa/raw/b61f4e48e42a1558b643c1095e3ac5a0ff24e37f/health-check.sh /health-check.sh
 
 
 FROM bootstrap-stage AS cache-stage
@@ -63,7 +63,7 @@ RUN chmod +x /wait-for-it.sh
 RUN chmod +x /health-check.sh
 
 ENV EXEC_PATH=/app/${NAME}
-COPY docker/docker-cmd-run-native.sh /app/run.sh
+COPY ./scripts/docker-cmd-run-native.sh /app/run.sh
 
 RUN ls -lah /app
 RUN cat /app/run.sh
