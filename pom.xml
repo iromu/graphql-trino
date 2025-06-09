@@ -24,7 +24,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <io.spring.javaformat.version>0.0.46</io.spring.javaformat.version>
-    <trino-jdbc.version>474</trino-jdbc.version>
+    <trino-jdbc.version>476</trino-jdbc.version>
     <graphql-spqr-spring-boot-starter.version>1.0.1</graphql-spqr-spring-boot-starter.version>
   </properties>
 
