@@ -23,7 +23,7 @@
     <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <io.spring.javaformat.version>0.0.43</io.spring.javaformat.version>
+    <io.spring.javaformat.version>0.0.46</io.spring.javaformat.version>
     <trino-jdbc.version>474</trino-jdbc.version>
     <graphql-spqr-spring-boot-starter.version>1.0.1</graphql-spqr-spring-boot-starter.version>
   </properties>
